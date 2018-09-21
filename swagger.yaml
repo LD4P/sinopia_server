@@ -1,5 +1,9 @@
 swagger: '2.0'
 host: sinopia.edu/
+consumes:
+  - "application/json+ld"
+produces:
+  - "application/json+ld"
 basePath: resources/
 schemes:
   - http
@@ -16,28 +20,290 @@ securityDefinitions:
     in: header
     name: On-Behalf-Of
 paths:
-  '/{group}':
+  '/':
+    tags:
+      - LDP
+    description: Gets the baseline container.
     get:
-      summary: Query for Group information
-      description: 'Given an Agent, a top level action, and an optional context, (e.g. "create", "update"), is the user permitted to carry out this function'
-      operationId: groupQueryAction
+      summary: Query for RDF about a Group.
+      description: Get the RDF (default, JSON-LD) for a Group.
+      operationId: getContainer
+      security:
+        - RemoteUser: []
+      responses:
+        '200':
+          description: Successful response.
+          headers:
+            type:
+              description: Target URI matching type of container
+              type: string
+            Content-Type:
+              description: Content-Type for resource
+              type: string
+          schema:
+            $ref: '#/definitions/LDPContainer'
+        '404':
+          description: Unable to find the baseline container.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+  '/{groupID}':
+    tags:
+      - LDP
+    description: Gets the group (network or namespace) by its Group ID.
+    get:
+      summary: Query for RDF about a Group.
+      description: Get the RDF (default, JSON-LD) for a Group.
+      operationId: getGroup
       security:
         - RemoteUser: []
       parameters:
-        - name: Group
-          description: The group who is defining it's own resources or graph within Sinopia.
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
           in: path
           required: true
           type: string
+          format: UUID
       responses:
         '200':
-          description: RDF description (default as JSON-LD) of the Group.
+          description: Successful response.
+          headers:
+            type:
+              description: Target URI matching type of container
+              type: string
+            Content-Type:
+              description: Content-Type for resource
+              type: string
           schema:
-            $ref: '#/definitions/QueryResponse'
+            $ref: '#/definitions/LDPContainer'
         '404':
           description: Unable to find the specified Group.
           schema:
             $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+    post:
+      summary: Create new Group.
+      description: Create & assert RDF (default, JSON-LD) for a Group.
+      operationId: createGroup
+      tags:
+        - LDP
+      description: Creates new group as a ldp:Container
+      parameters:
+        - name: groupID
+          description: The group (ldp:Container) who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+          format: UUID
+        - name: resource
+          in: body
+          description: Resource to insert into container
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Slug
+          in: header
+          description: Suggested URI for resource
+          required: false
+          type: string
+        - name: Content-Type
+          in: header
+          description: Content-Type of resource
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response
+        "201":
+          description: Successful creation
+          headers:
+            Location:
+              description: URI to created resource
+              type: string
+        "404":
+          description: Unable to find container
+        "405":
+          description: Method not allowed
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        "409":
+          description: URI Already Exists
+
+        default:
+          description: Unsuccessful response
+    put:
+      tags:
+        - LDP
+      description: |
+        Updates container
+      parameters:
+        - name: groupID
+          in: path
+          description: LDP Container to get
+          required: true
+          type: integer
+          format: UUID
+        - name: resource
+          in: body
+          description: Resource to insert into container
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Slug
+          in: header
+          description: Suggested URI for resource
+          required: false
+          type: string
+        - name: Content-Type
+          in: header
+          description: Content-Type of resource
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response
+        "404":
+          description: Unable to find container
+        "405":
+          description: Method not allowed
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        "409":
+          description: URI Already Exists
+        default:
+          description: Unsuccessful response
+    patch:
+      tags:
+        - LDP
+      description: |
+        Updates LDP container
+      parameters:
+        - name: groupID
+          in: path
+          description: LDP Container to get
+          required: true
+          type: integer
+          format: UUID
+        - name: resource
+          in: body
+          description: Resource to insert into container
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+      responses:
+        "200":
+          description: Successful response
+        "404":
+          description: Unable to find container
+        "405":
+          description: Method not allowed
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        "406":
+          description: Violates constraints on resource modification
+          headers:
+            Accept-Patch:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Unsuccessful response
+    delete:
+      tags:
+        - LDP
+      description: |
+        Deletes LDP container
+      parameters:
+        - name: groupID
+          in: path
+          description: LDP Container to get
+          required: true
+          type: integer
+          format: UUID
+      responses:
+        "200":
+          description: Successful response
+        "404":
+          description: Unable to find container
+        "405":
+          description: Method not allowed
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    options:
+      tags:
+        - LDP
+      description: Gets options for HTTP methods to utilize for this container
+      parameters:
+        - name: groupID
+          in: path
+          description: LDP Container to get
+          required: true
+          type: integer
+          format: UUID
+      responses:
+        "200":
+          description: Successful response
+          headers:
+            Accept:
+              type: array
+              items:
+                type: string
+            Accept-Patch:
+              type: array
+              items:
+                type: string
+        "404":
+          description: Unable to find container
+        default:
+          description: Unsuccessful response
+    head:
+      tags:
+        - LDP
+      description: Gets the header values that would normally be found in the header of GET
+      parameters:
+        - name: groupID
+          in: path
+          description: LDP Container to get
+          required: true
+          type: integer
+          format: UUID
+      responses:
+        "200":
+          description: Successful response
+          headers:
+            Allow:
+              type: array
+              items:
+                type: string
+            Link:
+              type: array
+              items:
+                type: string
+                format: uri
+        "404":
+          description: Unable to find container
+        default:
+          description: Unsuccessful response
   /healthcheck:
     get:
       summary: Health Check
@@ -85,3 +351,63 @@ definitions:
           pointer:
             type: string
             example: /data/attributes/title
+  Resource:
+    required:
+      - "@graph"
+      - "@id"
+      - "@context"
+    properties:
+      "@graph":
+        type: array
+        items:
+          allOf:
+            - $ref: "#/definitions/ResourceInfo"
+      "@id":
+        type: string
+        format: uri
+      "@context":
+        $ref: "#/definitions/ResourceContext"
+  ResourceInfo:
+    required:
+      - "@id"
+      - "@type"
+      - label
+      - resource
+    properties:
+      "@id":
+        type: string
+        format: uri
+      "@type":
+        type: string
+        format: uri
+      label:
+        type: string
+      resource:
+        type: string
+        format: uri
+  ResourceContext:
+    required:
+      - "@id"
+      - "@type"
+      - label
+    properties:
+      "@id":
+        type: string
+        format: uri
+      "@type":
+        type: string
+        format: uri
+      label:
+        $ref: "#/definitions/variable"
+  variable:
+    type: object
+    required:
+      - "@id"
+      - "@type"
+    properties:
+      "@id":
+        type: string
+        format: uri
+      "@type":
+        type: string
+        format: uri
