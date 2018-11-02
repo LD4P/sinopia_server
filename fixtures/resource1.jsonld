@@ -2,7 +2,7 @@
   "@context": {
     "dcterms": "http://purl.org/dc/terms/",
     "ldp": "http://www.w3.org/ns/ldp#" },
-  "@id": "http://localhost:8080/pcc/resource1",
+  "@id": "",
   "@type": ["ldp:RDFSource"],
   "dcterms:title": "Sinopia Resource 1"
 }

@@ -1,6 +1,6 @@
 [
   {
-    "@id": "http://localhost:8080/#pcc-read",
+    "@id": "http://localhost:8080/#stanford-read",
     "http://www.w3.org/ns/auth/acl#mode": [
       {
         "@id": "http://www.w3.org/ns/auth/acl#Read"
@@ -13,12 +13,12 @@
     ],
     "http://www.w3.org/ns/auth/acl#accessTo": [
       {
-        "@id": "http://localhost:8080/pcc"
+        "@id": "http://localhost:8080/stanford"
       }
     ]
   },
   {
-    "@id": "http://localhost:8080/#pcc-edit",
+    "@id": "http://localhost:8080/#stanford-edit",
     "http://www.w3.org/ns/auth/acl#mode": [
       {
         "@id": "http://www.w3.org/ns/auth/acl#Read"
@@ -40,7 +40,7 @@
     ],
     "http://www.w3.org/ns/auth/acl#accessTo": [
       {
-        "@id": "http://localhost:8080/pcc"
+        "@id": "http://localhost:8080/stanford"
       }
     ]
   }

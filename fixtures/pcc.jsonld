@@ -2,7 +2,7 @@
   "@context": {
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "ldp": "http://www.w3.org/ns/ldp#" },
-  "@id": "http://localhost:8080/pcc/",
+  "@id": "",
   "@type": ["ldp:Container", "ldp:BasicContainer"],
   "rdfs:label": "PCC Group"
 }

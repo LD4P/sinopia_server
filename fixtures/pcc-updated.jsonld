@@ -3,7 +3,7 @@
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "ldp": "http://www.w3.org/ns/ldp#",
     "dcterms": "http://purl.org/dc/terms/" },
-  "@id": "http://localhost:8080/",
+  "@id": "http://localhost:8080/pcc",
   "@type": ["ldp:Container", "ldp:BasicContainer"],
   "rdfs:label": "PCC Group",
   "dcterms:author": "http://sinopia.io/users/cmharlow"

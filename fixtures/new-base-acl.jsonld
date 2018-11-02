@@ -1,6 +1,6 @@
 [
   {
-    "@id": "http://localhost:8080/#worldread",
+    "@id": "http://localhost:8080/#base-read",
     "http://www.w3.org/ns/auth/acl#mode": [
       {
         "@id": "http://www.w3.org/ns/auth/acl#Read"
@@ -18,7 +18,7 @@
     ]
   },
   {
-    "@id": "http://localhost:8080/#admin",
+    "@id": "http://localhost:8080/#base-admin",
     "http://www.w3.org/ns/auth/acl#mode": [
       {
         "@id": "http://www.w3.org/ns/auth/acl#Read"
