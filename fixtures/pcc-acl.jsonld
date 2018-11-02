@@ -1,0 +1,47 @@
+[
+  {
+    "@id": "http://localhost:8080/#pcc-read",
+    "http://www.w3.org/ns/auth/acl#mode": [
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Read"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#agentClass": [
+      {
+        "@id": "http://xmlns.com/foaf/0.1/Agent"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#accessTo": [
+      {
+        "@id": "http://localhost:8080/pcc"
+      }
+    ]
+  },
+  {
+    "@id": "http://localhost:8080/#pcc-edit",
+    "http://www.w3.org/ns/auth/acl#mode": [
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Read"
+      },
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Write"
+      },
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Control"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#agent": [
+      {
+        "@id": "http://sinopia.io/users/cmharlow"
+      },
+      {
+        "@id": "http://sinopia.io/users/suntzu"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#accessTo": [
+      {
+        "@id": "http://localhost:8080/pcc"
+      }
+    ]
+  }
+]
