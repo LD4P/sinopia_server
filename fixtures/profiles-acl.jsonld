@@ -1,0 +1,50 @@
+[
+  {
+    "@id": "http://localhost:8080/#profiles-read",
+    "http://www.w3.org/ns/auth/acl#mode": [
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Read"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#agentClass": [
+      {
+        "@id": "http://xmlns.com/foaf/0.1/Agent"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#accessTo": [
+      {
+        "@id": "http://localhost:8080/profiles"
+      }
+    ]
+  },
+  {
+    "@id": "http://localhost:8080/#profiles-edit",
+    "http://www.w3.org/ns/auth/acl#mode": [
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Read"
+      },
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Write"
+      },
+      {
+        "@id": "http://www.w3.org/ns/auth/acl#Control"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#agent": [
+      {
+        "@id": "http://sinopia.io/users/cmharlow"
+      },
+      {
+        "@id": "http://sinopia.io/users/suntzu"
+      },
+      {
+        "@id": "http://sinopia.io/users/zimeon"
+      }
+    ],
+    "http://www.w3.org/ns/auth/acl#accessTo": [
+      {
+        "@id": "http://localhost:8080/profiles"
+      }
+    ]
+  }
+]

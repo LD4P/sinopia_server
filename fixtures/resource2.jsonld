@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "dcterms": "http://purl.org/dc/terms/",
+    "ldp": "http://www.w3.org/ns/ldp#",
+    "bf": "http://id.loc.gov/ontologies/bibframe/",
+    "wikiba": "http://wikiba.se/ontology-beta#"},
+  "@id": "",
+  "@type": ["ldp:RDFSource", "bf:Work"],
+  "dcterms:title": "Sinopia Resource 2",
+  "bf:hasInstance": {
+    "@id": "http://localhost:8080/stanford/resource1"
+  },
+  "bf:subject": {
+    "@id": "http://www.wikidata.org/entity/Q147",
+    "@type": "Item",
+    "dcterms:title": "wikiba:kitten"
+  }
+}

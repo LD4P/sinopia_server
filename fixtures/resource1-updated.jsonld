@@ -1,0 +1,10 @@
+{
+  "@context": {
+    "dcterms": "http://purl.org/dc/terms/",
+    "ldp": "http://www.w3.org/ns/ldp#",
+    "bf": "http://id.loc.gov/ontologies/bibframe/"},
+  "@id": "",
+  "@type": ["ldp:RDFSource", "bf:Instance"],
+  "dcterms:title": "Sinopia Resource 1",
+  "dcterms:description": "I'm whatever you want me to be!"
+}
