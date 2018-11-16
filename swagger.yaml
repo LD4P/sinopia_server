@@ -1,5 +1,5 @@
 swagger: '2.0'
-host: sinopia.io/
+host: sinopia.io
 consumes:
   - "application/json+ld"
 produces:
@@ -21,9 +21,7 @@ securityDefinitions:
     name: On-Behalf-Of
 paths:
   '/resources':
-    tags:
-      - LDP
-    description: Gets the base container, i.e., the Sinopia entities domain description.
+    # summary: Gets the base container, i.e., the Sinopia entities domain description.
     get:
       summary: Query for RDF about the base container.
       description: Get the RDF (default, JSON-LD) for the base container.
@@ -53,7 +51,6 @@ paths:
     post:
       summary: Create new Group within the base container.
       description: Create a new Group (defined via JSON-LD in payload) within the baseline container.
-      operationId: createGroup
       tags:
         - LDP
       parameters:
@@ -101,7 +98,6 @@ paths:
     put:
       summary: Create new Group within the baseline container.
       description: Create a new Group (defined via JSON-LD in payload) within the baseline container.
-      operationId: createGroup
       tags:
         - LDP
       parameters:
@@ -267,9 +263,7 @@ paths:
         default:
           description: Unsuccessful response
   '/{groupID}':
-    tags:
-      - LDP
-    description: Gets the group (network or namespace) by its Group ID.
+    # summary: Gets the group (network or namespace) by its Group ID.
     get:
       summary: Query for RDF about a Group.
       description: Get the RDF (default, JSON-LD) for a Group.
@@ -304,7 +298,6 @@ paths:
     post:
       summary: Create new Group.
       description: Create a resource (defined via JSON-LD in payload) within a Group.
-      operationId: createGroup
       tags:
         - LDP
       parameters:
