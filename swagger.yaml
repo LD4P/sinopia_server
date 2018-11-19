@@ -1,12 +1,9 @@
 swagger: '2.0'
-host: sinopia.io
 consumes:
   - "application/json+ld"
 produces:
   - "application/json+ld"
 basePath: /
-schemes:
-  - http
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
   version: 0.0.1
