@@ -586,6 +586,7 @@ definitions:
       "@graph":
         type: array
         items:
+          type: object
           allOf:
             - $ref: "#/definitions/ResourceInfo"
       "@id":
