@@ -21,7 +21,6 @@ securityDefinitions:
     name: On-Behalf-Of
 paths:
   '/resources':
-    # summary: Gets the base container, i.e., the Sinopia entities domain description.
     get:
       summary: Query for RDF about the base container.
       description: Get the RDF (default, JSON-LD) for the base container.
@@ -263,7 +262,6 @@ paths:
         default:
           description: Unsuccessful response
   '/{groupID}':
-    # summary: Gets the group (network or namespace) by its Group ID.
     get:
       summary: Query for RDF about a Group.
       description: Get the RDF (default, JSON-LD) for a Group.
