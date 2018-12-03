@@ -31,6 +31,7 @@
 
   beforeEach(function() {
     instance = new SinopiaServer.LDPApi();
+    instance.apiClient.basePath = 'http://localhost:8080';
   });
 
   var getProperty = function(object, getter, property) {
@@ -72,12 +73,11 @@
     });
     describe('groupIDOptions', function() {
       it('should call groupIDOptions successfully', function(done) {
-        //uncomment below and update the code to test groupIDOptions
-        //instance.groupIDOptions(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        instance.resourcesGroupIDOptions('pcc', function(error) {
+          if (error) throw error;
+          expect().to.be();
+          done();
+        });
       });
     });
     describe('groupIDPatch', function() {
@@ -133,11 +133,11 @@
     describe('resourcesOptions', function() {
       it('should call resourcesOptions successfully', function(done) {
         //uncomment below and update the code to test resourcesOptions
-        //instance.resourcesOptions(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        instance.resourcesOptions(function(error) {
+          if (error) throw error;
+          expect().to.be();
+          done();
+        });
       });
     });
     describe('resourcesPatch', function() {
