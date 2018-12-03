@@ -220,7 +220,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/resources/{groupID}', 'OPTIONS',
+        '/repository/{groupID}', 'OPTIONS',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
