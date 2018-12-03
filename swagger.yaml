@@ -17,7 +17,7 @@ securityDefinitions:
     in: header
     name: On-Behalf-Of
 paths:
-  '/resources':
+  '/resources':  # TODO: should this be repository instead of resources?
     get:
       summary: Get metadata for the base container.
       description: Get the RDF metadata (default serialization is JSON-LD) for the base container.
@@ -176,7 +176,7 @@ paths:
           description: Unable to find container
         default:
           description: Unsuccessful response
-  '/resources/{groupID}':
+  '/resources/{groupID}':  # TODO: should this be repository instead of resources?
     get:
       summary: Query for RDF about a Group.
       description: Get the RDF (default, JSON-LD) for a Group.

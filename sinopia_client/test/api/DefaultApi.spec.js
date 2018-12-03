@@ -31,6 +31,7 @@
 
   beforeEach(function() {
     instance = new SinopiaServer.DefaultApi();
+    instance.apiClient.basePath = 'http://localhost:8080';
   });
 
   var getProperty = function(object, getter, property) {
@@ -71,13 +72,17 @@
       });
     });
     describe('healthCheck', function() {
+      before(function() {
+        instance.apiClient.basePath = 'http://localhost:8081';
+      });
       it('should call healthCheck successfully', function(done) {
-        //uncomment below and update the code to test healthCheck
-        //instance.healthCheck(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        // Application health checks are available at http://localhost:8081/healthcheck
+        // see https://github.com/trellis-ldp/trellis-ext-db/blob/22efbc5bc3e12bfae41e06536c498a0e659ce98f/deployment/src/dist/README.md
+        instance.healthCheck(function(error, responseObj, rawResponse) {
+          if (error) throw error;
+          expect(responseObj).to.be(HealthCheckResponse);
+          done();
+        });
       });
     });
   });
