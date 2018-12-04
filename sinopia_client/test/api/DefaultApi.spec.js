@@ -53,16 +53,15 @@
   describe('DefaultApi', function() {
     describe('getGroup', function() {
       it('should call getGroup successfully', function(done) {
-        //uncomment below and update the code to test getGroup
-        //instance.getGroup(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        instance.getGroup('pcc', function(error) {
+          if (error) throw error;
+          expect().to.be();
+          done();
+        });
       });
     });
     describe('healthCheck', function() {
-      before(function() {
+      beforeEach(function() {
         instance.apiClient.basePath = 'http://localhost:8081';
       });
       it('should call healthCheck successfully', function(done) {
@@ -70,7 +69,7 @@
         // see https://github.com/trellis-ldp/trellis-ext-db/blob/22efbc5bc3e12bfae41e06536c498a0e659ce98f/deployment/src/dist/README.md
         instance.healthCheck(function(error, responseObj, rawResponse) {
           if (error) throw error;
-          expect(responseObj).to.be(HealthCheckResponse);
+          expect(responseObj).to.be.a(SinopiaServer.HealthCheckResponse);
           done();
         });
       });
