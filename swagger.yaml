@@ -6,7 +6,7 @@ produces:
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 0.0.2
+  version: 1.0.0
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -17,7 +17,7 @@ securityDefinitions:
     in: header
     name: On-Behalf-Of
 paths:
-  '/resources':  # TODO: should this be repository instead of resources?
+  '/repository':
     get:
       summary: Get metadata for the base container.
       description: Get the RDF metadata (default serialization is JSON-LD) for the base container.
@@ -176,7 +176,7 @@ paths:
           description: Unable to find container
         default:
           description: Unsuccessful response
-  '/resources/{groupID}':  # TODO: should this be repository instead of resources?
+  '/repository/{groupID}':
     get:
       summary: Query for RDF about a Group.
       description: Get the RDF (default, JSON-LD) for a Group.

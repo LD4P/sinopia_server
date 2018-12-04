@@ -4,17 +4,17 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getBase**](LDPApi.md#getBase) | **GET** /resources | Get metadata for the base container.
-[**resourcesGroupIDDelete**](LDPApi.md#resourcesGroupIDDelete) | **DELETE** /resources/{groupID} | 
-[**resourcesGroupIDHead**](LDPApi.md#resourcesGroupIDHead) | **HEAD** /resources/{groupID} | 
-[**resourcesGroupIDOptions**](LDPApi.md#resourcesGroupIDOptions) | **OPTIONS** /resources/{groupID} | 
-[**resourcesGroupIDPatch**](LDPApi.md#resourcesGroupIDPatch) | **PATCH** /resources/{groupID} | 
-[**resourcesGroupIDPost**](LDPApi.md#resourcesGroupIDPost) | **POST** /resources/{groupID} | Create new Group.
-[**resourcesGroupIDPut**](LDPApi.md#resourcesGroupIDPut) | **PUT** /resources/{groupID} | 
-[**resourcesHead**](LDPApi.md#resourcesHead) | **HEAD** /resources | Get headers only of base container request.
-[**resourcesOptions**](LDPApi.md#resourcesOptions) | **OPTIONS** /resources | 
-[**resourcesPost**](LDPApi.md#resourcesPost) | **POST** /resources | Create new Group within the base container.
-[**resourcesPut**](LDPApi.md#resourcesPut) | **PUT** /resources | Update metadata on base container.
+[**getBase**](LDPApi.md#getBase) | **GET** /repository | Get metadata for the base container.
+[**repositoryGroupIDDelete**](LDPApi.md#repositoryGroupIDDelete) | **DELETE** /repository/{groupID} | 
+[**repositoryGroupIDHead**](LDPApi.md#repositoryGroupIDHead) | **HEAD** /repository/{groupID} | 
+[**repositoryGroupIDOptions**](LDPApi.md#repositoryGroupIDOptions) | **OPTIONS** /repository/{groupID} | 
+[**repositoryGroupIDPatch**](LDPApi.md#repositoryGroupIDPatch) | **PATCH** /repository/{groupID} | 
+[**repositoryGroupIDPost**](LDPApi.md#repositoryGroupIDPost) | **POST** /repository/{groupID} | Create new Group.
+[**repositoryGroupIDPut**](LDPApi.md#repositoryGroupIDPut) | **PUT** /repository/{groupID} | 
+[**repositoryHead**](LDPApi.md#repositoryHead) | **HEAD** /repository | Get headers only of base container request.
+[**repositoryOptions**](LDPApi.md#repositoryOptions) | **OPTIONS** /repository | 
+[**repositoryPost**](LDPApi.md#repositoryPost) | **POST** /repository | Create new Group within the base container.
+[**repositoryPut**](LDPApi.md#repositoryPut) | **PUT** /repository | Update metadata on base container.
 
 
 <a name="getBase"></a>
@@ -64,9 +64,9 @@ This endpoint does not need any parameter.
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDDelete"></a>
-# **resourcesGroupIDDelete**
-> resourcesGroupIDDelete(groupID)
+<a name="repositoryGroupIDDelete"></a>
+# **repositoryGroupIDDelete**
+> repositoryGroupIDDelete(groupID)
 
 
 
@@ -88,7 +88,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDDelete(groupID, callback);
+apiInstance.repositoryGroupIDDelete(groupID, callback);
 ```
 
 ### Parameters
@@ -110,9 +110,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDHead"></a>
-# **resourcesGroupIDHead**
-> resourcesGroupIDHead(groupID)
+<a name="repositoryGroupIDHead"></a>
+# **repositoryGroupIDHead**
+> repositoryGroupIDHead(groupID)
 
 
 
@@ -134,7 +134,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDHead(groupID, callback);
+apiInstance.repositoryGroupIDHead(groupID, callback);
 ```
 
 ### Parameters
@@ -156,9 +156,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDOptions"></a>
-# **resourcesGroupIDOptions**
-> resourcesGroupIDOptions(groupID)
+<a name="repositoryGroupIDOptions"></a>
+# **repositoryGroupIDOptions**
+> repositoryGroupIDOptions(groupID)
 
 
 
@@ -180,7 +180,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDOptions(groupID, callback);
+apiInstance.repositoryGroupIDOptions(groupID, callback);
 ```
 
 ### Parameters
@@ -202,9 +202,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPatch"></a>
-# **resourcesGroupIDPatch**
-> resourcesGroupIDPatch(groupID, resource)
+<a name="repositoryGroupIDPatch"></a>
+# **repositoryGroupIDPatch**
+> repositoryGroupIDPatch(groupID, resource)
 
 
 
@@ -228,7 +228,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDPatch(groupID, resource, callback);
+apiInstance.repositoryGroupIDPatch(groupID, resource, callback);
 ```
 
 ### Parameters
@@ -251,9 +251,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPost"></a>
-# **resourcesGroupIDPost**
-> resourcesGroupIDPost(groupID, resource, opts)
+<a name="repositoryGroupIDPost"></a>
+# **repositoryGroupIDPost**
+> repositoryGroupIDPost(groupID, resource, opts)
 
 Create new Group.
 
@@ -281,7 +281,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDPost(groupID, resource, opts, callback);
+apiInstance.repositoryGroupIDPost(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -306,9 +306,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPut"></a>
-# **resourcesGroupIDPut**
-> resourcesGroupIDPut(groupID, resource, opts)
+<a name="repositoryGroupIDPut"></a>
+# **repositoryGroupIDPut**
+> repositoryGroupIDPut(groupID, resource, opts)
 
 
 
@@ -336,7 +336,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesGroupIDPut(groupID, resource, opts, callback);
+apiInstance.repositoryGroupIDPut(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -361,9 +361,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesHead"></a>
-# **resourcesHead**
-> resourcesHead()
+<a name="repositoryHead"></a>
+# **repositoryHead**
+> repositoryHead()
 
 Get headers only of base container request.
 
@@ -382,7 +382,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesHead(callback);
+apiInstance.repositoryHead(callback);
 ```
 
 ### Parameters
@@ -401,9 +401,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesOptions"></a>
-# **resourcesOptions**
-> resourcesOptions()
+<a name="repositoryOptions"></a>
+# **repositoryOptions**
+> repositoryOptions()
 
 
 
@@ -422,7 +422,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesOptions(callback);
+apiInstance.repositoryOptions(callback);
 ```
 
 ### Parameters
@@ -441,9 +441,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesPost"></a>
-# **resourcesPost**
-> resourcesPost(groupMD, opts)
+<a name="repositoryPost"></a>
+# **repositoryPost**
+> repositoryPost(groupMD, opts)
 
 Create new Group within the base container.
 
@@ -469,7 +469,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesPost(groupMD, opts, callback);
+apiInstance.repositoryPost(groupMD, opts, callback);
 ```
 
 ### Parameters
@@ -493,9 +493,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesPut"></a>
-# **resourcesPut**
-> resourcesPut(metadata, opts)
+<a name="repositoryPut"></a>
+# **repositoryPut**
+> repositoryPut(metadata, opts)
 
 Update metadata on base container.
 
@@ -520,7 +520,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-apiInstance.resourcesPut(metadata, opts, callback);
+apiInstance.repositoryPut(metadata, opts, callback);
 ```
 
 ### Parameters
