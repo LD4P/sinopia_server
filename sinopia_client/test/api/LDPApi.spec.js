@@ -31,6 +31,7 @@
 
   beforeEach(function() {
     instance = new SinopiaServer.LDPApi();
+    // same idea as https://stackoverflow.com/a/36041786
     instance.apiClient.basePath = 'http://localhost:8080';
   });
 
@@ -53,12 +54,11 @@
   describe('LDPApi', function() {
     describe('getBase', function() {
       it('should call getBase successfully', function(done) {
-        //uncomment below and update the code to test getBase
-        //instance.getBase(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        instance.getBase(function(error) {
+          if (error) throw error;
+          expect().to.be();
+          done();
+        });
       });
     });
     describe('repositoryGroupIDDelete', function() {
@@ -73,12 +73,11 @@
     });
     describe('repositoryGroupIDHead', function() {
       it('should call repositoryGroupIDHead successfully', function(done) {
-        //uncomment below and update the code to test repositoryGroupIDHead
-        //instance.repositoryGroupIDHead(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+        instance.repositoryGroupIDHead('pcc', function(error) {
+          if (error) throw error;
+          expect().to.be();
+          done();
+        });
       });
     });
     describe('repositoryGroupIDOptions', function() {
