@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/LD4P/sinopia_server.svg?style=svg)](https://circleci.com/gh/LD4P/sinopia_server)
+
 # Sinopia Server
 
 ## Working with the Open API Specification (aka Swagger) Specification
