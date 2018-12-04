@@ -4,7 +4,7 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGroup**](DefaultApi.md#getGroup) | **GET** /resources/{groupID} | Query for RDF about a Group.
+[**getGroup**](DefaultApi.md#getGroup) | **GET** /repository/{groupID} | Query for RDF about a Group.
 [**healthCheck**](DefaultApi.md#healthCheck) | **GET** /healthcheck | Health Check
 
 
