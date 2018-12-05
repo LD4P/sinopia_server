@@ -37,15 +37,12 @@ RemoteUser.apiKey = 'YOUR API KEY';
 //RemoteUser.apiKeyPrefix = 'Token';
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.getBase().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBase(callback);
 ```
 
 ### Parameters
@@ -80,15 +77,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDDelete(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDDelete(groupID, callback);
 ```
 
 ### Parameters
@@ -126,15 +120,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDHead(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDHead(groupID, callback);
 ```
 
 ### Parameters
@@ -172,15 +163,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDOptions(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDOptions(groupID, callback);
 ```
 
 ### Parameters
@@ -220,15 +208,12 @@ var groupID = 56; // Number | LDP Container to get
 
 var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
 
+apiInstance.repositoryGroupIDPatch(groupID, resource).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDPatch(groupID, resource, callback);
 ```
 
 ### Parameters
@@ -273,15 +258,12 @@ var opts = {
   'slug': "slug_example", // String | Suggested URI for resource
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryGroupIDPost(groupID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDPost(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -328,15 +310,12 @@ var opts = {
   'slug': "slug_example", // String | Suggested URI for resource
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryGroupIDPut(groupID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryGroupIDPut(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -374,15 +353,12 @@ Gets the header values that would normally be found in the header of GET on base
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.repositoryHead().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryHead(callback);
 ```
 
 ### Parameters
@@ -414,15 +390,12 @@ Gets options for HTTP methods to utilize for the base container.
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.repositoryOptions().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryOptions(callback);
 ```
 
 ### Parameters
@@ -461,15 +434,12 @@ var opts = {
   'slug': "slug_example", // String | The group (ldp:Container) who is defining it's own entities or graph within Sinopia.
   'contentType': "contentType_example" // String | Content-Type of resource, with preference for JSON-LD.
 };
+apiInstance.repositoryPost(groupMD, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryPost(groupMD, opts, callback);
 ```
 
 ### Parameters
@@ -512,15 +482,12 @@ var metadata = new SinopiaServer.Resource(); // Resource | New base container me
 var opts = { 
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryPut(metadata, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.repositoryPut(metadata, opts, callback);
 ```
 
 ### Parameters

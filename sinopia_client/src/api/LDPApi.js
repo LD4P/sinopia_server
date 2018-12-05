@@ -47,21 +47,13 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the getBase operation.
-     * @callback module:api/LDPApi~getBaseCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/LDPContainer} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
-     * @param {module:api/LDPApi~getBaseCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/LDPContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
      */
-    this.getBase = function(callback) {
+    this.getBaseWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -84,24 +76,29 @@
       return this.apiClient.callApi(
         '/repository', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDDelete operation.
-     * @callback module:api/LDPApi~repositoryGroupIDDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Get metadata for the base container.
+     * Get the RDF metadata (default serialization is JSON-LD) for the base container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
      */
+    this.getBase = function() {
+      return this.getBaseWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Deletes LDP container 
      * @param {Number} groupID LDP Container to get
-     * @param {module:api/LDPApi~repositoryGroupIDDeleteCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDDelete = function(groupID, callback) {
+    this.repositoryGroupIDDeleteWithHttpInfo = function(groupID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
@@ -130,24 +127,29 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDHead operation.
-     * @callback module:api/LDPApi~repositoryGroupIDHeadCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Deletes LDP container 
+     * @param {Number} groupID LDP Container to get
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDDelete = function(groupID) {
+      return this.repositoryGroupIDDeleteWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Gets the header values that would normally be found in the header of GET
      * @param {Number} groupID LDP Container to get
-     * @param {module:api/LDPApi~repositoryGroupIDHeadCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDHead = function(groupID, callback) {
+    this.repositoryGroupIDHeadWithHttpInfo = function(groupID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
@@ -176,24 +178,29 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'HEAD',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDOptions operation.
-     * @callback module:api/LDPApi~repositoryGroupIDOptionsCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Gets the header values that would normally be found in the header of GET
+     * @param {Number} groupID LDP Container to get
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDHead = function(groupID) {
+      return this.repositoryGroupIDHeadWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Gets options for HTTP methods to utilize for this container
      * @param {Number} groupID LDP Container to get
-     * @param {module:api/LDPApi~repositoryGroupIDOptionsCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDOptions = function(groupID, callback) {
+    this.repositoryGroupIDOptionsWithHttpInfo = function(groupID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
@@ -222,25 +229,30 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'OPTIONS',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDPatch operation.
-     * @callback module:api/LDPApi~repositoryGroupIDPatchCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Gets options for HTTP methods to utilize for this container
+     * @param {Number} groupID LDP Container to get
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDOptions = function(groupID) {
+      return this.repositoryGroupIDOptionsWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Updates LDP container 
      * @param {Number} groupID LDP Container to get
      * @param {module:model/Resource} resource Resource to insert into container
-     * @param {module:api/LDPApi~repositoryGroupIDPatchCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDPatch = function(groupID, resource, callback) {
+    this.repositoryGroupIDPatchWithHttpInfo = function(groupID, resource) {
       var postBody = resource;
 
       // verify the required parameter 'groupID' is set
@@ -274,17 +286,23 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'PATCH',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDPost operation.
-     * @callback module:api/LDPApi~repositoryGroupIDPostCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Updates LDP container 
+     * @param {Number} groupID LDP Container to get
+     * @param {module:model/Resource} resource Resource to insert into container
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDPatch = function(groupID, resource) {
+      return this.repositoryGroupIDPatchWithHttpInfo(groupID, resource)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create new Group.
@@ -294,9 +312,9 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug Suggested URI for resource
      * @param {String} opts.contentType Content-Type of resource
-     * @param {module:api/LDPApi~repositoryGroupIDPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDPost = function(groupID, resource, opts, callback) {
+    this.repositoryGroupIDPostWithHttpInfo = function(groupID, resource, opts) {
       opts = opts || {};
       var postBody = resource;
 
@@ -333,17 +351,27 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryGroupIDPut operation.
-     * @callback module:api/LDPApi~repositoryGroupIDPutCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Create new Group.
+     * Create a resource (defined via JSON-LD in payload) within a Group.
+     * @param {String} groupID The group (ldp:Container) who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {module:model/Resource} resource Resource to insert into container
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug Suggested URI for resource
+     * @param {String} opts.contentType Content-Type of resource
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDPost = function(groupID, resource, opts) {
+      return this.repositoryGroupIDPostWithHttpInfo(groupID, resource, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Updates the group description.
@@ -352,9 +380,9 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug Suggested URI for resource
      * @param {String} opts.contentType Content-Type of resource
-     * @param {module:api/LDPApi~repositoryGroupIDPutCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDPut = function(groupID, resource, opts, callback) {
+    this.repositoryGroupIDPutWithHttpInfo = function(groupID, resource, opts) {
       opts = opts || {};
       var postBody = resource;
 
@@ -391,24 +419,33 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'PUT',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryHead operation.
-     * @callback module:api/LDPApi~repositoryHeadCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Updates the group description.
+     * @param {Number} groupID LDP Container to get
+     * @param {module:model/Resource} resource Resource to insert into container
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug Suggested URI for resource
+     * @param {String} opts.contentType Content-Type of resource
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryGroupIDPut = function(groupID, resource, opts) {
+      return this.repositoryGroupIDPutWithHttpInfo(groupID, resource, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Get headers only of base container request.
      * Gets the header values that would normally be found in the header of GET on base container
-     * @param {module:api/LDPApi~repositoryHeadCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryHead = function(callback) {
+    this.repositoryHeadWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -431,23 +468,28 @@
       return this.apiClient.callApi(
         '/repository', 'HEAD',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryOptions operation.
-     * @callback module:api/LDPApi~repositoryOptionsCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Get headers only of base container request.
+     * Gets the header values that would normally be found in the header of GET on base container
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryHead = function() {
+      return this.repositoryHeadWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Gets options for HTTP methods to utilize for the base container.
-     * @param {module:api/LDPApi~repositoryOptionsCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryOptions = function(callback) {
+    this.repositoryOptionsWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -470,17 +512,21 @@
       return this.apiClient.callApi(
         '/repository', 'OPTIONS',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryPost operation.
-     * @callback module:api/LDPApi~repositoryPostCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Gets options for HTTP methods to utilize for the base container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryOptions = function() {
+      return this.repositoryOptionsWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create new Group within the base container.
@@ -489,9 +535,9 @@
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug The group (ldp:Container) who is defining it&#39;s own entities or graph within Sinopia.
      * @param {String} opts.contentType Content-Type of resource, with preference for JSON-LD.
-     * @param {module:api/LDPApi~repositoryPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryPost = function(groupMD, opts, callback) {
+    this.repositoryPostWithHttpInfo = function(groupMD, opts) {
       opts = opts || {};
       var postBody = groupMD;
 
@@ -522,17 +568,26 @@
       return this.apiClient.callApi(
         '/repository', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the repositoryPut operation.
-     * @callback module:api/LDPApi~repositoryPutCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * Create new Group within the base container.
+     * Create a new Group (defined via JSON-LD in payload) within the base container.
+     * @param {module:model/Resource} groupMD Group metadata to insert into base container and describe the group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug The group (ldp:Container) who is defining it&#39;s own entities or graph within Sinopia.
+     * @param {String} opts.contentType Content-Type of resource, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    this.repositoryPost = function(groupMD, opts) {
+      return this.repositoryPostWithHttpInfo(groupMD, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Update metadata on base container.
@@ -540,9 +595,9 @@
      * @param {module:model/Resource} metadata New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
      * @param {String} opts.contentType Content-Type of resource
-     * @param {module:api/LDPApi~repositoryPutCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryPut = function(metadata, opts, callback) {
+    this.repositoryPutWithHttpInfo = function(metadata, opts) {
       opts = opts || {};
       var postBody = metadata;
 
@@ -572,8 +627,23 @@
       return this.apiClient.callApi(
         '/repository', 'PUT',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Update metadata on base container.
+     * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {module:model/Resource} metadata New base container metadata to assert on the container.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of resource
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.repositoryPut = function(metadata, opts) {
+      return this.repositoryPutWithHttpInfo(metadata, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 
