@@ -53,12 +53,11 @@
 
   describe('LDPApi', function() {
     describe('getBase', function() {
-      it('should call getBase successfully', function(done) {
-        instance.getBase(function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call getBase successfully', function() {
+        return instance.getBase()
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('repositoryGroupIDDelete', function() {
@@ -72,21 +71,19 @@
       });
     });
     describe('repositoryGroupIDHead', function() {
-      it('should call repositoryGroupIDHead successfully', function(done) {
-        instance.repositoryGroupIDHead('pcc', function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call repositoryGroupIDHead successfully', function() {
+        return instance.repositoryGroupIDHead('pcc')
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('repositoryGroupIDOptions', function() {
-      it('should call repositoryGroupIDOptions successfully', function(done) {
-        instance.repositoryGroupIDOptions('pcc', function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call repositoryGroupIDOptions successfully', function() {
+        return instance.repositoryGroupIDOptions('pcc')
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('repositoryGroupIDPatch', function() {
@@ -120,21 +117,19 @@
       });
     });
     describe('repositoryHead', function() {
-      it('should call repositoryHead successfully', function(done) {
-        instance.repositoryHead(function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call repositoryHead successfully', function() {
+        return instance.repositoryHead()
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('repositoryOptions', function() {
-      it('should call repositoryOptions successfully', function(done) {
-        instance.repositoryOptions(function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call repositoryOptions successfully', function() {
+        return instance.repositoryOptions()
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('repositoryPost', function() {

@@ -47,22 +47,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the getGroup operation.
-     * @callback module:api/DefaultApi~getGroupCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/LDPContainer} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Query for RDF about a Group.
      * Get the RDF (default, JSON-LD) for a Group.
      * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to get.
-     * @param {module:api/DefaultApi~getGroupCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/LDPContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
      */
-    this.getGroup = function(groupID, callback) {
+    this.getGroupWithHttpInfo = function(groupID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
@@ -91,25 +83,30 @@
       return this.apiClient.callApi(
         '/repository/{groupID}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the healthCheck operation.
-     * @callback module:api/DefaultApi~healthCheckCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/HealthCheckResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Query for RDF about a Group.
+     * Get the RDF (default, JSON-LD) for a Group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to get.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
      */
+    this.getGroup = function(groupID) {
+      return this.getGroupWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Health Check
      * The healthcheck endpoint provides information about the health of the service.
-     * @param {module:api/DefaultApi~healthCheckCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/HealthCheckResponse}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/HealthCheckResponse} and HTTP response
      */
-    this.healthCheck = function(callback) {
+    this.healthCheckWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -132,8 +129,20 @@
       return this.apiClient.callApi(
         '/healthcheck', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Health Check
+     * The healthcheck endpoint provides information about the health of the service.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/HealthCheckResponse}
+     */
+    this.healthCheck = function() {
+      return this.healthCheckWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 

@@ -31,6 +31,7 @@
 
   beforeEach(function() {
     instance = new SinopiaServer.DefaultApi();
+    // same idea as https://stackoverflow.com/a/36041786
     instance.apiClient.basePath = 'http://localhost:8080';
   });
 
@@ -52,26 +53,24 @@
 
   describe('DefaultApi', function() {
     describe('getGroup', function() {
-      it('should call getGroup successfully', function(done) {
-        instance.getGroup('pcc', function(error) {
-          if (error) throw error;
-          expect().to.be();
-          done();
-        });
+      it('should call getGroup successfully', function() {
+        return instance.getGroup('pcc')
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('healthCheck', function() {
       beforeEach(function() {
         instance.apiClient.basePath = 'http://localhost:8081';
       });
-      it('should call healthCheck successfully', function(done) {
+      it('should call healthCheck successfully', function() {
         // Application health checks are available at http://localhost:8081/healthcheck
         // see https://github.com/trellis-ldp/trellis-ext-db/blob/22efbc5bc3e12bfae41e06536c498a0e659ce98f/deployment/src/dist/README.md
-        instance.healthCheck(function(error, responseObj, rawResponse) {
-          if (error) throw error;
-          expect(responseObj).to.be.a(SinopiaServer.HealthCheckResponse);
-          done();
-        });
+        return instance.healthCheck()
+          .then(function(data) {
+            expect(data).to.be.a(SinopiaServer.HealthCheckResponse);
+          });
       });
     });
   });

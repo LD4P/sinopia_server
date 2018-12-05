@@ -31,15 +31,12 @@ var apiInstance = new SinopiaServer.DefaultApi();
 
 var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
 
+apiInstance.getGroup(groupID).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getGroup(groupID, callback);
 ```
 
 ### Parameters
@@ -74,15 +71,12 @@ The healthcheck endpoint provides information about the health of the service.
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.DefaultApi();
+apiInstance.healthCheck().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.healthCheck(callback);
 ```
 
 ### Parameters
