@@ -49,31 +49,34 @@ paths:
     post:
       summary: Create new Group within the base container.
       description: Create a new Group (defined via JSON-LD in payload) within the base container.
+      operationId: createGroup
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
         - name: Slug
-          description: The group (ldp:Container) who is defining it's own entities or graph within Sinopia.
+          description: The suggested URI path for the group.
           in: header
-          required: false
+          required: true
           type: string
-        - name: groupMD
+        - name: Group
           in: body
           description: Group metadata to insert into base container and describe the group.
           required: true
           schema:
-            $ref: '#/definitions/Resource'
+            $ref: '#/definitions/LDPContainer'
         - name: Content-Type
           in: header
-          description: Content-Type of resource, with preference for JSON-LD.
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "201":
-          description: Successful Group resource creation.
+          description: Successful Group creation.
           headers:
             Location:
-              description: URI of the newly created resource
+              description: URI of the newly created group.
               type: string
               format: uri
         "401":
@@ -97,10 +100,13 @@ paths:
     put:
       summary: Update metadata on base container.
       description: Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateBase
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
-        - name: Metadata
+        - name: Base
           in: body
           description: New base container metadata to assert on the container.
           required: true
@@ -108,39 +114,44 @@ paths:
             $ref: '#/definitions/Resource'
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "200":
           description: Successful response
-        "201":
-          description: Successful creation
+        "204":
+          description: Base container updated successfully.
           headers:
             Location:
-              description: URI to created resource
+              description: URI of the updated base container.
               type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find the base container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
               type: array
               items:
                 type: string
-        "409":
-          description: URI Already Exists
-        default:
-          description: Unsuccessful response
     options:
+      summary: HTTP Options for base container.
+      description: Gets the available options for HTTP methods to utilize on the base container.
+      operationId: optionsBase
       tags:
         - LDP
-      description: Gets options for HTTP methods to utilize for the base container.
+      security:
+        - RemoteUser: []
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Accept:
               type: array
@@ -151,17 +162,20 @@ paths:
               items:
                 type: string
         "404":
-          description: Unable to find base container
+          description: Unable to the find base container.
         default:
           description: Unsuccessful response
     head:
+      summary: Get headers only for base container GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the base container.
+      operationId: headBase
       tags:
         - LDP
-      summary: Get headers only of base container request.
-      description: Gets the header values that would normally be found in the header of GET on base container
+      security:
+        - RemoteUser: []
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Allow:
               type: array
@@ -173,53 +187,58 @@ paths:
                 type: string
                 format: uri
         "404":
-          description: Unable to find container
+          description: Unable to find the base container.
         default:
           description: Unsuccessful response
   '/repository/{groupID}':
     get:
-      summary: Query for RDF about a Group.
-      description: Get the RDF (default, JSON-LD) for a Group.
+      summary: Get metadata (RDF) for a given Group.
+      description: Get the RDF (default serialization is JSON-LD) for a given Group.
       operationId: getGroup
+      tags:
+        - LDP
       security:
         - RemoteUser: []
       parameters:
         - name: groupID
-          description: The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
           required: true
           type: string
-          format: UUID
       responses:
         '200':
-          description: Successful response.
+          description: Successful group container response.
           headers:
             type:
-              description: Target URI matching type of container
+              description: Target URI matching type of container (basic).
               type: string
+              format: URI
             Content-Type:
               description: Content-Type for resource
               type: string
+              format: URI
           schema:
             $ref: '#/definitions/LDPContainer'
         '404':
-          description: Unable to find the specified Group.
+          description: Unable to find the specified Group container.
           schema:
             $ref: '#/definitions/ErrorResponse'
         default:
           description: Unsuccessful response
     post:
-      summary: Create new Group.
-      description: Create a resource (defined via JSON-LD in payload) within a Group.
+      summary: Create a resource within a Group.
+      description: Create a new resource (defined via JSON-LD in payload) within a supplied Group.
+      operationId: createResource
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
-          description: The group (ldp:Container) who is defining it's own resources or graph within Sinopia.
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
           required: true
           type: string
-          format: UUID
         - name: resource
           in: body
           description: Resource to insert into container
@@ -228,25 +247,29 @@ paths:
             $ref: '#/definitions/Resource'
         - name: Slug
           in: header
-          description: Suggested URI for resource
+          description: The suggested URI path for the resource.
           required: false
           type: string
+          format: URI
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type for the resource, with preference for JSON-LD.
           required: false
           type: string
       responses:
-        "200":
-          description: Successful response
         "201":
           description: Successful creation
           headers:
             Location:
-              description: URI to created resource
+              description: URI of the newly created resoruce.
               type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
           description: Method not allowed
           headers:
@@ -256,113 +279,92 @@ paths:
               items:
                 type: string
         "409":
-          description: URI Already Exists
-
+          description: Resource URI already exists (if you provide a slug).
         default:
           description: Unsuccessful response
     put:
+      summary: Update metadata on a group.
+      description: Update metadata of a given group container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateGroup
       tags:
         - LDP
-      description: Updates the group description.
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia. LDP Container to create the new resource within.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
-        - name: resource
+          type: string
+        - name: Group
           in: body
-          description: Resource to insert into container
+          description: Group metadata to replace existing description of the given group.
           required: true
           schema:
-            $ref: '#/definitions/Resource'
-        - name: Slug
-          in: header
-          description: Suggested URI for resource
-          required: false
-          type: string
+            $ref: '#/definitions/LDPContainer'
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response for Group update.
+        "204":
+          description: Group updated successfully.
+          headers:
+            Location:
+              description: URI of the updated group.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
               type: array
               items:
                 type: string
-        "409":
-          description: URI Already Exists
-        default:
-          description: Unsuccessful response
-    patch:
-      tags:
-        - LDP
-      description: |
-        Updates LDP container
-      parameters:
-        - name: groupID
-          in: path
-          description: LDP Container to get
-          required: true
-          type: integer
-          format: UUID
-        - name: resource
-          in: body
-          description: Resource to insert into container
-          required: true
-          schema:
-            $ref: '#/definitions/Resource'
-      responses:
-        "200":
-          description: Successful response
-        "404":
-          description: Unable to find container
-        "405":
-          description: Method not allowed
-          headers:
-            Allow:
-              description: HTTP methods allowed
-              type: array
-              items:
-                type: string
-        "406":
-          description: Violates constraints on resource modification
-          headers:
-            Accept-Patch:
-                type: array
-                items:
-                  type: string
         default:
           description: Unsuccessful response
     delete:
+      summary: Delete an Group.
+      description: Deletes an existing Group container. This Group URI cannot be reused.
+      operationId: deleteGroup
       tags:
         - LDP
-      description: |
-        Deletes LDP container
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response for request.
+          headers:
+            Location:
+              description: URI of the deleted group.
+              type: string
+              format: uri
+        "204":
+          description: Successfully deleted the provided Group.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
@@ -372,19 +374,22 @@ paths:
         default:
           description: Unsuccessful response
     options:
+      summary: HTTP Options for group.
+      description: Gets the available options for HTTP methods to utilize on the given group.
+      operationId: optionsGroup
       tags:
         - LDP
-      description: Gets options for HTTP methods to utilize for this container
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Accept:
               type: array
@@ -395,23 +400,24 @@ paths:
               items:
                 type: string
         "404":
-          description: Unable to find container
+          description: Unable to find the given group.
         default:
           description: Unsuccessful response
     head:
+      summary: Get headers only for a group GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the given group.
+      operationId: headGroup
       tags:
         - LDP
-      description: Gets the header values that would normally be found in the header of GET
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Allow:
               type: array
@@ -423,7 +429,7 @@ paths:
                 type: string
                 format: uri
         "404":
-          description: Unable to find container
+          description: Unable to find the given group.
         default:
           description: Unsuccessful response
   /healthcheck:
