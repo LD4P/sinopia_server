@@ -17,7 +17,7 @@ securityDefinitions:
     in: header
     name: On-Behalf-Of
 paths:
-  '/repository':
+  /repository:
     get:
       summary: Get metadata for the base container.
       description: Get the RDF metadata (default serialization is JSON-LD) for the base container.
@@ -190,7 +190,7 @@ paths:
           description: Unable to find the base container.
         default:
           description: Unsuccessful response
-  '/repository/{groupID}':
+  /repository/{groupID}:
     get:
       summary: Get metadata (RDF) for a given Group.
       description: Get the RDF (default serialization is JSON-LD) for a given Group.
@@ -430,6 +430,216 @@ paths:
                 format: uri
         "404":
           description: Unable to find the given group.
+        default:
+          description: Unsuccessful response
+  /repository/{groupID}/{resourceID}:
+    get:
+      summary: Get metadata (RDF) for a given resource.
+      description: Get the RDF (default serialization is JSON-LD) for a given resource.
+      operationId: getResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful resource response.
+          headers:
+            type:
+              description: Target URI matching type of resource.
+              type: string
+              format: URI
+            Content-Type:
+              description: Content-Type for resource.
+              type: string
+              format: URI
+          schema:
+            $ref: '#/definitions/Resource'
+        '404':
+          description: Unable to find the specified resource.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+    put:
+      summary: Update metadata on a resource.
+      description: Update metadata of a given resource with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: Resource
+          in: body
+          description: Resource metadata to replace existing description of the given group.
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Content-Type
+          in: header
+          description: Content-Type of Group metadata, with preference for JSON-LD.
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response for Resource update.
+        "204":
+          description: Resource updated successfully.
+          headers:
+            Location:
+              description: URI of the updated resource.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified resource.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    delete:
+      summary: Delete a Resource.
+      description: Deletes an existing Resource. This Resource URI cannot be reused.
+      operationId: deleteResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response for request.
+          headers:
+            Location:
+              description: URI of the deleted resource.
+              type: string
+              format: uri
+        "204":
+          description: Successfully deleted the provided resource.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified resource.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    options:
+      summary: HTTP Options for resource.
+      description: Gets the available options for HTTP methods to utilize on the given resource.
+      operationId: optionsResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Accept:
+              type: array
+              items:
+                type: string
+            Accept-Patch:
+              type: array
+              items:
+                type: string
+        "404":
+          description: Unable to find the specified resource.
+        default:
+          description: Unsuccessful response
+    head:
+      summary: Get headers only for a resource GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the given resource.
+      operationId: headResource
+      tags:
+        - LDP
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Allow:
+              type: array
+              items:
+                type: string
+            Link:
+              type: array
+              items:
+                type: string
+                format: uri
+        "404":
+          description: Unable to find the specified resource.
         default:
           description: Unsuccessful response
   /healthcheck:
