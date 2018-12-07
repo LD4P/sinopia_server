@@ -22,6 +22,8 @@ jobs:
       - checkout
       - restore_cache:
           key: node_modules-{{ checksum "sinopia_client/package.json" }}
+      - setup_remote_docker
+      - run: docker-compose up -d
       - run: cd sinopia_client && npm run test
 
 workflows:
