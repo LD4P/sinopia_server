@@ -4,7 +4,22 @@
 
 ## Working with the Open API Specification (aka Swagger) Specification
 
-WIP.
+### Using the swagger-codegen cli
+
+##### Generating a Javascript Client API
+[swagger-codegen-2.3.1](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.3.1) is the lastest version of swagger-codegen that supports the javascript language.
+
+1. Obtain the openapi.yaml file that you will be using. https://editor.swagger.io/ has a utility to convert a JSON spec to a YAML spec.
+- On the first line of the YAML spec change: `openapi: 3.0.1` to: `swagger: 3.0.1`
+- Download and the unzip the [v2.3.1](https://github.com/swagger-api/swagger-codegen/archive/v2.3.1.zip) zip file, then:
+```
+$> cd swagger-codegen-2.3.1
+$swagger-codegen-2.3.1/> ./run-in-docker.sh mvn package
+$swagger-codegen-2.3.1/> mkdir client_api
+$swagger-codegen-2.3.1/> ./run-in-docker.sh generate -i openapi.yaml -l javascript -o client_api/
+$swagger-codegen-2.3.1/> cp -r client_api /path/to/project/location/
+```
+(See: https://github.com/swagger-api/swagger-codegen#docker)
 
 ## Setting up LDP Server with Trellis & Postgres for Development Testing
 
