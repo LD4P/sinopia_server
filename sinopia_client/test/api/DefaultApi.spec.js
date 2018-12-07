@@ -32,7 +32,7 @@
   beforeEach(function() {
     instance = new SinopiaServer.DefaultApi();
     // same idea as https://stackoverflow.com/a/36041786
-    instance.apiClient.basePath = 'http://localhost:8080';
+    instance.apiClient.basePath = 'http://localhost:9080';
   });
 
   var getProperty = function(object, getter, property) {
@@ -62,7 +62,7 @@
     });
     describe('healthCheck', function() {
       beforeEach(function() {
-        instance.apiClient.basePath = 'http://localhost:8081';
+        instance.apiClient.basePath = 'http://localhost:9081';
       });
       it('should call healthCheck successfully', function() {
         // Application health checks are available at http://localhost:8081/healthcheck

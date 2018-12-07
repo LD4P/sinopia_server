@@ -32,7 +32,7 @@
   beforeEach(function() {
     instance = new SinopiaServer.LDPApi();
     // same idea as https://stackoverflow.com/a/36041786
-    instance.apiClient.basePath = 'http://localhost:8080';
+    instance.apiClient.basePath = 'http://localhost:9080';
   });
 
   var getProperty = function(object, getter, property) {

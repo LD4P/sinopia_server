@@ -1,0 +1,26 @@
+version: "3"
+services:
+  trellis:
+    image: trellisldp/trellis-ext-db:latest
+    environment:
+      TRELLIS_DB_USERNAME: sinopia
+      TRELLIS_DB_PASSWORD: s3cr3t
+      TRELLIS_DB_URL: jdbc:postgresql://db/sinopia
+    ports:
+      - 9080:8080
+      - 9081:8081
+    depends_on:
+      - db
+    volumes:
+      - ./docker/test/trellis/data:/opt/trellis/data
+      - ./docker/test/trellis/log:/opt/trellis/log
+      - ./docker/test/trellis/etc:/opt/trellis/etc
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: sinopia
+      POSTGRES_PASSWORD: s3cr3t
+      POSTGRES_USER: sinopia
+      PGDATA: /var/lib/postgresql/data/pgdata/mydata
+    volumes:
+      - ./docker/test/postgresql/data/folder:/var/lib/postgresql/data/pgdata/mydata
