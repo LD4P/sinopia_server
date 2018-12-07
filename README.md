@@ -15,24 +15,7 @@ This is all a work in progress, and the following indicates the documentation we
 ## Local Development Set up
 
 ### With Docker & Docker-Compose
-
-### Using the swagger-codegen cli
-
-##### Generating a Javascript Client API
-[swagger-codegen-2.3.1](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.3.1) is the lastest version of swagger-codegen that supports the javascript language.
-
-1. Obtain the openapi.yaml file that you will be using. (https://editor.swagger.io/ has a utility to convert a JSON spec to a YAML spec.)
-- On the first line of the YAML spec change: `openapi: 3.0.1` to: `swagger: 3.0.1`
-- Download and the unzip the [v2.3.1](https://github.com/swagger-api/swagger-codegen/archive/v2.3.1.zip) zip file, then:
-- run the following (mvn package will take a little while to run)
-```
-$> cd swagger-codegen-2.3.1
-$swagger-codegen-2.3.1/> ./run-in-docker.sh mvn package
-$swagger-codegen-2.3.1/> mkdir client_api
-$swagger-codegen-2.3.1/> ./run-in-docker.sh generate -i openapi.yaml -l javascript --additional-properties usePromises=true -o client_api/
-$swagger-codegen-2.3.1/> cp -r client_api /path/to/project/location/
-```
-(See: https://github.com/swagger-api/swagger-codegen#docker)
+ WIP.
 
 ### Without Docker
 
@@ -44,7 +27,7 @@ See the official Postgres installation instructions here: https://www.postgresql
 
 See the official Trellis manual installation instructions here: https://github.com/trellis-ldp/trellis/wiki/Manual-Installation
 
-### Spin-up Steps
+**Spin-up Steps:**
 
 1. With local Postgres running, create the needed Postgres database & Postgres user:
     1. `$ createdb sinopia` (using the postgresql package's binaries)
@@ -98,8 +81,23 @@ WIP.
 
 See the Specification-driven API documentation here: https://ld4p.github.io/sinopia_server/
 
-### How to Generate a Sinopia Server Client
+### Generating Sinopia Server Client with Swagger
 
-#### Javascript
+#### Generating a Javascript Client API with swagger-codegen cli
 
-#### Go
+[swagger-codegen-2.3.1](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.3.1) is the latest version of swagger-codegen that supports the javascript language.
+
+1. Obtain the openapi.yaml file that you will be using. (https://editor.swagger.io/ has a utility to convert a JSON spec to a YAML spec.)
+- On the first line of the YAML spec change: `openapi: 3.0.1` to: `swagger: 3.0.1`
+- Download and the unzip the [v2.3.1](https://github.com/swagger-api/swagger-codegen/archive/v2.3.1.zip) zip file, then:
+- run the following (mvn package will take a little while to run)
+
+```
+$> cd swagger-codegen-2.3.1
+$swagger-codegen-2.3.1/> ./run-in-docker.sh mvn package
+$swagger-codegen-2.3.1/> mkdir client_api
+$swagger-codegen-2.3.1/> ./run-in-docker.sh generate -i openapi.yaml -l javascript --additional-properties usePromises=true -o client_api/
+$swagger-codegen-2.3.1/> cp -r client_api /path/to/project/location/
+```
+
+(See: https://github.com/swagger-api/swagger-codegen#docker)
