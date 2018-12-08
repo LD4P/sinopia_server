@@ -75,7 +75,7 @@ auth:
         key: changeme
     basic:
         enabled: true
-        usersFile: etc/users.auth
+        usersFile: users.auth
 
 cors:
     enabled: true
