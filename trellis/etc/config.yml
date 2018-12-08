@@ -38,7 +38,7 @@ database:
 
   # The JDBC URL
   # url: jdbc:mysql://db.example.com/db-name
-  url: jdbc:postgresql://localhost/sinopia
+  url: jdbc:postgresql://postgres:5432/sinopia
 
   properties:
     charSet: UTF-8
@@ -70,11 +70,8 @@ auth:
     adminUsers: [cmharlow]
     webac:
         enabled: true
-    anon:
-        enabled: true
     jwt:
         enabled: false
-        base64Encoded: false
         key: changeme
     basic:
         enabled: true
