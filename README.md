@@ -2,11 +2,22 @@
 
 # Sinopia Server
 
-## Working with the Open API Specification (aka Swagger) Specification
+This is the repository for the Sinopia Server, namely, the Server that persists and support CRUD operations against Sinopia resources (see [here](https://ld4p.github.io/sinopia/models) for resource models). The Sinopia Server consists of:
 
-WIP.
+- LDP Server via the [Trellis-Ext-Db Codebase (release 0.1.1)](https://github.com/trellis-ldp/trellis-ext-db).
+- [Swagger specification](swagger.yaml) that constrains interactions and expectations on top of the LDP Server ReST API Endpoint.
+- Server integration testsuite driveny by the Swagger specification.
+- Authn and Authz handling (being explored at present).
+- And documentation on how to autogenerate Sinopia Server client based on the Swagger specification as well as how to locally run and deploy to AWS the Sinopia Server leveraging Docker.
 
-## Setting up LDP Server with Trellis & Postgres for Development Testing
+This is all a work in progress, and the following indicates the documentation we are currently writing as implementation decisions are made.
+
+## Local Development Set up
+
+### With Docker & Docker-Compose
+ WIP.
+
+### Without Docker
 
 Trellis (with relational backend) serves the majority of the Sinopia Server functions as specified in the Swagger spec described above. Below are some starter steps for running Trellis locally with Postgres, for expansion as we 1. add on functions we need to our fork of Trellis; 2. generate specifications & functional tests for our Sinopia data models; 3. write the needed services & codebases that will be sitting beside Trellis, serving the Server API routes we need.
 
@@ -16,7 +27,7 @@ See the official Postgres installation instructions here: https://www.postgresql
 
 See the official Trellis manual installation instructions here: https://github.com/trellis-ldp/trellis/wiki/Manual-Installation
 
-### Spin-up Steps
+**Spin-up Steps:**
 
 1. With local Postgres running, create the needed Postgres database & Postgres user:
     1. `$ createdb sinopia` (using the postgresql package's binaries)
@@ -36,3 +47,57 @@ See the official Trellis manual installation instructions here: https://github.c
 6. Run the server by running `$ ./bin/trellis-db server ./etc/config.yml`.
 
 Trellis should be available at: http://localhost:8080 And there is a built-in Trellis health check here: http://localhost:8081/healthcheck.
+
+## Sinopia Server Testing
+
+WIP.
+
+### Sinopia Server Integration Tests
+
+### Trellis Integration Tests
+
+### Sinopia Server Unit Tests
+
+### Trellis Unit Tests
+
+### Circle-CI Integration Testing Setup
+
+
+## AWS Deployment Set Up
+
+WIP.
+
+## Working with the Open API Specification (aka Swagger) Specification
+
+WIP.
+
+### Use of Swagger with Trellis - LDP
+
+### Validating Swagger
+
+### Use of Swagger with Testing Framework
+
+### Swagger Documentation
+
+See the Specification-driven API documentation here: https://ld4p.github.io/sinopia_server/
+
+### Generating Sinopia Server Client with Swagger
+
+#### Generating a Javascript Client API with swagger-codegen cli
+
+[swagger-codegen-2.3.1](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.3.1) is the latest version of swagger-codegen that supports the javascript language.
+
+1. Obtain the openapi.yaml file that you will be using. (https://editor.swagger.io/ has a utility to convert a JSON spec to a YAML spec.)
+- On the first line of the YAML spec change: `openapi: 3.0.1` to: `swagger: 3.0.1`
+- Download and the unzip the [v2.3.1](https://github.com/swagger-api/swagger-codegen/archive/v2.3.1.zip) zip file, then:
+- run the following (mvn package will take a little while to run)
+
+```
+$> cd swagger-codegen-2.3.1
+$swagger-codegen-2.3.1/> ./run-in-docker.sh mvn package
+$swagger-codegen-2.3.1/> mkdir client_api
+$swagger-codegen-2.3.1/> ./run-in-docker.sh generate -i openapi.yaml -l javascript --additional-properties usePromises=true -o client_api/
+$swagger-codegen-2.3.1/> cp -r client_api /path/to/project/location/
+```
+
+(See: https://github.com/swagger-api/swagger-codegen#docker)
