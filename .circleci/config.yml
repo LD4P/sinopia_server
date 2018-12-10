@@ -26,7 +26,7 @@ jobs:
       - restore_cache:
           key: node_modules-{{ checksum "sinopia_client/package.json" }}
       # restore cache: docker stuff
-      - run: docker-compose up -f docker/test/docker-compose.yml
+      - run: docker-compose up
       - run: cd sinopia_client && npm run test
 
 workflows:
