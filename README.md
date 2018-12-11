@@ -15,7 +15,20 @@ This is all a work in progress, and the following indicates the documentation we
 ## Local Development Set up
 
 ### With Docker & Docker-Compose
- WIP.
+
+Using the `docker-compose.yml` file and `trellis/etc/` directory at the top level of this repository, you can spin up a container of postgres and trellis, run the trellis database migration job, and have access to the Sinopia Server (here, just straight trellis) at http://localhost:8080. The following command sets this up:
+
+```
+$ docker-compose up
+```
+
+Give this command a few seconds to run; it will remain running in the shell you started it in. When you want to close it down, `cntl + c` will stop the server, then run:
+
+```
+$ docker-compose down
+```
+
+The above command stops and destroys the images created. This is helpful if you wish to register new docker-compose changes between runs.
 
 ### Without Docker
 
