@@ -1,6 +1,7 @@
 version: "3"
 services:
   trellis:
+    container_name: trellis_server
     build:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
@@ -12,7 +13,11 @@ services:
     depends_on:
       - postgres
       - migration
+    healthcheck:
+      test:  ["CMD", "curl", "-f", "http://localhost:8081/healthcheck"]
+      retries: 5
   postgres:
+    container_name: postgres_server
     image: postgres:latest
     environment:
       POSTGRES_USER: sinopia
@@ -22,6 +27,7 @@ services:
     ports:
       - 5432:5432
   migration:
+    container_name: trellis_migration
     build:
       context: .
       dockerfile: Dockerfile.trellis-ext-db

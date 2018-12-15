@@ -23,8 +23,13 @@ jobs:
       - restore_cache:
           key: node_modules-{{ checksum "sinopia_client/package.json" }}
       - setup_remote_docker
-      - run: docker-compose up -d
-      - run: cd sinopia_client && npm run test
+      - run:
+          name: bring up trellis-ext-db, wait for it to start, run sinopia client integration tests
+          command: |
+            docker-compose up -d
+            ./wait_for_healthy_trellis.sh
+            cd sinopia_client
+            npm run test
 
 workflows:
   version: 2
