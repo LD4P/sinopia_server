@@ -3,8 +3,8 @@ server:
     - type: http
       port: ${TRELLIS_HTTP_PORT:-8080}
   adminConnectors:
-  - type: http
-    port: ${TRELLIS_ADMIN_HTTP_PORT:-8081}
+    - type: http
+      port: ${TRELLIS_ADMIN_HTTP_PORT:-8081}
   requestLog:
     appenders:
       - type: file
