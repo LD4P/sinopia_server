@@ -53,12 +53,12 @@
 
   describe('DefaultApi', function() {
     describe('getGroup', function() {
-      it('should call getGroup successfully', function() {
-        return instance.getGroup('pcc')
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call getGroup successfully', function() {
+      //   return instance.getGroup('pcc')
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('healthCheck', function() {
       beforeEach(function() {

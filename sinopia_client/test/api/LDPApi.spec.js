@@ -53,12 +53,12 @@
 
   describe('LDPApi', function() {
     describe('getBase', function() {
-      it('should call getBase successfully', function() {
-        return instance.getBase()
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call getBase successfully', function() {
+      //   return instance.getBase()
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('repositoryGroupIDDelete', function() {
       it('should call repositoryGroupIDDelete successfully', function(done) {
@@ -71,20 +71,20 @@
       });
     });
     describe('repositoryGroupIDHead', function() {
-      it('should call repositoryGroupIDHead successfully', function() {
-        return instance.repositoryGroupIDHead('pcc')
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call repositoryGroupIDHead successfully', function() {
+      //   return instance.repositoryGroupIDHead('pcc')
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('repositoryGroupIDOptions', function() {
-      it('should call repositoryGroupIDOptions successfully', function() {
-        return instance.repositoryGroupIDOptions('pcc')
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call repositoryGroupIDOptions successfully', function() {
+      //   return instance.repositoryGroupIDOptions('pcc')
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('repositoryGroupIDPatch', function() {
       it('should call repositoryGroupIDPatch successfully', function(done) {
@@ -117,20 +117,20 @@
       });
     });
     describe('repositoryHead', function() {
-      it('should call repositoryHead successfully', function() {
-        return instance.repositoryHead()
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call repositoryHead successfully', function() {
+      //   return instance.repositoryHead()
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('repositoryOptions', function() {
-      it('should call repositoryOptions successfully', function() {
-        return instance.repositoryOptions()
-          .then(function(_data) {
-            expect().to.be();
-          });
-      });
+      // it('should call repositoryOptions successfully', function() {
+      //   return instance.repositoryOptions()
+      //     .then(function(_data) {
+      //       expect().to.be();
+      //     });
+      // });
     });
     describe('repositoryPost', function() {
       it('should call repositoryPost successfully', function(done) {
