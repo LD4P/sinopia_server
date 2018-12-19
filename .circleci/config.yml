@@ -1,6 +1,5 @@
 defaults: &defaults
-  docker:
-    - image: circleci/node:10.11-browsers
+  machine: true
   working_directory: ~/sinopia_server
 
 version: 2
@@ -22,7 +21,6 @@ jobs:
       - checkout
       - restore_cache:
           key: node_modules-{{ checksum "sinopia_client/package.json" }}
-      - setup_remote_docker
       - run:
           name: bring up trellis-ext-db, wait for it to start, run sinopia client integration tests
           command: |
