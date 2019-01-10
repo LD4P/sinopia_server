@@ -52,6 +52,66 @@
   }
 
   describe('LDPApi', function() {
+    describe('createGroup', function() {
+      it('should call createGroup successfully', function(done) {
+        //uncomment below and update the code to test createGroup
+        //instance.createGroup(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('createResource', function() {
+      it('should call createResource successfully', function(done) {
+        //uncomment below and update the code to test createResource
+        //instance.createResource(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('createUser', function() {
+      it('should call createUser successfully', function(done) {
+        //uncomment below and update the code to test createUser
+        //instance.createUser(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('deleteGroup', function() {
+      it('should call deleteGroup successfully', function(done) {
+        //uncomment below and update the code to test deleteGroup
+        //instance.deleteGroup(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('deleteResource', function() {
+      it('should call deleteResource successfully', function(done) {
+        //uncomment below and update the code to test deleteResource
+        //instance.deleteResource(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('deleteUser', function() {
+      it('should call deleteUser successfully', function(done) {
+        //uncomment below and update the code to test deleteUser
+        //instance.deleteUser(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe('getBase', function() {
       // it('should call getBase successfully', function() {
       //   return instance.getBase()
@@ -60,92 +120,182 @@
       //     });
       // });
     });
-    describe('repositoryGroupIDDelete', function() {
-      it('should call repositoryGroupIDDelete successfully', function(done) {
-        //uncomment below and update the code to test repositoryGroupIDDelete
-        //instance.repositoryGroupIDDelete(function(error) {
+    describe('getGroup', function() {
+      it('should call getGroup successfully', function(done) {
+        //uncomment below and update the code to test getGroup
+        //instance.getGroup(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('repositoryGroupIDHead', function() {
-      // it('should call repositoryGroupIDHead successfully', function() {
-      //   return instance.repositoryGroupIDHead('pcc')
+    describe('getResource', function() {
+      it('should call getResource successfully', function(done) {
+        //uncomment below and update the code to test getResource
+        //instance.getResource(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('getUser', function() {
+      it('should call getUser successfully', function(done) {
+        //uncomment below and update the code to test getUser
+        //instance.getUser(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('getUsers', function() {
+      it('should call getUsers successfully', function(done) {
+        //uncomment below and update the code to test getUsers
+        //instance.getUsers(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('headBase', function() {
+      // it('should call headBase successfully', function() {
+      //   return instance.headBase()
       //     .then(function(_data) {
       //       expect().to.be();
       //     });
       // });
     });
-    describe('repositoryGroupIDOptions', function() {
-      // it('should call repositoryGroupIDOptions successfully', function() {
-      //   return instance.repositoryGroupIDOptions('pcc')
+    describe('headGroup', function() {
+      // it('should call headGroup successfully', function() {
+      //   return instance.headGroup('pcc')
       //     .then(function(_data) {
       //       expect().to.be();
       //     });
       // });
     });
-    describe('repositoryGroupIDPatch', function() {
-      it('should call repositoryGroupIDPatch successfully', function(done) {
-        //uncomment below and update the code to test repositoryGroupIDPatch
-        //instance.repositoryGroupIDPatch(function(error) {
+    describe('headResource', function() {
+      it('should call headResource successfully', function(done) {
+        //uncomment below and update the code to test headResource
+        //instance.headResource(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('repositoryGroupIDPost', function() {
-      it('should call repositoryGroupIDPost successfully', function(done) {
-        //uncomment below and update the code to test repositoryGroupIDPost
-        //instance.repositoryGroupIDPost(function(error) {
+    describe('headUser', function() {
+      it('should call headUser successfully', function(done) {
+        //uncomment below and update the code to test headUser
+        //instance.headUser(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('repositoryGroupIDPut', function() {
-      it('should call repositoryGroupIDPut successfully', function(done) {
-        //uncomment below and update the code to test repositoryGroupIDPut
-        //instance.repositoryGroupIDPut(function(error) {
+    describe('headUsers', function() {
+      it('should call headUsers successfully', function(done) {
+        //uncomment below and update the code to test headUsers
+        //instance.headUsers(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('repositoryHead', function() {
-      // it('should call repositoryHead successfully', function() {
-      //   return instance.repositoryHead()
+    describe('optionsBase', function() {
+      // it('should call optionsBase successfully', function() {
+      //   return instance.optionsBase()
       //     .then(function(_data) {
       //       expect().to.be();
       //     });
       // });
     });
-    describe('repositoryOptions', function() {
-      // it('should call repositoryOptions successfully', function() {
-      //   return instance.repositoryOptions()
+    describe('optionsGroup', function() {
+      // it('should call optionsGroup successfully', function() {
+      //   return instance.optionsGroup('pcc')
       //     .then(function(_data) {
       //       expect().to.be();
       //     });
       // });
     });
-    describe('repositoryPost', function() {
-      it('should call repositoryPost successfully', function(done) {
-        //uncomment below and update the code to test repositoryPost
-        //instance.repositoryPost(function(error) {
+    describe('optionsResource', function() {
+      it('should call optionsResource successfully', function(done) {
+        //uncomment below and update the code to test optionsResource
+        //instance.optionsResource(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('repositoryPut', function() {
-      it('should call repositoryPut successfully', function(done) {
-        //uncomment below and update the code to test repositoryPut
-        //instance.repositoryPut(function(error) {
+    describe('optionsUser', function() {
+      it('should call optionsUser successfully', function(done) {
+        //uncomment below and update the code to test optionsUser
+        //instance.optionsUser(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('optionsUsers', function() {
+      it('should call optionsUsers successfully', function(done) {
+        //uncomment below and update the code to test optionsUsers
+        //instance.optionsUsers(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('updateBase', function() {
+      it('should call updateBase successfully', function(done) {
+        //uncomment below and update the code to test updateBase
+        //instance.updateBase(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('updateGroup', function() {
+      it('should call updateGroup successfully', function(done) {
+        //uncomment below and update the code to test updateGroup
+        //instance.updateGroup(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('updateResource', function() {
+      it('should call updateResource successfully', function(done) {
+        //uncomment below and update the code to test updateResource
+        //instance.updateResource(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('updateUser', function() {
+      it('should call updateUser successfully', function(done) {
+        //uncomment below and update the code to test updateUser
+        //instance.updateUser(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('updateUsers', function() {
+      it('should call updateUsers successfully', function(done) {
+        //uncomment below and update the code to test updateUsers
+        //instance.updateUsers(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

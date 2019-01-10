@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/HealthCheckResponse', 'model/LDPContainer'], factory);
+    define(['ApiClient', 'model/HealthCheckResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/HealthCheckResponse'), require('../model/LDPContainer'));
+    module.exports = factory(require('../ApiClient'), require('../model/HealthCheckResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.DefaultApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ErrorResponse, root.SinopiaServer.HealthCheckResponse, root.SinopiaServer.LDPContainer);
+    root.SinopiaServer.DefaultApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.HealthCheckResponse);
   }
-}(this, function(ApiClient, ErrorResponse, HealthCheckResponse, LDPContainer) {
+}(this, function(ApiClient, HealthCheckResponse) {
   'use strict';
 
   /**
@@ -46,59 +46,6 @@
   var exports = function(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
 
-
-
-    /**
-     * Query for RDF about a Group.
-     * Get the RDF (default, JSON-LD) for a Group.
-     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to get.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
-     */
-    this.getGroupWithHttpInfo = function(groupID) {
-      var postBody = null;
-
-      // verify the required parameter 'groupID' is set
-      if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling getGroup");
-      }
-
-
-      var pathParams = {
-        'groupID': groupID
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['RemoteUser'];
-      var contentTypes = ['application/json+ld'];
-      var accepts = ['application/json+ld'];
-      var returnType = LDPContainer;
-
-      return this.apiClient.callApi(
-        '/repository/{groupID}', 'GET',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Query for RDF about a Group.
-     * Get the RDF (default, JSON-LD) for a Group.
-     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to get.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
-     */
-    this.getGroup = function(groupID) {
-      return this.getGroupWithHttpInfo(groupID)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
 
 
     /**

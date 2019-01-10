@@ -49,6 +49,369 @@
 
 
     /**
+     * Create new Group within the base container.
+     * Create a new Group (defined via JSON-LD in payload) within the base container.
+     * @param {String} slug The suggested URI path for the group.
+     * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.createGroupWithHttpInfo = function(slug, group, opts) {
+      opts = opts || {};
+      var postBody = group;
+
+      // verify the required parameter 'slug' is set
+      if (slug === undefined || slug === null) {
+        throw new Error("Missing the required parameter 'slug' when calling createGroup");
+      }
+
+      // verify the required parameter 'group' is set
+      if (group === undefined || group === null) {
+        throw new Error("Missing the required parameter 'group' when calling createGroup");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Slug': slug,
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Create new Group within the base container.
+     * Create a new Group (defined via JSON-LD in payload) within the base container.
+     * @param {String} slug The suggested URI path for the group.
+     * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.createGroup = function(slug, group, opts) {
+      return this.createGroupWithHttpInfo(slug, group, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Create a resource within a Group.
+     * Create a new resource (defined via JSON-LD in payload) within a supplied Group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {module:model/Resource} resource Resource to insert into container
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.createResourceWithHttpInfo = function(groupID, resource, opts) {
+      opts = opts || {};
+      var postBody = resource;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling createResource");
+      }
+
+      // verify the required parameter 'resource' is set
+      if (resource === undefined || resource === null) {
+        throw new Error("Missing the required parameter 'resource' when calling createResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Slug': opts['slug'],
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Create a resource within a Group.
+     * Create a new resource (defined via JSON-LD in payload) within a supplied Group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {module:model/Resource} resource Resource to insert into container
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.createResource = function(groupID, resource, opts) {
+      return this.createResourceWithHttpInfo(groupID, resource, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Create a user within Sinopia.
+     * Create a new user (defined via JSON-LD in payload) within Sinopia.
+     * @param {module:model/Resource} user User to insert into Sinopia users&#39; container.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug The suggested URI path for the user.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.createUserWithHttpInfo = function(user, opts) {
+      opts = opts || {};
+      var postBody = user;
+
+      // verify the required parameter 'user' is set
+      if (user === undefined || user === null) {
+        throw new Error("Missing the required parameter 'user' when calling createUser");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Slug': opts['slug'],
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/users', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Create a user within Sinopia.
+     * Create a new user (defined via JSON-LD in payload) within Sinopia.
+     * @param {module:model/Resource} user User to insert into Sinopia users&#39; container.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.slug The suggested URI path for the user.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.createUser = function(user, opts) {
+      return this.createUserWithHttpInfo(user, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Delete an Group.
+     * Deletes an existing Group container. This Group URI cannot be reused.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.deleteGroupWithHttpInfo = function(groupID) {
+      var postBody = null;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling deleteGroup");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}', 'DELETE',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Delete an Group.
+     * Deletes an existing Group container. This Group URI cannot be reused.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.deleteGroup = function(groupID) {
+      return this.deleteGroupWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Delete a Resource.
+     * Deletes an existing Resource. This Resource URI cannot be reused.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.deleteResourceWithHttpInfo = function(groupID, resourceID) {
+      var postBody = null;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling deleteResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling deleteResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID,
+        'resourceID': resourceID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}/{resourceID}', 'DELETE',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Delete a Resource.
+     * Deletes an existing Resource. This Resource URI cannot be reused.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.deleteResource = function(groupID, resourceID) {
+      return this.deleteResourceWithHttpInfo(groupID, resourceID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Delete a User.
+     * Deletes an existing User. This User URI cannot be reused.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.deleteUserWithHttpInfo = function(userID) {
+      var postBody = null;
+
+      // verify the required parameter 'userID' is set
+      if (userID === undefined || userID === null) {
+        throw new Error("Missing the required parameter 'userID' when calling deleteUser");
+      }
+
+
+      var pathParams = {
+        'userID': userID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/users/{userID}', 'DELETE',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Delete a User.
+     * Deletes an existing User. This User URI cannot be reused.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.deleteUser = function(userID) {
+      return this.deleteUserWithHttpInfo(userID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
@@ -94,16 +457,17 @@
 
 
     /**
-     * Deletes LDP container 
-     * @param {Number} groupID LDP Container to get
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * Get metadata (RDF) for a given Group.
+     * Get the RDF (default serialization is JSON-LD) for a given Group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
      */
-    this.repositoryGroupIDDeleteWithHttpInfo = function(groupID) {
+    this.getGroupWithHttpInfo = function(groupID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
       if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDDelete");
+        throw new Error("Missing the required parameter 'groupID' when calling getGroup");
       }
 
 
@@ -119,25 +483,26 @@
       var formParams = {
       };
 
-      var authNames = [];
+      var authNames = ['RemoteUser'];
       var contentTypes = ['application/json+ld'];
       var accepts = ['application/json+ld'];
-      var returnType = null;
+      var returnType = LDPContainer;
 
       return this.apiClient.callApi(
-        '/repository/{groupID}', 'DELETE',
+        '/repository/{groupID}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Deletes LDP container 
-     * @param {Number} groupID LDP Container to get
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * Get metadata (RDF) for a given Group.
+     * Get the RDF (default serialization is JSON-LD) for a given Group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
      */
-    this.repositoryGroupIDDelete = function(groupID) {
-      return this.repositoryGroupIDDeleteWithHttpInfo(groupID)
+    this.getGroup = function(groupID) {
+      return this.getGroupWithHttpInfo(groupID)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -145,16 +510,221 @@
 
 
     /**
-     * Gets the header values that would normally be found in the header of GET
-     * @param {Number} groupID LDP Container to get
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * Get metadata (RDF) for a given resource.
+     * Get the RDF (default serialization is JSON-LD) for a given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Resource} and HTTP response
      */
-    this.repositoryGroupIDHeadWithHttpInfo = function(groupID) {
+    this.getResourceWithHttpInfo = function(groupID, resourceID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
       if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDHead");
+        throw new Error("Missing the required parameter 'groupID' when calling getResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling getResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID,
+        'resourceID': resourceID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = Resource;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}/{resourceID}', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get metadata (RDF) for a given resource.
+     * Get the RDF (default serialization is JSON-LD) for a given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Resource}
+     */
+    this.getResource = function(groupID, resourceID) {
+      return this.getResourceWithHttpInfo(groupID, resourceID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get metadata (RDF) for a given user.
+     * Get the RDF (default serialization is JSON-LD) for a given Sinopia user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Resource} and HTTP response
+     */
+    this.getUserWithHttpInfo = function(userID) {
+      var postBody = null;
+
+      // verify the required parameter 'userID' is set
+      if (userID === undefined || userID === null) {
+        throw new Error("Missing the required parameter 'userID' when calling getUser");
+      }
+
+
+      var pathParams = {
+        'userID': userID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = Resource;
+
+      return this.apiClient.callApi(
+        '/repository/users/{userID}', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get metadata (RDF) for a given user.
+     * Get the RDF (default serialization is JSON-LD) for a given Sinopia user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Resource}
+     */
+    this.getUser = function(userID) {
+      return this.getUserWithHttpInfo(userID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get metadata (RDF) for the Sinopia users container.
+     * Get the RDF (default serialization is JSON-LD) for the Sinopia users&#39; container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
+     */
+    this.getUsersWithHttpInfo = function() {
+      var postBody = null;
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = LDPContainer;
+
+      return this.apiClient.callApi(
+        '/repository/users', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get metadata (RDF) for the Sinopia users container.
+     * Get the RDF (default serialization is JSON-LD) for the Sinopia users&#39; container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
+     */
+    this.getUsers = function() {
+      return this.getUsersWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get headers only for base container GET request.
+     * Gets the header values that would normally be found in the header of GET request on the base container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.headBaseWithHttpInfo = function() {
+      var postBody = null;
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository', 'HEAD',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get headers only for base container GET request.
+     * Gets the header values that would normally be found in the header of GET request on the base container.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.headBase = function() {
+      return this.headBaseWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get headers only for a group GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.headGroupWithHttpInfo = function(groupID) {
+      var postBody = null;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling headGroup");
       }
 
 
@@ -183,12 +753,13 @@
     }
 
     /**
-     * Gets the header values that would normally be found in the header of GET
-     * @param {Number} groupID LDP Container to get
+     * Get headers only for a group GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryGroupIDHead = function(groupID) {
-      return this.repositoryGroupIDHeadWithHttpInfo(groupID)
+    this.headGroup = function(groupID) {
+      return this.headGroupWithHttpInfo(groupID)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -196,21 +767,29 @@
 
 
     /**
-     * Gets options for HTTP methods to utilize for this container
-     * @param {Number} groupID LDP Container to get
+     * Get headers only for a resource GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDOptionsWithHttpInfo = function(groupID) {
+    this.headResourceWithHttpInfo = function(groupID, resourceID) {
       var postBody = null;
 
       // verify the required parameter 'groupID' is set
       if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDOptions");
+        throw new Error("Missing the required parameter 'groupID' when calling headResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling headResource");
       }
 
 
       var pathParams = {
-        'groupID': groupID
+        'groupID': groupID,
+        'resourceID': resourceID
       };
       var queryParams = {
       };
@@ -227,19 +806,21 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/repository/{groupID}', 'OPTIONS',
+        '/repository/{groupID}/{resourceID}', 'HEAD',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Gets options for HTTP methods to utilize for this container
-     * @param {Number} groupID LDP Container to get
+     * Get headers only for a resource GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryGroupIDOptions = function(groupID) {
-      return this.repositoryGroupIDOptionsWithHttpInfo(groupID)
+    this.headResource = function(groupID, resourceID) {
+      return this.headResourceWithHttpInfo(groupID, resourceID)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -247,27 +828,22 @@
 
 
     /**
-     * Updates LDP container 
-     * @param {Number} groupID LDP Container to get
-     * @param {module:model/Resource} resource Resource to insert into container
+     * Get headers only for a user GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDPatchWithHttpInfo = function(groupID, resource) {
-      var postBody = resource;
+    this.headUserWithHttpInfo = function(userID) {
+      var postBody = null;
 
-      // verify the required parameter 'groupID' is set
-      if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDPatch");
-      }
-
-      // verify the required parameter 'resource' is set
-      if (resource === undefined || resource === null) {
-        throw new Error("Missing the required parameter 'resource' when calling repositoryGroupIDPatch");
+      // verify the required parameter 'userID' is set
+      if (userID === undefined || userID === null) {
+        throw new Error("Missing the required parameter 'userID' when calling headUser");
       }
 
 
       var pathParams = {
-        'groupID': groupID
+        'userID': userID
       };
       var queryParams = {
       };
@@ -284,20 +860,20 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/repository/{groupID}', 'PATCH',
+        '/repository/users/{userID}', 'HEAD',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Updates LDP container 
-     * @param {Number} groupID LDP Container to get
-     * @param {module:model/Resource} resource Resource to insert into container
+     * Get headers only for a user GET request.
+     * Gets the header values that would normally be found in the header of GET request on the given user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryGroupIDPatch = function(groupID, resource) {
-      return this.repositoryGroupIDPatchWithHttpInfo(groupID, resource)
+    this.headUser = function(userID) {
+      return this.headUserWithHttpInfo(userID)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -305,147 +881,11 @@
 
 
     /**
-     * Create new Group.
-     * Create a resource (defined via JSON-LD in payload) within a Group.
-     * @param {String} groupID The group (ldp:Container) who is defining it&#39;s own resources or graph within Sinopia.
-     * @param {module:model/Resource} resource Resource to insert into container
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug Suggested URI for resource
-     * @param {String} opts.contentType Content-Type of resource
+     * Get headers only for a Sinopia users&#39; container GET request.
+     * Gets the header values that would normally be found in the header of GET request on the Sinopia users&#39; container.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryGroupIDPostWithHttpInfo = function(groupID, resource, opts) {
-      opts = opts || {};
-      var postBody = resource;
-
-      // verify the required parameter 'groupID' is set
-      if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDPost");
-      }
-
-      // verify the required parameter 'resource' is set
-      if (resource === undefined || resource === null) {
-        throw new Error("Missing the required parameter 'resource' when calling repositoryGroupIDPost");
-      }
-
-
-      var pathParams = {
-        'groupID': groupID
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-        'Slug': opts['slug'],
-        'Content-Type': opts['contentType']
-      };
-      var formParams = {
-      };
-
-      var authNames = [];
-      var contentTypes = ['application/json+ld'];
-      var accepts = ['application/json+ld'];
-      var returnType = null;
-
-      return this.apiClient.callApi(
-        '/repository/{groupID}', 'POST',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Create new Group.
-     * Create a resource (defined via JSON-LD in payload) within a Group.
-     * @param {String} groupID The group (ldp:Container) who is defining it&#39;s own resources or graph within Sinopia.
-     * @param {module:model/Resource} resource Resource to insert into container
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug Suggested URI for resource
-     * @param {String} opts.contentType Content-Type of resource
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-     */
-    this.repositoryGroupIDPost = function(groupID, resource, opts) {
-      return this.repositoryGroupIDPostWithHttpInfo(groupID, resource, opts)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Updates the group description.
-     * @param {Number} groupID LDP Container to get
-     * @param {module:model/Resource} resource Resource to insert into container
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug Suggested URI for resource
-     * @param {String} opts.contentType Content-Type of resource
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-     */
-    this.repositoryGroupIDPutWithHttpInfo = function(groupID, resource, opts) {
-      opts = opts || {};
-      var postBody = resource;
-
-      // verify the required parameter 'groupID' is set
-      if (groupID === undefined || groupID === null) {
-        throw new Error("Missing the required parameter 'groupID' when calling repositoryGroupIDPut");
-      }
-
-      // verify the required parameter 'resource' is set
-      if (resource === undefined || resource === null) {
-        throw new Error("Missing the required parameter 'resource' when calling repositoryGroupIDPut");
-      }
-
-
-      var pathParams = {
-        'groupID': groupID
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-        'Slug': opts['slug'],
-        'Content-Type': opts['contentType']
-      };
-      var formParams = {
-      };
-
-      var authNames = [];
-      var contentTypes = ['application/json+ld'];
-      var accepts = ['application/json+ld'];
-      var returnType = null;
-
-      return this.apiClient.callApi(
-        '/repository/{groupID}', 'PUT',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Updates the group description.
-     * @param {Number} groupID LDP Container to get
-     * @param {module:model/Resource} resource Resource to insert into container
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug Suggested URI for resource
-     * @param {String} opts.contentType Content-Type of resource
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-     */
-    this.repositoryGroupIDPut = function(groupID, resource, opts) {
-      return this.repositoryGroupIDPutWithHttpInfo(groupID, resource, opts)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Get headers only of base container request.
-     * Gets the header values that would normally be found in the header of GET on base container
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-     */
-    this.repositoryHeadWithHttpInfo = function() {
+    this.headUsersWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -466,19 +906,19 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/repository', 'HEAD',
+        '/repository/users', 'HEAD',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Get headers only of base container request.
-     * Gets the header values that would normally be found in the header of GET on base container
+     * Get headers only for a Sinopia users&#39; container GET request.
+     * Gets the header values that would normally be found in the header of GET request on the Sinopia users&#39; container.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryHead = function() {
-      return this.repositoryHeadWithHttpInfo()
+    this.headUsers = function() {
+      return this.headUsersWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -486,10 +926,11 @@
 
 
     /**
-     * Gets options for HTTP methods to utilize for the base container.
+     * HTTP Options for base container.
+     * Gets the available options for HTTP methods to utilize on the base container.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryOptionsWithHttpInfo = function() {
+    this.optionsBaseWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -504,7 +945,7 @@
       var formParams = {
       };
 
-      var authNames = [];
+      var authNames = ['RemoteUser'];
       var contentTypes = ['application/json+ld'];
       var accepts = ['application/json+ld'];
       var returnType = null;
@@ -517,11 +958,12 @@
     }
 
     /**
-     * Gets options for HTTP methods to utilize for the base container.
+     * HTTP Options for base container.
+     * Gets the available options for HTTP methods to utilize on the base container.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryOptions = function() {
-      return this.repositoryOptionsWithHttpInfo()
+    this.optionsBase = function() {
+      return this.optionsBaseWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -529,22 +971,179 @@
 
 
     /**
-     * Create new Group within the base container.
-     * Create a new Group (defined via JSON-LD in payload) within the base container.
-     * @param {module:model/Resource} groupMD Group metadata to insert into base container and describe the group.
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug The group (ldp:Container) who is defining it&#39;s own entities or graph within Sinopia.
-     * @param {String} opts.contentType Content-Type of resource, with preference for JSON-LD.
+     * HTTP Options for group.
+     * Gets the available options for HTTP methods to utilize on the given group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryPostWithHttpInfo = function(groupMD, opts) {
-      opts = opts || {};
-      var postBody = groupMD;
+    this.optionsGroupWithHttpInfo = function(groupID) {
+      var postBody = null;
 
-      // verify the required parameter 'groupMD' is set
-      if (groupMD === undefined || groupMD === null) {
-        throw new Error("Missing the required parameter 'groupMD' when calling repositoryPost");
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling optionsGroup");
       }
+
+
+      var pathParams = {
+        'groupID': groupID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}', 'OPTIONS',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * HTTP Options for group.
+     * Gets the available options for HTTP methods to utilize on the given group.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.optionsGroup = function(groupID) {
+      return this.optionsGroupWithHttpInfo(groupID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * HTTP Options for resource.
+     * Gets the available options for HTTP methods to utilize on the given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.optionsResourceWithHttpInfo = function(groupID, resourceID) {
+      var postBody = null;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling optionsResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling optionsResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID,
+        'resourceID': resourceID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}/{resourceID}', 'OPTIONS',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * HTTP Options for resource.
+     * Gets the available options for HTTP methods to utilize on the given resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.optionsResource = function(groupID, resourceID) {
+      return this.optionsResourceWithHttpInfo(groupID, resourceID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * HTTP Options for user.
+     * Gets the available options for HTTP methods to utilize on the given user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.optionsUserWithHttpInfo = function(userID) {
+      var postBody = null;
+
+      // verify the required parameter 'userID' is set
+      if (userID === undefined || userID === null) {
+        throw new Error("Missing the required parameter 'userID' when calling optionsUser");
+      }
+
+
+      var pathParams = {
+        'userID': userID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/users/{userID}', 'OPTIONS',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * HTTP Options for user.
+     * Gets the available options for HTTP methods to utilize on the given user.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.optionsUser = function(userID) {
+      return this.optionsUserWithHttpInfo(userID)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * HTTP Options for Sinopia users&#39; container.
+     * Gets the available options for HTTP methods to utilize on the Sinopia users&#39; container
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.optionsUsersWithHttpInfo = function() {
+      var postBody = null;
 
 
       var pathParams = {
@@ -554,35 +1153,29 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'Slug': opts['slug'],
-        'Content-Type': opts['contentType']
       };
       var formParams = {
       };
 
-      var authNames = [];
+      var authNames = ['RemoteUser'];
       var contentTypes = ['application/json+ld'];
       var accepts = ['application/json+ld'];
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/repository', 'POST',
+        '/repository/users', 'OPTIONS',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Create new Group within the base container.
-     * Create a new Group (defined via JSON-LD in payload) within the base container.
-     * @param {module:model/Resource} groupMD Group metadata to insert into base container and describe the group.
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.slug The group (ldp:Container) who is defining it&#39;s own entities or graph within Sinopia.
-     * @param {String} opts.contentType Content-Type of resource, with preference for JSON-LD.
+     * HTTP Options for Sinopia users&#39; container.
+     * Gets the available options for HTTP methods to utilize on the Sinopia users&#39; container
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryPost = function(groupMD, opts) {
-      return this.repositoryPostWithHttpInfo(groupMD, opts)
+    this.optionsUsers = function() {
+      return this.optionsUsersWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -592,18 +1185,18 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/Resource} metadata New base container metadata to assert on the container.
+     * @param {module:model/Resource} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.contentType Content-Type of resource
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    this.repositoryPutWithHttpInfo = function(metadata, opts) {
+    this.updateBaseWithHttpInfo = function(base, opts) {
       opts = opts || {};
-      var postBody = metadata;
+      var postBody = base;
 
-      // verify the required parameter 'metadata' is set
-      if (metadata === undefined || metadata === null) {
-        throw new Error("Missing the required parameter 'metadata' when calling repositoryPut");
+      // verify the required parameter 'base' is set
+      if (base === undefined || base === null) {
+        throw new Error("Missing the required parameter 'base' when calling updateBase");
       }
 
 
@@ -619,7 +1212,7 @@
       var formParams = {
       };
 
-      var authNames = [];
+      var authNames = ['RemoteUser'];
       var contentTypes = ['application/json+ld'];
       var accepts = ['application/json+ld'];
       var returnType = null;
@@ -634,13 +1227,277 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/Resource} metadata New base container metadata to assert on the container.
+     * @param {module:model/Resource} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.contentType Content-Type of resource
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    this.repositoryPut = function(metadata, opts) {
-      return this.repositoryPutWithHttpInfo(metadata, opts)
+    this.updateBase = function(base, opts) {
+      return this.updateBaseWithHttpInfo(base, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Update metadata on a group.
+     * Update metadata of a given group container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to create the new resource within.
+     * @param {module:model/LDPContainer} group Group metadata to replace existing description of the given group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.updateGroupWithHttpInfo = function(groupID, group, opts) {
+      opts = opts || {};
+      var postBody = group;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling updateGroup");
+      }
+
+      // verify the required parameter 'group' is set
+      if (group === undefined || group === null) {
+        throw new Error("Missing the required parameter 'group' when calling updateGroup");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}', 'PUT',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Update metadata on a group.
+     * Update metadata of a given group container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to create the new resource within.
+     * @param {module:model/LDPContainer} group Group metadata to replace existing description of the given group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.updateGroup = function(groupID, group, opts) {
+      return this.updateGroupWithHttpInfo(groupID, group, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Update metadata on a resource.
+     * Update metadata of a given resource with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @param {module:model/Resource} resource Resource metadata to replace existing description of the given group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.updateResourceWithHttpInfo = function(groupID, resourceID, resource, opts) {
+      opts = opts || {};
+      var postBody = resource;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling updateResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling updateResource");
+      }
+
+      // verify the required parameter 'resource' is set
+      if (resource === undefined || resource === null) {
+        throw new Error("Missing the required parameter 'resource' when calling updateResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID,
+        'resourceID': resourceID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}/{resourceID}', 'PUT',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Update metadata on a resource.
+     * Update metadata of a given resource with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @param {module:model/Resource} resource Resource metadata to replace existing description of the given group.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.updateResource = function(groupID, resourceID, resource, opts) {
+      return this.updateResourceWithHttpInfo(groupID, resourceID, resource, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Update metadata on a user.
+     * Update metadata of a given Sinopua user with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @param {module:model/Resource} user User resource metadata to replace existing description of the given user.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.updateUserWithHttpInfo = function(userID, user, opts) {
+      opts = opts || {};
+      var postBody = user;
+
+      // verify the required parameter 'userID' is set
+      if (userID === undefined || userID === null) {
+        throw new Error("Missing the required parameter 'userID' when calling updateUser");
+      }
+
+      // verify the required parameter 'user' is set
+      if (user === undefined || user === null) {
+        throw new Error("Missing the required parameter 'user' when calling updateUser");
+      }
+
+
+      var pathParams = {
+        'userID': userID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/users/{userID}', 'PUT',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Update metadata on a user.
+     * Update metadata of a given Sinopua user with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {String} userID The ID for the User defined and managed within Sinopia.
+     * @param {module:model/Resource} user User resource metadata to replace existing description of the given user.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.updateUser = function(userID, user, opts) {
+      return this.updateUserWithHttpInfo(userID, user, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Update metadata on the Sinopia users&#39; container.
+     * Update metadata of the Sinopia users&#39; container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {module:model/LDPContainer} users Sinopia users&#39; container metadata to replace existing description of the Sinopia users&#39; container.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Sinopia users&#39; container metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    this.updateUsersWithHttpInfo = function(users, opts) {
+      opts = opts || {};
+      var postBody = users;
+
+      // verify the required parameter 'users' is set
+      if (users === undefined || users === null) {
+        throw new Error("Missing the required parameter 'users' when calling updateUsers");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+        'Content-Type': opts['contentType']
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json+ld'];
+      var accepts = ['application/json+ld'];
+      var returnType = null;
+
+      return this.apiClient.callApi(
+        '/repository/users', 'PUT',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Update metadata on the Sinopia users&#39; container.
+     * Update metadata of the Sinopia users&#39; container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+     * @param {module:model/LDPContainer} users Sinopia users&#39; container metadata to replace existing description of the Sinopia users&#39; container.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.contentType Content-Type of Sinopia users&#39; container metadata, with preference for JSON-LD.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    this.updateUsers = function(users, opts) {
+      return this.updateUsersWithHttpInfo(users, opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

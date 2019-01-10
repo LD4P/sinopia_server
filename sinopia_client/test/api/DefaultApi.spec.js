@@ -52,14 +52,6 @@
   }
 
   describe('DefaultApi', function() {
-    describe('getGroup', function() {
-      // it('should call getGroup successfully', function() {
-      //   return instance.getGroup('pcc')
-      //     .then(function(_data) {
-      //       expect().to.be();
-      //     });
-      // });
-    });
     describe('healthCheck', function() {
       beforeEach(function() {
         instance.apiClient.basePath = 'http://localhost:8081';

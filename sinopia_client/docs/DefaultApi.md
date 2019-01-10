@@ -4,59 +4,8 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGroup**](DefaultApi.md#getGroup) | **GET** /repository/{groupID} | Query for RDF about a Group.
 [**healthCheck**](DefaultApi.md#healthCheck) | **GET** /healthcheck | Health Check
 
-
-<a name="getGroup"></a>
-# **getGroup**
-> LDPContainer getGroup(groupID)
-
-Query for RDF about a Group.
-
-Get the RDF (default, JSON-LD) for a Group.
-
-### Example
-```javascript
-var SinopiaServer = require('sinopia_server');
-var defaultClient = SinopiaServer.ApiClient.instance;
-
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
-
-var apiInstance = new SinopiaServer.DefaultApi();
-
-var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
-
-apiInstance.getGroup(groupID).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to get. | 
-
-### Return type
-
-[**LDPContainer**](LDPContainer.md)
-
-### Authorization
-
-[RemoteUser](../README.md#RemoteUser)
-
-### HTTP request headers
-
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
 
 <a name="healthCheck"></a>
 # **healthCheck**
