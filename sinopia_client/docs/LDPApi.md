@@ -4,17 +4,17 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getBase**](LDPApi.md#getBase) | **GET** /resources | Get metadata for the base container.
-[**resourcesGroupIDDelete**](LDPApi.md#resourcesGroupIDDelete) | **DELETE** /resources/{groupID} | 
-[**resourcesGroupIDHead**](LDPApi.md#resourcesGroupIDHead) | **HEAD** /resources/{groupID} | 
-[**resourcesGroupIDOptions**](LDPApi.md#resourcesGroupIDOptions) | **OPTIONS** /resources/{groupID} | 
-[**resourcesGroupIDPatch**](LDPApi.md#resourcesGroupIDPatch) | **PATCH** /resources/{groupID} | 
-[**resourcesGroupIDPost**](LDPApi.md#resourcesGroupIDPost) | **POST** /resources/{groupID} | Create new Group.
-[**resourcesGroupIDPut**](LDPApi.md#resourcesGroupIDPut) | **PUT** /resources/{groupID} | 
-[**resourcesHead**](LDPApi.md#resourcesHead) | **HEAD** /resources | Get headers only of base container request.
-[**resourcesOptions**](LDPApi.md#resourcesOptions) | **OPTIONS** /resources | 
-[**resourcesPost**](LDPApi.md#resourcesPost) | **POST** /resources | Create new Group within the base container.
-[**resourcesPut**](LDPApi.md#resourcesPut) | **PUT** /resources | Update metadata on base container.
+[**getBase**](LDPApi.md#getBase) | **GET** /repository | Get metadata for the base container.
+[**repositoryGroupIDDelete**](LDPApi.md#repositoryGroupIDDelete) | **DELETE** /repository/{groupID} | 
+[**repositoryGroupIDHead**](LDPApi.md#repositoryGroupIDHead) | **HEAD** /repository/{groupID} | 
+[**repositoryGroupIDOptions**](LDPApi.md#repositoryGroupIDOptions) | **OPTIONS** /repository/{groupID} | 
+[**repositoryGroupIDPatch**](LDPApi.md#repositoryGroupIDPatch) | **PATCH** /repository/{groupID} | 
+[**repositoryGroupIDPost**](LDPApi.md#repositoryGroupIDPost) | **POST** /repository/{groupID} | Create new Group.
+[**repositoryGroupIDPut**](LDPApi.md#repositoryGroupIDPut) | **PUT** /repository/{groupID} | 
+[**repositoryHead**](LDPApi.md#repositoryHead) | **HEAD** /repository | Get headers only of base container request.
+[**repositoryOptions**](LDPApi.md#repositoryOptions) | **OPTIONS** /repository | 
+[**repositoryPost**](LDPApi.md#repositoryPost) | **POST** /repository | Create new Group within the base container.
+[**repositoryPut**](LDPApi.md#repositoryPut) | **PUT** /repository | Update metadata on base container.
 
 
 <a name="getBase"></a>
@@ -37,15 +37,12 @@ RemoteUser.apiKey = 'YOUR API KEY';
 //RemoteUser.apiKeyPrefix = 'Token';
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.getBase().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.getBase(callback);
 ```
 
 ### Parameters
@@ -64,9 +61,9 @@ This endpoint does not need any parameter.
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDDelete"></a>
-# **resourcesGroupIDDelete**
-> resourcesGroupIDDelete(groupID)
+<a name="repositoryGroupIDDelete"></a>
+# **repositoryGroupIDDelete**
+> repositoryGroupIDDelete(groupID)
 
 
 
@@ -80,15 +77,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDDelete(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDDelete(groupID, callback);
 ```
 
 ### Parameters
@@ -110,9 +104,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDHead"></a>
-# **resourcesGroupIDHead**
-> resourcesGroupIDHead(groupID)
+<a name="repositoryGroupIDHead"></a>
+# **repositoryGroupIDHead**
+> repositoryGroupIDHead(groupID)
 
 
 
@@ -126,15 +120,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDHead(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDHead(groupID, callback);
 ```
 
 ### Parameters
@@ -156,9 +147,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDOptions"></a>
-# **resourcesGroupIDOptions**
-> resourcesGroupIDOptions(groupID)
+<a name="repositoryGroupIDOptions"></a>
+# **repositoryGroupIDOptions**
+> repositoryGroupIDOptions(groupID)
 
 
 
@@ -172,15 +163,12 @@ var apiInstance = new SinopiaServer.LDPApi();
 
 var groupID = 56; // Number | LDP Container to get
 
+apiInstance.repositoryGroupIDOptions(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDOptions(groupID, callback);
 ```
 
 ### Parameters
@@ -202,9 +190,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPatch"></a>
-# **resourcesGroupIDPatch**
-> resourcesGroupIDPatch(groupID, resource)
+<a name="repositoryGroupIDPatch"></a>
+# **repositoryGroupIDPatch**
+> repositoryGroupIDPatch(groupID, resource)
 
 
 
@@ -220,15 +208,12 @@ var groupID = 56; // Number | LDP Container to get
 
 var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
 
+apiInstance.repositoryGroupIDPatch(groupID, resource).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDPatch(groupID, resource, callback);
 ```
 
 ### Parameters
@@ -251,9 +236,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPost"></a>
-# **resourcesGroupIDPost**
-> resourcesGroupIDPost(groupID, resource, opts)
+<a name="repositoryGroupIDPost"></a>
+# **repositoryGroupIDPost**
+> repositoryGroupIDPost(groupID, resource, opts)
 
 Create new Group.
 
@@ -273,15 +258,12 @@ var opts = {
   'slug': "slug_example", // String | Suggested URI for resource
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryGroupIDPost(groupID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDPost(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -306,9 +288,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesGroupIDPut"></a>
-# **resourcesGroupIDPut**
-> resourcesGroupIDPut(groupID, resource, opts)
+<a name="repositoryGroupIDPut"></a>
+# **repositoryGroupIDPut**
+> repositoryGroupIDPut(groupID, resource, opts)
 
 
 
@@ -328,15 +310,12 @@ var opts = {
   'slug': "slug_example", // String | Suggested URI for resource
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryGroupIDPut(groupID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesGroupIDPut(groupID, resource, opts, callback);
 ```
 
 ### Parameters
@@ -361,9 +340,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesHead"></a>
-# **resourcesHead**
-> resourcesHead()
+<a name="repositoryHead"></a>
+# **repositoryHead**
+> repositoryHead()
 
 Get headers only of base container request.
 
@@ -374,15 +353,12 @@ Gets the header values that would normally be found in the header of GET on base
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.repositoryHead().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesHead(callback);
 ```
 
 ### Parameters
@@ -401,9 +377,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesOptions"></a>
-# **resourcesOptions**
-> resourcesOptions()
+<a name="repositoryOptions"></a>
+# **repositoryOptions**
+> repositoryOptions()
 
 
 
@@ -414,15 +390,12 @@ Gets options for HTTP methods to utilize for the base container.
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.repositoryOptions().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesOptions(callback);
 ```
 
 ### Parameters
@@ -441,9 +414,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesPost"></a>
-# **resourcesPost**
-> resourcesPost(groupMD, opts)
+<a name="repositoryPost"></a>
+# **repositoryPost**
+> repositoryPost(groupMD, opts)
 
 Create new Group within the base container.
 
@@ -461,15 +434,12 @@ var opts = {
   'slug': "slug_example", // String | The group (ldp:Container) who is defining it's own entities or graph within Sinopia.
   'contentType': "contentType_example" // String | Content-Type of resource, with preference for JSON-LD.
 };
+apiInstance.repositoryPost(groupMD, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesPost(groupMD, opts, callback);
 ```
 
 ### Parameters
@@ -493,9 +463,9 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="resourcesPut"></a>
-# **resourcesPut**
-> resourcesPut(metadata, opts)
+<a name="repositoryPut"></a>
+# **repositoryPut**
+> repositoryPut(metadata, opts)
 
 Update metadata on base container.
 
@@ -512,15 +482,12 @@ var metadata = new SinopiaServer.Resource(); // Resource | New base container me
 var opts = { 
   'contentType': "contentType_example" // String | Content-Type of resource
 };
+apiInstance.repositoryPut(metadata, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-apiInstance.resourcesPut(metadata, opts, callback);
 ```
 
 ### Parameters

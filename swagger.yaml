@@ -6,7 +6,7 @@ produces:
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 0.0.2
+  version: 1.0.0
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -17,7 +17,7 @@ securityDefinitions:
     in: header
     name: On-Behalf-Of
 paths:
-  '/resources':
+  /repository:
     get:
       summary: Get metadata for the base container.
       description: Get the RDF metadata (default serialization is JSON-LD) for the base container.
@@ -49,31 +49,34 @@ paths:
     post:
       summary: Create new Group within the base container.
       description: Create a new Group (defined via JSON-LD in payload) within the base container.
+      operationId: createGroup
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
         - name: Slug
-          description: The group (ldp:Container) who is defining it's own entities or graph within Sinopia.
+          description: The suggested URI path for the group.
           in: header
-          required: false
+          required: true
           type: string
-        - name: groupMD
+        - name: Group
           in: body
           description: Group metadata to insert into base container and describe the group.
           required: true
           schema:
-            $ref: '#/definitions/Resource'
+            $ref: '#/definitions/LDPContainer'
         - name: Content-Type
           in: header
-          description: Content-Type of resource, with preference for JSON-LD.
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "201":
-          description: Successful Group resource creation.
+          description: Successful Group creation.
           headers:
             Location:
-              description: URI of the newly created resource
+              description: URI of the newly created group.
               type: string
               format: uri
         "401":
@@ -97,10 +100,13 @@ paths:
     put:
       summary: Update metadata on base container.
       description: Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateBase
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
-        - name: Metadata
+        - name: Base
           in: body
           description: New base container metadata to assert on the container.
           required: true
@@ -108,39 +114,44 @@ paths:
             $ref: '#/definitions/Resource'
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "200":
           description: Successful response
-        "201":
-          description: Successful creation
+        "204":
+          description: Base container updated successfully.
           headers:
             Location:
-              description: URI to created resource
+              description: URI of the updated base container.
               type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find the base container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
               type: array
               items:
                 type: string
-        "409":
-          description: URI Already Exists
-        default:
-          description: Unsuccessful response
     options:
+      summary: HTTP Options for base container.
+      description: Gets the available options for HTTP methods to utilize on the base container.
+      operationId: optionsBase
       tags:
         - LDP
-      description: Gets options for HTTP methods to utilize for the base container.
+      security:
+        - RemoteUser: []
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Accept:
               type: array
@@ -151,17 +162,20 @@ paths:
               items:
                 type: string
         "404":
-          description: Unable to find base container
+          description: Unable to the find base container.
         default:
           description: Unsuccessful response
     head:
+      summary: Get headers only for base container GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the base container.
+      operationId: headBase
       tags:
         - LDP
-      summary: Get headers only of base container request.
-      description: Gets the header values that would normally be found in the header of GET on base container
+      security:
+        - RemoteUser: []
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Allow:
               type: array
@@ -173,53 +187,58 @@ paths:
                 type: string
                 format: uri
         "404":
-          description: Unable to find container
+          description: Unable to find the base container.
         default:
           description: Unsuccessful response
-  '/resources/{groupID}':
+  /repository/{groupID}:
     get:
-      summary: Query for RDF about a Group.
-      description: Get the RDF (default, JSON-LD) for a Group.
+      summary: Get metadata (RDF) for a given Group.
+      description: Get the RDF (default serialization is JSON-LD) for a given Group.
       operationId: getGroup
+      tags:
+        - LDP
       security:
         - RemoteUser: []
       parameters:
         - name: groupID
-          description: The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
           required: true
           type: string
-          format: UUID
       responses:
         '200':
-          description: Successful response.
+          description: Successful group container response.
           headers:
             type:
-              description: Target URI matching type of container
+              description: Target URI matching type of container (basic).
               type: string
+              format: URI
             Content-Type:
               description: Content-Type for resource
               type: string
+              format: URI
           schema:
             $ref: '#/definitions/LDPContainer'
         '404':
-          description: Unable to find the specified Group.
+          description: Unable to find the specified Group container.
           schema:
             $ref: '#/definitions/ErrorResponse'
         default:
           description: Unsuccessful response
     post:
-      summary: Create new Group.
-      description: Create a resource (defined via JSON-LD in payload) within a Group.
+      summary: Create a resource within a Group.
+      description: Create a new resource (defined via JSON-LD in payload) within a supplied Group.
+      operationId: createResource
       tags:
         - LDP
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
-          description: The group (ldp:Container) who is defining it's own resources or graph within Sinopia.
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
           required: true
           type: string
-          format: UUID
         - name: resource
           in: body
           description: Resource to insert into container
@@ -228,25 +247,29 @@ paths:
             $ref: '#/definitions/Resource'
         - name: Slug
           in: header
-          description: Suggested URI for resource
+          description: The suggested URI path for the resource.
           required: false
           type: string
+          format: URI
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type for the resource, with preference for JSON-LD.
           required: false
           type: string
       responses:
-        "200":
-          description: Successful response
         "201":
           description: Successful creation
           headers:
             Location:
-              description: URI to created resource
+              description: URI of the newly created resoruce.
               type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
           description: Method not allowed
           headers:
@@ -256,113 +279,92 @@ paths:
               items:
                 type: string
         "409":
-          description: URI Already Exists
-
+          description: Resource URI already exists (if you provide a slug).
         default:
           description: Unsuccessful response
     put:
+      summary: Update metadata on a group.
+      description: Update metadata of a given group container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateGroup
       tags:
         - LDP
-      description: Updates the group description.
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia. LDP Container to create the new resource within.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
-        - name: resource
+          type: string
+        - name: Group
           in: body
-          description: Resource to insert into container
+          description: Group metadata to replace existing description of the given group.
           required: true
           schema:
-            $ref: '#/definitions/Resource'
-        - name: Slug
-          in: header
-          description: Suggested URI for resource
-          required: false
-          type: string
+            $ref: '#/definitions/LDPContainer'
         - name: Content-Type
           in: header
-          description: Content-Type of resource
+          description: Content-Type of Group metadata, with preference for JSON-LD.
           required: false
           type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response for Group update.
+        "204":
+          description: Group updated successfully.
+          headers:
+            Location:
+              description: URI of the updated group.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
               type: array
               items:
                 type: string
-        "409":
-          description: URI Already Exists
-        default:
-          description: Unsuccessful response
-    patch:
-      tags:
-        - LDP
-      description: |
-        Updates LDP container
-      parameters:
-        - name: groupID
-          in: path
-          description: LDP Container to get
-          required: true
-          type: integer
-          format: UUID
-        - name: resource
-          in: body
-          description: Resource to insert into container
-          required: true
-          schema:
-            $ref: '#/definitions/Resource'
-      responses:
-        "200":
-          description: Successful response
-        "404":
-          description: Unable to find container
-        "405":
-          description: Method not allowed
-          headers:
-            Allow:
-              description: HTTP methods allowed
-              type: array
-              items:
-                type: string
-        "406":
-          description: Violates constraints on resource modification
-          headers:
-            Accept-Patch:
-                type: array
-                items:
-                  type: string
         default:
           description: Unsuccessful response
     delete:
+      summary: Delete an Group.
+      description: Deletes an existing Group container. This Group URI cannot be reused.
+      operationId: deleteGroup
       tags:
         - LDP
-      description: |
-        Deletes LDP container
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response for request.
+          headers:
+            Location:
+              description: URI of the deleted group.
+              type: string
+              format: uri
+        "204":
+          description: Successfully deleted the provided Group.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
         "404":
-          description: Unable to find container
+          description: Unable to find either the base or group container.
         "405":
-          description: Method not allowed
+          description: Method not allowed.
           headers:
             Allow:
               description: HTTP methods allowed
@@ -372,19 +374,22 @@ paths:
         default:
           description: Unsuccessful response
     options:
+      summary: HTTP Options for group.
+      description: Gets the available options for HTTP methods to utilize on the given group.
+      operationId: optionsGroup
       tags:
         - LDP
-      description: Gets options for HTTP methods to utilize for this container
+      security:
+        - RemoteUser: []
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Accept:
               type: array
@@ -395,23 +400,24 @@ paths:
               items:
                 type: string
         "404":
-          description: Unable to find container
+          description: Unable to find the given group.
         default:
           description: Unsuccessful response
     head:
+      summary: Get headers only for a group GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the given group.
+      operationId: headGroup
       tags:
         - LDP
-      description: Gets the header values that would normally be found in the header of GET
       parameters:
         - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
           in: path
-          description: LDP Container to get
           required: true
-          type: integer
-          format: UUID
+          type: string
       responses:
         "200":
-          description: Successful response
+          description: Successful response.
           headers:
             Allow:
               type: array
@@ -423,7 +429,571 @@ paths:
                 type: string
                 format: uri
         "404":
-          description: Unable to find container
+          description: Unable to find the given group.
+        default:
+          description: Unsuccessful response
+  /repository/{groupID}/{resourceID}:
+    get:
+      summary: Get metadata (RDF) for a given resource.
+      description: Get the RDF (default serialization is JSON-LD) for a given resource.
+      operationId: getResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful resource response.
+          headers:
+            type:
+              description: Target URI matching type of resource.
+              type: string
+              format: URI
+            Content-Type:
+              description: Content-Type for resource.
+              type: string
+              format: URI
+          schema:
+            $ref: '#/definitions/Resource'
+        '404':
+          description: Unable to find the specified resource.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+    put:
+      summary: Update metadata on a resource.
+      description: Update metadata of a given resource with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: Resource
+          in: body
+          description: Resource metadata to replace existing description of the given group.
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Content-Type
+          in: header
+          description: Content-Type of Group metadata, with preference for JSON-LD.
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response for Resource update.
+        "204":
+          description: Resource updated successfully.
+          headers:
+            Location:
+              description: URI of the updated resource.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified resource.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    delete:
+      summary: Delete a Resource.
+      description: Deletes an existing Resource. This Resource URI cannot be reused.
+      operationId: deleteResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response for request.
+          headers:
+            Location:
+              description: URI of the deleted resource.
+              type: string
+              format: uri
+        "204":
+          description: Successfully deleted the provided resource.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified resource.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    options:
+      summary: HTTP Options for resource.
+      description: Gets the available options for HTTP methods to utilize on the given resource.
+      operationId: optionsResource
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Accept:
+              type: array
+              items:
+                type: string
+            Accept-Patch:
+              type: array
+              items:
+                type: string
+        "404":
+          description: Unable to find the specified resource.
+        default:
+          description: Unsuccessful response
+    head:
+      summary: Get headers only for a resource GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the given resource.
+      operationId: headResource
+      tags:
+        - LDP
+      parameters:
+        - name: groupID
+          description: The group who is defining it's own resources or graph within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: resourceID
+          description: The UUID for the resource defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Allow:
+              type: array
+              items:
+                type: string
+            Link:
+              type: array
+              items:
+                type: string
+                format: uri
+        "404":
+          description: Unable to find the specified resource.
+        default:
+          description: Unsuccessful response
+  /repository/users:
+    get:
+      summary: Get metadata (RDF) for the Sinopia users container.
+      description: Get the RDF (default serialization is JSON-LD) for the Sinopia users' container.
+      operationId: getUsers
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      responses:
+        '200':
+          description: Successful group container response.
+          headers:
+            type:
+              description: Target URI matching type of container (basic).
+              type: string
+              format: URI
+            Content-Type:
+              description: Content-Type for resource
+              type: string
+              format: URI
+          schema:
+            $ref: '#/definitions/LDPContainer'
+        '404':
+          description: Unable to find the Sinopia users' container.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+    post:
+      summary: Create a user within Sinopia.
+      description: Create a new user (defined via JSON-LD in payload) within Sinopia.
+      operationId: createUser
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: User
+          in: body
+          description: User to insert into Sinopia users' container.
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Slug
+          in: header
+          description: The suggested URI path for the user.
+          required: false
+          type: string
+          format: URI
+        - name: Content-Type
+          in: header
+          description: Content-Type for the resource, with preference for JSON-LD.
+          required: false
+          type: string
+      responses:
+        "201":
+          description: Successful creation
+          headers:
+            Location:
+              description: URI of the newly created user.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find either the Sinopia users' container.
+        "405":
+          description: Method not allowed
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        "409":
+          description: User URI already exists (if you provide a slug).
+        default:
+          description: Unsuccessful response
+    put:
+      summary: Update metadata on the Sinopia users' container.
+      description: Update metadata of the Sinopia users' container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateUsers
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: Users
+          in: body
+          description: Sinopia users' container metadata to replace existing description of the Sinopia users' container.
+          required: true
+          schema:
+            $ref: '#/definitions/LDPContainer'
+        - name: Content-Type
+          in: header
+          description: Content-Type of Sinopia users' container metadata, with preference for JSON-LD.
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response for Sinopia users' container update.
+        "204":
+          description: Sinopia users' container updated successfully.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find either the Sinopia users' container.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    options:
+      summary: HTTP Options for Sinopia users' container.
+      description: Gets the available options for HTTP methods to utilize on the Sinopia users' container
+      operationId: optionsUsers
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Accept:
+              type: array
+              items:
+                type: string
+            Accept-Patch:
+              type: array
+              items:
+                type: string
+        "404":
+          description: Unable to find the Sinopia users' container.
+        default:
+          description: Unsuccessful response
+    head:
+      summary: Get headers only for a Sinopia users' container GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the Sinopia users' container.
+      operationId: headUsers
+      tags:
+        - LDP
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Allow:
+              type: array
+              items:
+                type: string
+            Link:
+              type: array
+              items:
+                type: string
+                format: uri
+        "404":
+          description: Unable to find the Sinopia users' container.
+        default:
+          description: Unsuccessful response
+  /repository/users/{userID}:
+    get:
+      summary: Get metadata (RDF) for a given user.
+      description: Get the RDF (default serialization is JSON-LD) for a given Sinopia user.
+      operationId: getUser
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: userID
+          description: The ID for the User defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful user resource response.
+          headers:
+            type:
+              description: Target URI matching type of resource.
+              type: string
+              format: URI
+            Content-Type:
+              description: Content-Type for resource.
+              type: string
+              format: URI
+          schema:
+            $ref: '#/definitions/Resource'
+        '404':
+          description: Unable to find the specified user.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unsuccessful response
+    put:
+      summary: Update metadata on a user.
+      description: Update metadata of a given Sinopua user with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+      operationId: updateUser
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: userID
+          description: The ID for the User defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+        - name: User
+          in: body
+          description: User resource metadata to replace existing description of the given user.
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - name: Content-Type
+          in: header
+          description: Content-Type of Group metadata, with preference for JSON-LD.
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Successful response for User update.
+        "204":
+          description: User updated successfully.
+          headers:
+            Location:
+              description: URI of the updated user.
+              type: string
+              format: uri
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified user.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    delete:
+      summary: Delete a User.
+      description: Deletes an existing User. This User URI cannot be reused.
+      operationId: deleteUser
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: userID
+          description: The ID for the User defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response for request.
+          headers:
+            Location:
+              description: URI of the deleted user.
+              type: string
+              format: uri
+        "204":
+          description: Successfully deleted the provided user.
+        "401":
+          description: Unsuccessful authentication.
+        "403":
+          description: You are not allow to perform this action.
+        "404":
+          description: Unable to find the specified user.
+        "405":
+          description: Method not allowed.
+          headers:
+            Allow:
+              description: HTTP methods allowed
+              type: array
+              items:
+                type: string
+        default:
+          description: Unsuccessful response
+    options:
+      summary: HTTP Options for user.
+      description: Gets the available options for HTTP methods to utilize on the given user.
+      operationId: optionsUser
+      tags:
+        - LDP
+      security:
+        - RemoteUser: []
+      parameters:
+        - name: userID
+          description: The ID for the User defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Accept:
+              type: array
+              items:
+                type: string
+            Accept-Patch:
+              type: array
+              items:
+                type: string
+        "404":
+          description: Unable to find the specified user.
+        default:
+          description: Unsuccessful response
+    head:
+      summary: Get headers only for a user GET request.
+      description: Gets the header values that would normally be found in the header of GET request on the given user.
+      operationId: headUser
+      tags:
+        - LDP
+      parameters:
+        - name: userID
+          description: The ID for the User defined and managed within Sinopia.
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful response.
+          headers:
+            Allow:
+              type: array
+              items:
+                type: string
+            Link:
+              type: array
+              items:
+                type: string
+                format: uri
+        "404":
+          description: Unable to find the specified user.
         default:
           description: Unsuccessful response
   /healthcheck:
