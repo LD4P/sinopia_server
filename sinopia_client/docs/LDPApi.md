@@ -4,18 +4,358 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**createGroup**](LDPApi.md#createGroup) | **POST** /repository | Create new Group within the base container.
+[**createResource**](LDPApi.md#createResource) | **POST** /repository/{groupID} | Create a resource within a Group.
+[**createUser**](LDPApi.md#createUser) | **POST** /repository/users | Create a user within Sinopia.
+[**deleteGroup**](LDPApi.md#deleteGroup) | **DELETE** /repository/{groupID} | Delete an Group.
+[**deleteResource**](LDPApi.md#deleteResource) | **DELETE** /repository/{groupID}/{resourceID} | Delete a Resource.
+[**deleteUser**](LDPApi.md#deleteUser) | **DELETE** /repository/users/{userID} | Delete a User.
 [**getBase**](LDPApi.md#getBase) | **GET** /repository | Get metadata for the base container.
-[**repositoryGroupIDDelete**](LDPApi.md#repositoryGroupIDDelete) | **DELETE** /repository/{groupID} | 
-[**repositoryGroupIDHead**](LDPApi.md#repositoryGroupIDHead) | **HEAD** /repository/{groupID} | 
-[**repositoryGroupIDOptions**](LDPApi.md#repositoryGroupIDOptions) | **OPTIONS** /repository/{groupID} | 
-[**repositoryGroupIDPatch**](LDPApi.md#repositoryGroupIDPatch) | **PATCH** /repository/{groupID} | 
-[**repositoryGroupIDPost**](LDPApi.md#repositoryGroupIDPost) | **POST** /repository/{groupID} | Create new Group.
-[**repositoryGroupIDPut**](LDPApi.md#repositoryGroupIDPut) | **PUT** /repository/{groupID} | 
-[**repositoryHead**](LDPApi.md#repositoryHead) | **HEAD** /repository | Get headers only of base container request.
-[**repositoryOptions**](LDPApi.md#repositoryOptions) | **OPTIONS** /repository | 
-[**repositoryPost**](LDPApi.md#repositoryPost) | **POST** /repository | Create new Group within the base container.
-[**repositoryPut**](LDPApi.md#repositoryPut) | **PUT** /repository | Update metadata on base container.
+[**getGroup**](LDPApi.md#getGroup) | **GET** /repository/{groupID} | Get metadata (RDF) for a given Group.
+[**getResource**](LDPApi.md#getResource) | **GET** /repository/{groupID}/{resourceID} | Get metadata (RDF) for a given resource.
+[**getUser**](LDPApi.md#getUser) | **GET** /repository/users/{userID} | Get metadata (RDF) for a given user.
+[**getUsers**](LDPApi.md#getUsers) | **GET** /repository/users | Get metadata (RDF) for the Sinopia users container.
+[**headBase**](LDPApi.md#headBase) | **HEAD** /repository | Get headers only for base container GET request.
+[**headGroup**](LDPApi.md#headGroup) | **HEAD** /repository/{groupID} | Get headers only for a group GET request.
+[**headResource**](LDPApi.md#headResource) | **HEAD** /repository/{groupID}/{resourceID} | Get headers only for a resource GET request.
+[**headUser**](LDPApi.md#headUser) | **HEAD** /repository/users/{userID} | Get headers only for a user GET request.
+[**headUsers**](LDPApi.md#headUsers) | **HEAD** /repository/users | Get headers only for a Sinopia users&#39; container GET request.
+[**optionsBase**](LDPApi.md#optionsBase) | **OPTIONS** /repository | HTTP Options for base container.
+[**optionsGroup**](LDPApi.md#optionsGroup) | **OPTIONS** /repository/{groupID} | HTTP Options for group.
+[**optionsResource**](LDPApi.md#optionsResource) | **OPTIONS** /repository/{groupID}/{resourceID} | HTTP Options for resource.
+[**optionsUser**](LDPApi.md#optionsUser) | **OPTIONS** /repository/users/{userID} | HTTP Options for user.
+[**optionsUsers**](LDPApi.md#optionsUsers) | **OPTIONS** /repository/users | HTTP Options for Sinopia users&#39; container.
+[**updateBase**](LDPApi.md#updateBase) | **PUT** /repository | Update metadata on base container.
+[**updateGroup**](LDPApi.md#updateGroup) | **PUT** /repository/{groupID} | Update metadata on a group.
+[**updateResource**](LDPApi.md#updateResource) | **PUT** /repository/{groupID}/{resourceID} | Update metadata on a resource.
+[**updateUser**](LDPApi.md#updateUser) | **PUT** /repository/users/{userID} | Update metadata on a user.
+[**updateUsers**](LDPApi.md#updateUsers) | **PUT** /repository/users | Update metadata on the Sinopia users&#39; container.
 
+
+<a name="createGroup"></a>
+# **createGroup**
+> createGroup(slug, group, opts)
+
+Create new Group within the base container.
+
+Create a new Group (defined via JSON-LD in payload) within the base container.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var slug = "slug_example"; // String | The suggested URI path for the group.
+
+var group = new SinopiaServer.LDPContainer(); // LDPContainer | Group metadata to insert into base container and describe the group.
+
+var opts = { 
+  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
+};
+apiInstance.createGroup(slug, group, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **slug** | **String**| The suggested URI path for the group. | 
+ **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to insert into base container and describe the group. | 
+ **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="createResource"></a>
+# **createResource**
+> createResource(groupID, resource, opts)
+
+Create a resource within a Group.
+
+Create a new resource (defined via JSON-LD in payload) within a supplied Group.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
+
+var opts = { 
+  'slug': "slug_example", // String | The suggested URI path for the resource.
+  'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
+};
+apiInstance.createResource(groupID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
+ **slug** | **String**| The suggested URI path for the resource. | [optional] 
+ **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="createUser"></a>
+# **createUser**
+> createUser(user, opts)
+
+Create a user within Sinopia.
+
+Create a new user (defined via JSON-LD in payload) within Sinopia.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var user = new SinopiaServer.Resource(); // Resource | User to insert into Sinopia users' container.
+
+var opts = { 
+  'slug': "slug_example", // String | The suggested URI path for the user.
+  'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
+};
+apiInstance.createUser(user, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user** | [**Resource**](Resource.md)| User to insert into Sinopia users&#39; container. | 
+ **slug** | **String**| The suggested URI path for the user. | [optional] 
+ **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="deleteGroup"></a>
+# **deleteGroup**
+> deleteGroup(groupID)
+
+Delete an Group.
+
+Deletes an existing Group container. This Group URI cannot be reused.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+apiInstance.deleteGroup(groupID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="deleteResource"></a>
+# **deleteResource**
+> deleteResource(groupID, resourceID)
+
+Delete a Resource.
+
+Deletes an existing Resource. This Resource URI cannot be reused.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
+
+apiInstance.deleteResource(groupID, resourceID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="deleteUser"></a>
+# **deleteUser**
+> deleteUser(userID)
+
+Delete a User.
+
+Deletes an existing User. This User URI cannot be reused.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var userID = "userID_example"; // String | The ID for the User defined and managed within Sinopia.
+
+apiInstance.deleteUser(userID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userID** | **String**| The ID for the User defined and managed within Sinopia. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
 
 <a name="getBase"></a>
 # **getBase**
@@ -61,13 +401,254 @@ This endpoint does not need any parameter.
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryGroupIDDelete"></a>
-# **repositoryGroupIDDelete**
-> repositoryGroupIDDelete(groupID)
+<a name="getGroup"></a>
+# **getGroup**
+> LDPContainer getGroup(groupID)
 
+Get metadata (RDF) for a given Group.
 
+Get the RDF (default serialization is JSON-LD) for a given Group.
 
-Deletes LDP container 
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+apiInstance.getGroup(groupID).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+
+### Return type
+
+[**LDPContainer**](LDPContainer.md)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="getResource"></a>
+# **getResource**
+> Resource getResource(groupID, resourceID)
+
+Get metadata (RDF) for a given resource.
+
+Get the RDF (default serialization is JSON-LD) for a given resource.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
+
+apiInstance.getResource(groupID, resourceID).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
+
+### Return type
+
+[**Resource**](Resource.md)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="getUser"></a>
+# **getUser**
+> Resource getUser(userID)
+
+Get metadata (RDF) for a given user.
+
+Get the RDF (default serialization is JSON-LD) for a given Sinopia user.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var userID = "userID_example"; // String | The ID for the User defined and managed within Sinopia.
+
+apiInstance.getUser(userID).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userID** | **String**| The ID for the User defined and managed within Sinopia. | 
+
+### Return type
+
+[**Resource**](Resource.md)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="getUsers"></a>
+# **getUsers**
+> LDPContainer getUsers()
+
+Get metadata (RDF) for the Sinopia users container.
+
+Get the RDF (default serialization is JSON-LD) for the Sinopia users&#39; container.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.getUsers().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**LDPContainer**](LDPContainer.md)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="headBase"></a>
+# **headBase**
+> headBase()
+
+Get headers only for base container GET request.
+
+Gets the header values that would normally be found in the header of GET request on the base container.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.headBase().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="headGroup"></a>
+# **headGroup**
+> headGroup(groupID)
+
+Get headers only for a group GET request.
+
+Gets the header values that would normally be found in the header of GET request on the given group.
 
 ### Example
 ```javascript
@@ -75,9 +656,9 @@ var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var groupID = 56; // Number | LDP Container to get
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
 
-apiInstance.repositoryGroupIDDelete(groupID).then(function() {
+apiInstance.headGroup(groupID).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -89,7 +670,7 @@ apiInstance.repositoryGroupIDDelete(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **Number**| LDP Container to get | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -104,13 +685,13 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryGroupIDHead"></a>
-# **repositoryGroupIDHead**
-> repositoryGroupIDHead(groupID)
+<a name="headResource"></a>
+# **headResource**
+> headResource(groupID, resourceID)
 
+Get headers only for a resource GET request.
 
-
-Gets the header values that would normally be found in the header of GET
+Gets the header values that would normally be found in the header of GET request on the given resource.
 
 ### Example
 ```javascript
@@ -118,9 +699,11 @@ var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var groupID = 56; // Number | LDP Container to get
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
 
-apiInstance.repositoryGroupIDHead(groupID).then(function() {
+var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
+
+apiInstance.headResource(groupID, resourceID).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -132,7 +715,8 @@ apiInstance.repositoryGroupIDHead(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **Number**| LDP Container to get | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
 
 ### Return type
 
@@ -147,13 +731,13 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryGroupIDOptions"></a>
-# **repositoryGroupIDOptions**
-> repositoryGroupIDOptions(groupID)
+<a name="headUser"></a>
+# **headUser**
+> headUser(userID)
 
+Get headers only for a user GET request.
 
-
-Gets options for HTTP methods to utilize for this container
+Gets the header values that would normally be found in the header of GET request on the given user.
 
 ### Example
 ```javascript
@@ -161,9 +745,9 @@ var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var groupID = 56; // Number | LDP Container to get
+var userID = "userID_example"; // String | The ID for the User defined and managed within Sinopia.
 
-apiInstance.repositoryGroupIDOptions(groupID).then(function() {
+apiInstance.headUser(userID).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -175,7 +759,7 @@ apiInstance.repositoryGroupIDOptions(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **Number**| LDP Container to get | 
+ **userID** | **String**| The ID for the User defined and managed within Sinopia. | 
 
 ### Return type
 
@@ -190,170 +774,20 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryGroupIDPatch"></a>
-# **repositoryGroupIDPatch**
-> repositoryGroupIDPatch(groupID, resource)
+<a name="headUsers"></a>
+# **headUsers**
+> headUsers()
 
+Get headers only for a Sinopia users&#39; container GET request.
 
-
-Updates LDP container 
-
-### Example
-```javascript
-var SinopiaServer = require('sinopia_server');
-
-var apiInstance = new SinopiaServer.LDPApi();
-
-var groupID = 56; // Number | LDP Container to get
-
-var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
-
-apiInstance.repositoryGroupIDPatch(groupID, resource).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupID** | **Number**| LDP Container to get | 
- **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
-
-<a name="repositoryGroupIDPost"></a>
-# **repositoryGroupIDPost**
-> repositoryGroupIDPost(groupID, resource, opts)
-
-Create new Group.
-
-Create a resource (defined via JSON-LD in payload) within a Group.
+Gets the header values that would normally be found in the header of GET request on the Sinopia users&#39; container.
 
 ### Example
 ```javascript
 var SinopiaServer = require('sinopia_server');
 
 var apiInstance = new SinopiaServer.LDPApi();
-
-var groupID = "groupID_example"; // String | The group (ldp:Container) who is defining it's own resources or graph within Sinopia.
-
-var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
-
-var opts = { 
-  'slug': "slug_example", // String | Suggested URI for resource
-  'contentType': "contentType_example" // String | Content-Type of resource
-};
-apiInstance.repositoryGroupIDPost(groupID, resource, opts).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group (ldp:Container) who is defining it&#39;s own resources or graph within Sinopia. | 
- **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
- **slug** | **String**| Suggested URI for resource | [optional] 
- **contentType** | **String**| Content-Type of resource | [optional] 
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
-
-<a name="repositoryGroupIDPut"></a>
-# **repositoryGroupIDPut**
-> repositoryGroupIDPut(groupID, resource, opts)
-
-
-
-Updates the group description.
-
-### Example
-```javascript
-var SinopiaServer = require('sinopia_server');
-
-var apiInstance = new SinopiaServer.LDPApi();
-
-var groupID = 56; // Number | LDP Container to get
-
-var resource = new SinopiaServer.Resource(); // Resource | Resource to insert into container
-
-var opts = { 
-  'slug': "slug_example", // String | Suggested URI for resource
-  'contentType': "contentType_example" // String | Content-Type of resource
-};
-apiInstance.repositoryGroupIDPut(groupID, resource, opts).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupID** | **Number**| LDP Container to get | 
- **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
- **slug** | **String**| Suggested URI for resource | [optional] 
- **contentType** | **String**| Content-Type of resource | [optional] 
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
-
-<a name="repositoryHead"></a>
-# **repositoryHead**
-> repositoryHead()
-
-Get headers only of base container request.
-
-Gets the header values that would normally be found in the header of GET on base container
-
-### Example
-```javascript
-var SinopiaServer = require('sinopia_server');
-
-var apiInstance = new SinopiaServer.LDPApi();
-apiInstance.repositoryHead().then(function() {
+apiInstance.headUsers().then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -377,20 +811,27 @@ No authorization required
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryOptions"></a>
-# **repositoryOptions**
-> repositoryOptions()
+<a name="optionsBase"></a>
+# **optionsBase**
+> optionsBase()
 
+HTTP Options for base container.
 
-
-Gets options for HTTP methods to utilize for the base container.
+Gets the available options for HTTP methods to utilize on the base container.
 
 ### Example
 ```javascript
 var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
 
 var apiInstance = new SinopiaServer.LDPApi();
-apiInstance.repositoryOptions().then(function() {
+apiInstance.optionsBase().then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -407,34 +848,37 @@ null (empty response body)
 
 ### Authorization
 
-No authorization required
+[RemoteUser](../README.md#RemoteUser)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryPost"></a>
-# **repositoryPost**
-> repositoryPost(groupMD, opts)
+<a name="optionsGroup"></a>
+# **optionsGroup**
+> optionsGroup(groupID)
 
-Create new Group within the base container.
+HTTP Options for group.
 
-Create a new Group (defined via JSON-LD in payload) within the base container.
+Gets the available options for HTTP methods to utilize on the given group.
 
 ### Example
 ```javascript
 var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var groupMD = new SinopiaServer.Resource(); // Resource | Group metadata to insert into base container and describe the group.
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
 
-var opts = { 
-  'slug': "slug_example", // String | The group (ldp:Container) who is defining it's own entities or graph within Sinopia.
-  'contentType': "contentType_example" // String | Content-Type of resource, with preference for JSON-LD.
-};
-apiInstance.repositoryPost(groupMD, opts).then(function() {
+apiInstance.optionsGroup(groupID).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -446,9 +890,7 @@ apiInstance.repositoryPost(groupMD, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupMD** | [**Resource**](Resource.md)| Group metadata to insert into base container and describe the group. | 
- **slug** | **String**| The group (ldp:Container) who is defining it&#39;s own entities or graph within Sinopia. | [optional] 
- **contentType** | **String**| Content-Type of resource, with preference for JSON-LD. | [optional] 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -456,16 +898,163 @@ null (empty response body)
 
 ### Authorization
 
-No authorization required
+[RemoteUser](../README.md#RemoteUser)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json+ld
  - **Accept**: application/json+ld
 
-<a name="repositoryPut"></a>
-# **repositoryPut**
-> repositoryPut(metadata, opts)
+<a name="optionsResource"></a>
+# **optionsResource**
+> optionsResource(groupID, resourceID)
+
+HTTP Options for resource.
+
+Gets the available options for HTTP methods to utilize on the given resource.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
+
+apiInstance.optionsResource(groupID, resourceID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="optionsUser"></a>
+# **optionsUser**
+> optionsUser(userID)
+
+HTTP Options for user.
+
+Gets the available options for HTTP methods to utilize on the given user.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var userID = "userID_example"; // String | The ID for the User defined and managed within Sinopia.
+
+apiInstance.optionsUser(userID).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userID** | **String**| The ID for the User defined and managed within Sinopia. | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="optionsUsers"></a>
+# **optionsUsers**
+> optionsUsers()
+
+HTTP Options for Sinopia users&#39; container.
+
+Gets the available options for HTTP methods to utilize on the Sinopia users&#39; container
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+apiInstance.optionsUsers().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="updateBase"></a>
+# **updateBase**
+> updateBase(base, opts)
 
 Update metadata on base container.
 
@@ -474,15 +1063,22 @@ Update metadata of base container with new metadata defined via JSON-LD in paylo
 ### Example
 ```javascript
 var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var metadata = new SinopiaServer.Resource(); // Resource | New base container metadata to assert on the container.
+var base = new SinopiaServer.Resource(); // Resource | New base container metadata to assert on the container.
 
 var opts = { 
-  'contentType': "contentType_example" // String | Content-Type of resource
+  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
 };
-apiInstance.repositoryPut(metadata, opts).then(function() {
+apiInstance.updateBase(base, opts).then(function() {
   console.log('API called successfully.');
 }, function(error) {
   console.error(error);
@@ -494,8 +1090,8 @@ apiInstance.repositoryPut(metadata, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **metadata** | [**Resource**](Resource.md)| New base container metadata to assert on the container. | 
- **contentType** | **String**| Content-Type of resource | [optional] 
+ **base** | [**Resource**](Resource.md)| New base container metadata to assert on the container. | 
+ **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
 
@@ -503,7 +1099,235 @@ null (empty response body)
 
 ### Authorization
 
-No authorization required
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="updateGroup"></a>
+# **updateGroup**
+> updateGroup(groupID, group, opts)
+
+Update metadata on a group.
+
+Update metadata of a given group container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia. LDP Container to create the new resource within.
+
+var group = new SinopiaServer.LDPContainer(); // LDPContainer | Group metadata to replace existing description of the given group.
+
+var opts = { 
+  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
+};
+apiInstance.updateGroup(groupID, group, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to create the new resource within. | 
+ **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to replace existing description of the given group. | 
+ **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="updateResource"></a>
+# **updateResource**
+> updateResource(groupID, resourceID, resource, opts)
+
+Update metadata on a resource.
+
+Update metadata of a given resource with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var groupID = "groupID_example"; // String | The group who is defining it's own resources or graph within Sinopia.
+
+var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
+
+var resource = new SinopiaServer.Resource(); // Resource | Resource metadata to replace existing description of the given group.
+
+var opts = { 
+  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
+};
+apiInstance.updateResource(groupID, resourceID, resource, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
+ **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
+ **resource** | [**Resource**](Resource.md)| Resource metadata to replace existing description of the given group. | 
+ **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="updateUser"></a>
+# **updateUser**
+> updateUser(userID, user, opts)
+
+Update metadata on a user.
+
+Update metadata of a given Sinopua user with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var userID = "userID_example"; // String | The ID for the User defined and managed within Sinopia.
+
+var user = new SinopiaServer.Resource(); // Resource | User resource metadata to replace existing description of the given user.
+
+var opts = { 
+  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
+};
+apiInstance.updateUser(userID, user, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userID** | **String**| The ID for the User defined and managed within Sinopia. | 
+ **user** | [**Resource**](Resource.md)| User resource metadata to replace existing description of the given user. | 
+ **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json+ld
+ - **Accept**: application/json+ld
+
+<a name="updateUsers"></a>
+# **updateUsers**
+> updateUsers(users, opts)
+
+Update metadata on the Sinopia users&#39; container.
+
+Update metadata of the Sinopia users&#39; container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+
+### Example
+```javascript
+var SinopiaServer = require('sinopia_server');
+var defaultClient = SinopiaServer.ApiClient.instance;
+
+// Configure API key authorization: RemoteUser
+var RemoteUser = defaultClient.authentications['RemoteUser'];
+RemoteUser.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//RemoteUser.apiKeyPrefix = 'Token';
+
+var apiInstance = new SinopiaServer.LDPApi();
+
+var users = new SinopiaServer.LDPContainer(); // LDPContainer | Sinopia users' container metadata to replace existing description of the Sinopia users' container.
+
+var opts = { 
+  'contentType': "contentType_example" // String | Content-Type of Sinopia users' container metadata, with preference for JSON-LD.
+};
+apiInstance.updateUsers(users, opts).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **users** | [**LDPContainer**](LDPContainer.md)| Sinopia users&#39; container metadata to replace existing description of the Sinopia users&#39; container. | 
+ **contentType** | **String**| Content-Type of Sinopia users&#39; container metadata, with preference for JSON-LD. | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[RemoteUser](../README.md#RemoteUser)
 
 ### HTTP request headers
 

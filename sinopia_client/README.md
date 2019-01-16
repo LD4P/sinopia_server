@@ -95,19 +95,8 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```javascript
 var SinopiaServer = require('sinopia_server');
 
-var defaultClient = SinopiaServer.ApiClient.instance;
-
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix['On-Behalf-Of'] = "Token"
-
 var api = new SinopiaServer.DefaultApi()
-
-var groupID = "groupID_example"; // {String} The group who is defining it's own resources or graph within Sinopia. LDP Container to get.
-
-api.getGroup(groupID).then(function(data) {
+api.healthCheck().then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -122,19 +111,33 @@ All URIs are relative to *https://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SinopiaServer.DefaultApi* | [**getGroup**](docs/DefaultApi.md#getGroup) | **GET** /repository/{groupID} | Query for RDF about a Group.
 *SinopiaServer.DefaultApi* | [**healthCheck**](docs/DefaultApi.md#healthCheck) | **GET** /healthcheck | Health Check
+*SinopiaServer.LDPApi* | [**createGroup**](docs/LDPApi.md#createGroup) | **POST** /repository | Create new Group within the base container.
+*SinopiaServer.LDPApi* | [**createResource**](docs/LDPApi.md#createResource) | **POST** /repository/{groupID} | Create a resource within a Group.
+*SinopiaServer.LDPApi* | [**createUser**](docs/LDPApi.md#createUser) | **POST** /repository/users | Create a user within Sinopia.
+*SinopiaServer.LDPApi* | [**deleteGroup**](docs/LDPApi.md#deleteGroup) | **DELETE** /repository/{groupID} | Delete an Group.
+*SinopiaServer.LDPApi* | [**deleteResource**](docs/LDPApi.md#deleteResource) | **DELETE** /repository/{groupID}/{resourceID} | Delete a Resource.
+*SinopiaServer.LDPApi* | [**deleteUser**](docs/LDPApi.md#deleteUser) | **DELETE** /repository/users/{userID} | Delete a User.
 *SinopiaServer.LDPApi* | [**getBase**](docs/LDPApi.md#getBase) | **GET** /repository | Get metadata for the base container.
-*SinopiaServer.LDPApi* | [**repositoryGroupIDDelete**](docs/LDPApi.md#repositoryGroupIDDelete) | **DELETE** /repository/{groupID} | 
-*SinopiaServer.LDPApi* | [**repositoryGroupIDHead**](docs/LDPApi.md#repositoryGroupIDHead) | **HEAD** /repository/{groupID} | 
-*SinopiaServer.LDPApi* | [**repositoryGroupIDOptions**](docs/LDPApi.md#repositoryGroupIDOptions) | **OPTIONS** /repository/{groupID} | 
-*SinopiaServer.LDPApi* | [**repositoryGroupIDPatch**](docs/LDPApi.md#repositoryGroupIDPatch) | **PATCH** /repository/{groupID} | 
-*SinopiaServer.LDPApi* | [**repositoryGroupIDPost**](docs/LDPApi.md#repositoryGroupIDPost) | **POST** /repository/{groupID} | Create new Group.
-*SinopiaServer.LDPApi* | [**repositoryGroupIDPut**](docs/LDPApi.md#repositoryGroupIDPut) | **PUT** /repository/{groupID} | 
-*SinopiaServer.LDPApi* | [**repositoryHead**](docs/LDPApi.md#repositoryHead) | **HEAD** /repository | Get headers only of base container request.
-*SinopiaServer.LDPApi* | [**repositoryOptions**](docs/LDPApi.md#repositoryOptions) | **OPTIONS** /repository | 
-*SinopiaServer.LDPApi* | [**repositoryPost**](docs/LDPApi.md#repositoryPost) | **POST** /repository | Create new Group within the base container.
-*SinopiaServer.LDPApi* | [**repositoryPut**](docs/LDPApi.md#repositoryPut) | **PUT** /repository | Update metadata on base container.
+*SinopiaServer.LDPApi* | [**getGroup**](docs/LDPApi.md#getGroup) | **GET** /repository/{groupID} | Get metadata (RDF) for a given Group.
+*SinopiaServer.LDPApi* | [**getResource**](docs/LDPApi.md#getResource) | **GET** /repository/{groupID}/{resourceID} | Get metadata (RDF) for a given resource.
+*SinopiaServer.LDPApi* | [**getUser**](docs/LDPApi.md#getUser) | **GET** /repository/users/{userID} | Get metadata (RDF) for a given user.
+*SinopiaServer.LDPApi* | [**getUsers**](docs/LDPApi.md#getUsers) | **GET** /repository/users | Get metadata (RDF) for the Sinopia users container.
+*SinopiaServer.LDPApi* | [**headBase**](docs/LDPApi.md#headBase) | **HEAD** /repository | Get headers only for base container GET request.
+*SinopiaServer.LDPApi* | [**headGroup**](docs/LDPApi.md#headGroup) | **HEAD** /repository/{groupID} | Get headers only for a group GET request.
+*SinopiaServer.LDPApi* | [**headResource**](docs/LDPApi.md#headResource) | **HEAD** /repository/{groupID}/{resourceID} | Get headers only for a resource GET request.
+*SinopiaServer.LDPApi* | [**headUser**](docs/LDPApi.md#headUser) | **HEAD** /repository/users/{userID} | Get headers only for a user GET request.
+*SinopiaServer.LDPApi* | [**headUsers**](docs/LDPApi.md#headUsers) | **HEAD** /repository/users | Get headers only for a Sinopia users&#39; container GET request.
+*SinopiaServer.LDPApi* | [**optionsBase**](docs/LDPApi.md#optionsBase) | **OPTIONS** /repository | HTTP Options for base container.
+*SinopiaServer.LDPApi* | [**optionsGroup**](docs/LDPApi.md#optionsGroup) | **OPTIONS** /repository/{groupID} | HTTP Options for group.
+*SinopiaServer.LDPApi* | [**optionsResource**](docs/LDPApi.md#optionsResource) | **OPTIONS** /repository/{groupID}/{resourceID} | HTTP Options for resource.
+*SinopiaServer.LDPApi* | [**optionsUser**](docs/LDPApi.md#optionsUser) | **OPTIONS** /repository/users/{userID} | HTTP Options for user.
+*SinopiaServer.LDPApi* | [**optionsUsers**](docs/LDPApi.md#optionsUsers) | **OPTIONS** /repository/users | HTTP Options for Sinopia users&#39; container.
+*SinopiaServer.LDPApi* | [**updateBase**](docs/LDPApi.md#updateBase) | **PUT** /repository | Update metadata on base container.
+*SinopiaServer.LDPApi* | [**updateGroup**](docs/LDPApi.md#updateGroup) | **PUT** /repository/{groupID} | Update metadata on a group.
+*SinopiaServer.LDPApi* | [**updateResource**](docs/LDPApi.md#updateResource) | **PUT** /repository/{groupID}/{resourceID} | Update metadata on a resource.
+*SinopiaServer.LDPApi* | [**updateUser**](docs/LDPApi.md#updateUser) | **PUT** /repository/users/{userID} | Update metadata on a user.
+*SinopiaServer.LDPApi* | [**updateUsers**](docs/LDPApi.md#updateUsers) | **PUT** /repository/users | Update metadata on the Sinopia users&#39; container.
 
 
 ## Documentation for Models
