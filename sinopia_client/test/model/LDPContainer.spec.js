@@ -50,33 +50,33 @@
   }
 
   describe('LDPContainer', function() {
-    it('should create an instance of LDPContainer', function() {
-      // uncomment below and update the code to test LDPContainer
-      //var instane = new SinopiaServer.LDPContainer();
-      //expect(instance).to.be.a(SinopiaServer.LDPContainer);
+    it('should create an instance of LDPContainer', function(done) {
+      var instance = new SinopiaServer.LDPContainer();
+      expect(instance).to.be.a(SinopiaServer.LDPContainer);
+      done();
     });
 
     it('should have the property containerID (base name: "containerID")', function() {
       // uncomment below and update the code to test the property containerID
-      //var instane = new SinopiaServer.LDPContainer();
+      //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instane = new SinopiaServer.LDPContainer();
+      //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
     it('should have the property URI (base name: "URI")', function() {
       // uncomment below and update the code to test the property URI
-      //var instane = new SinopiaServer.LDPContainer();
+      //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
     it('should have the property resources (base name: "resources")', function() {
       // uncomment below and update the code to test the property resources
-      //var instane = new SinopiaServer.LDPContainer();
+      //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 

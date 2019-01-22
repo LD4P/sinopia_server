@@ -53,13 +53,15 @@
 
   describe('LDPApi', function() {
     describe('createGroup', function() {
-      it('should call createGroup successfully', function(done) {
-        //uncomment below and update the code to test createGroup
-        //instance.createGroup(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+      it('should call createGroup successfully', function() {
+        // created manually for now, but will need to do this as setup here (and teardown later?) to make stuff created under /repository not 404
+        // instance.updateBase(new SinopiaServer.Resource( , , new SinopiaServer.ResourceContext));
+        // var resources = [new SinopiaServer.Resource()];
+        // var group = new SinopiaServer.LDPContainer('', 'PCC Group', null, resources);
+        // return instance.createGroup('pcc', group, { contentType: 'application/ld+json' })
+        //   .then(function(_data) {
+        //     expect().to.be();
+        //   });
       });
     });
     describe('createResource', function() {
@@ -253,13 +255,28 @@
       });
     });
     describe('updateBase', function() {
-      it('should call updateBase successfully', function(done) {
-        //uncomment below and update the code to test updateBase
-        //instance.updateBase(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+      it('should call updateBase successfully', function() {
+        var rsrcJsonStr = // just inlined content of fixtures/base-container.jsonld for expedient testing
+`{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "ldp": "http://www.w3.org/ns/ldp#" },
+  "@id": "",
+  "@type": [ "ldp:Container", "ldp:BasicContainer" ],
+  "rdfs:label": "Sinopia LDP Server"
+}`;
+        var rsrcJson = JSON.parse(rsrcJsonStr);
+        console.log("rsrcJson:");
+        console.log(rsrcJson);
+
+        var baseRsrc = SinopiaServer.Resource.constructFromObject(rsrcJson);
+        console.log("baseRsrc:");
+        console.log(baseRsrc);
+
+        return instance.updateBase(baseRsrc, { contentType: 'application/ld+json' })
+          .then(function(_data) {
+            expect().to.be();
+          });
       });
     });
     describe('updateGroup', function() {
