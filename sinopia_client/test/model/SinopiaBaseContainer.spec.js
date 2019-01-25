@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new SinopiaServer.Error();
+    instance = new SinopiaServer.SinopiaBaseContainer();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,28 +49,40 @@
       object[property] = value;
   }
 
-  describe('Error', function() {
-    it('should create an instance of Error', function() {
-      // uncomment below and update the code to test Error
-      //var instane = new SinopiaServer.Error();
-      //expect(instance).to.be.a(SinopiaServer.Error);
+  describe('SinopiaBaseContainer', function() {
+    it('should create an instance of SinopiaBaseContainer', function() {
+      // uncomment below and update the code to test SinopiaBaseContainer
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
+      //expect(instance).to.be.a(SinopiaServer.SinopiaBaseContainer);
     });
 
-    it('should have the property title (base name: "title")', function() {
-      // uncomment below and update the code to test the property title
-      //var instane = new SinopiaServer.Error();
+    it('should have the property id (base name: "@id")', function() {
+      // uncomment below and update the code to test the property id
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
       //expect(instance).to.be();
     });
 
-    it('should have the property detail (base name: "detail")', function() {
-      // uncomment below and update the code to test the property detail
-      //var instane = new SinopiaServer.Error();
+    it('should have the property context (base name: "@context")', function() {
+      // uncomment below and update the code to test the property context
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
       //expect(instance).to.be();
     });
 
-    it('should have the property source (base name: "source")', function() {
-      // uncomment below and update the code to test the property source
-      //var instane = new SinopiaServer.Error();
+    it('should have the property type (base name: "@type")', function() {
+      // uncomment below and update the code to test the property type
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property rdfslabel (base name: "rdfs:label")', function() {
+      // uncomment below and update the code to test the property rdfslabel
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property label (base name: "label")', function() {
+      // uncomment below and update the code to test the property label
+      //var instane = new SinopiaServer.SinopiaBaseContainer();
       //expect(instance).to.be();
     });
 

@@ -86,8 +86,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="createResource"></a>
 # **createResource**
@@ -145,8 +145,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="createUser"></a>
 # **createUser**
@@ -201,8 +201,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="deleteGroup"></a>
 # **deleteGroup**
@@ -251,8 +251,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="deleteResource"></a>
 # **deleteResource**
@@ -304,8 +304,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="deleteUser"></a>
 # **deleteUser**
@@ -354,12 +354,12 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="getBase"></a>
 # **getBase**
-> LDPContainer getBase()
+> SinopiaBaseContainer getBase()
 
 Get metadata for the base container.
 
@@ -390,7 +390,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**LDPContainer**](LDPContainer.md)
+[**SinopiaBaseContainer**](SinopiaBaseContainer.md)
 
 ### Authorization
 
@@ -398,8 +398,8 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="getGroup"></a>
 # **getGroup**
@@ -448,8 +448,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="getResource"></a>
 # **getResource**
@@ -501,8 +501,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="getUser"></a>
 # **getUser**
@@ -551,8 +551,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="getUsers"></a>
 # **getUsers**
@@ -595,8 +595,8 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="headBase"></a>
 # **headBase**
@@ -639,8 +639,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="headGroup"></a>
 # **headGroup**
@@ -682,8 +682,8 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="headResource"></a>
 # **headResource**
@@ -728,8 +728,8 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="headUser"></a>
 # **headUser**
@@ -771,8 +771,8 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="headUsers"></a>
 # **headUsers**
@@ -808,8 +808,8 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="optionsBase"></a>
 # **optionsBase**
@@ -852,8 +852,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="optionsGroup"></a>
 # **optionsGroup**
@@ -902,8 +902,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="optionsResource"></a>
 # **optionsResource**
@@ -955,8 +955,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="optionsUser"></a>
 # **optionsUser**
@@ -1005,8 +1005,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="optionsUsers"></a>
 # **optionsUsers**
@@ -1049,8 +1049,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="updateBase"></a>
 # **updateBase**
@@ -1073,7 +1073,7 @@ RemoteUser.apiKey = 'YOUR API KEY';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var base = new SinopiaServer.Resource(); // Resource | New base container metadata to assert on the container.
+var base = new SinopiaServer.SinopiaBaseContainer(); // SinopiaBaseContainer | New base container metadata to assert on the container.
 
 var opts = { 
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
@@ -1090,7 +1090,7 @@ apiInstance.updateBase(base, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base** | [**Resource**](Resource.md)| New base container metadata to assert on the container. | 
+ **base** | [**SinopiaBaseContainer**](SinopiaBaseContainer.md)| New base container metadata to assert on the container. | 
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -1103,8 +1103,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="updateGroup"></a>
 # **updateGroup**
@@ -1160,8 +1160,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="updateResource"></a>
 # **updateResource**
@@ -1220,8 +1220,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="updateUser"></a>
 # **updateUser**
@@ -1277,8 +1277,8 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 
 <a name="updateUsers"></a>
 # **updateUsers**
@@ -1331,6 +1331,6 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 

@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new SinopiaServer.ErrorSource();
+    instance = new SinopiaServer.SinopiaBaseResourceContext();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,16 +49,22 @@
       object[property] = value;
   }
 
-  describe('ErrorSource', function() {
-    it('should create an instance of ErrorSource', function() {
-      // uncomment below and update the code to test ErrorSource
-      //var instane = new SinopiaServer.ErrorSource();
-      //expect(instance).to.be.a(SinopiaServer.ErrorSource);
+  describe('SinopiaBaseResourceContext', function() {
+    it('should create an instance of SinopiaBaseResourceContext', function() {
+      // uncomment below and update the code to test SinopiaBaseResourceContext
+      //var instane = new SinopiaServer.SinopiaBaseResourceContext();
+      //expect(instance).to.be.a(SinopiaServer.SinopiaBaseResourceContext);
     });
 
-    it('should have the property pointer (base name: "pointer")', function() {
-      // uncomment below and update the code to test the property pointer
-      //var instane = new SinopiaServer.ErrorSource();
+    it('should have the property rdfs (base name: "rdfs")', function() {
+      // uncomment below and update the code to test the property rdfs
+      //var instane = new SinopiaServer.SinopiaBaseResourceContext();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property ldp (base name: "ldp")', function() {
+      // uncomment below and update the code to test the property ldp
+      //var instane = new SinopiaServer.SinopiaBaseResourceContext();
       //expect(instance).to.be();
     });
 

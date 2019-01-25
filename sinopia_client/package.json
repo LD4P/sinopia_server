@@ -1,6 +1,6 @@
 {
   "name": "sinopia_server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Sinopia_Server__Supports_CRUD_following_loosely_LDP_on_Sinopia_resources__Top_level_requires_special_authorization_for_creating_a_groups_graph__i_e__PCC_Stanford_etc__",
   "license": "Apache 2.0",
   "main": "src/index.js",
