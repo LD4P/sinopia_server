@@ -99,10 +99,10 @@ cache:
     mustRevalidate: ${TRELLIS_CACHE_MUST_REVALIDATE:-true}
 
 notifications:
-    enabled: ${TRELLIS_NOTIFICATIONS_ENABLED:-false}
+    enabled: ${TRELLIS_NOTIFICATIONS_ENABLED:-true}
     type: ${TRELLIS_NOTIFICATIONS_TYPE:-JMS}
     topicName: ${TRELLIS_NOTIFICATIONS_TOPIC_NAME:-trellis}
-    connectionString: ${TRELLIS_NOTIFICATIONS_CONNECTION_STRING:-tcp://localhost:61616}
+    connectionString: ${TRELLIS_NOTIFICATIONS_CONNECTION_STRING:-tcp://activemq:61616}
 
 # JSON-LD configuration
 jsonld:

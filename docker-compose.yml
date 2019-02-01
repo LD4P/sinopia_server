@@ -1,5 +1,11 @@
 version: "3"
 services:
+  activemq:
+    container_name: jms_broker
+    image: rmohr/activemq
+    ports:
+      - 61616:61616
+      - 8161:8161
   trellis:
     container_name: trellis_server
     build:
@@ -10,6 +16,7 @@ services:
       - 8081:8081
     links:
       - postgres
+      - activemq
     depends_on:
       - postgres
       - migration
