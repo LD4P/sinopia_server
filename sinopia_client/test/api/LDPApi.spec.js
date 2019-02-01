@@ -51,6 +51,9 @@
       object[property] = value;
   }
 
+  const chai = require('chai')
+  expect = chai.expect // no 'var', expect is already a param
+
   describe('LDPApi', function() {
     describe('createGroup', function() {
       it('should call createGroup successfully', function() {
@@ -256,27 +259,21 @@
     });
     describe('updateBase', function() {
       it('should call updateBase successfully', function() {
-        var rsrcJsonStr = // just inlined content of fixtures/base-container.jsonld for expedient testing
-`{
-  "@context": {
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "ldp": "http://www.w3.org/ns/ldp#" },
-  "@id": "",
-  "@type": [ "ldp:Container", "ldp:BasicContainer" ],
-  "rdfs:label": "Sinopia LDP Server"
-}`;
-        var rsrcJson = JSON.parse(rsrcJsonStr);
-        console.log("rsrcJson:");
-        console.log(rsrcJson);
+        var rsrcCtx = new SinopiaServer.SinopiaBaseResourceContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        var baseRsrc = new SinopiaServer.SinopiaBaseContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
 
-        var baseRsrc = SinopiaServer.Resource.constructFromObject(rsrcJson);
-        console.log("baseRsrc:");
-        console.log(baseRsrc);
+        return instance.updateBase(baseRsrc).then(function(_responseData) {
+          return instance.getBase()
+            .then(function(responseData) {
+              expect(responseData['@id']).to.equal(baseRsrc['@id'])
+              expect(responseData['@context']).to.deep.equal(baseRsrc['@context'])
+              expect(responseData['@type']).to.deep.equal(baseRsrc['@type'])
+              expect(responseData['label']).to.equal(baseRsrc['rdfs:label'])
+            })
+        })
 
-        return instance.updateBase(baseRsrc, { contentType: 'application/ld+json' })
-          .then(function(_data) {
-            expect().to.be();
-          });
+
+
       });
     });
     describe('updateGroup', function() {
