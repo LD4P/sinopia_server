@@ -1,12 +1,12 @@
 swagger: '2.0'
 consumes:
-  - "application/json+ld"
+  - "application/ld+json"
 produces:
-  - "application/json+ld"
+  - "application/ld+json"
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 1.0.0
+  version: 2.0.0
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -39,7 +39,7 @@ paths:
               type: string
               format: URI
           schema:
-            $ref: '#/definitions/LDPContainer'
+            $ref: '#/definitions/SinopiaBaseContainer'
         '404':
           description: Unable to find the base container.
           schema:
@@ -111,7 +111,7 @@ paths:
           description: New base container metadata to assert on the container.
           required: true
           schema:
-            $ref: '#/definitions/Resource'
+            $ref: '#/definitions/SinopiaBaseContainer'
         - name: Content-Type
           in: header
           description: Content-Type of Group metadata, with preference for JSON-LD.
@@ -1119,5 +1119,40 @@ definitions:
         type: string
         format: uri
       "@type":
+        type: string
+        format: uri
+  # note: wanted to have a Sinopia: section for Sinopia-not-LDP models, but swagger-codegen just made a SinopiaModels
+  # file and mashed together everything under it, instead of making a file for each model.  so, seems like we need to
+  # do our namespacing via naming convention for one level, instead of hierarchy.
+  SinopiaBaseContainer:
+    required:
+      - "@context"
+      - "@id"
+      - "@type"
+      - "rdfs:label"
+    properties:
+      "@id":
+        type: string
+        format: uri
+      "@context":
+        $ref: "#/definitions/SinopiaBaseResourceContext"
+      "@type":
+        type: array
+        items:
+          type: string
+        default: ["ldp:Container", "ldp:BasicContainer"]
+      "rdfs:label":
+        type: string
+      "label":
+        type: string
+  SinopiaBaseResourceContext:
+    required:
+      - rdfs
+      - ldp
+    properties:
+      "rdfs":
+        type: string
+        format: uri
+      "ldp":
         type: string
         format: uri

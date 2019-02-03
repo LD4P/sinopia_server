@@ -41,6 +41,6 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json+ld
- - **Accept**: application/json+ld
+ - **Content-Type**: application/ld+json
+ - **Accept**: application/ld+json
 

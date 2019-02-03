@@ -16,53 +16,54 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/SinopiaBaseResourceContext'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./SinopiaBaseResourceContext'));
   } else {
     // Browser globals (root is window)
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.ResourceInfo = factory(root.SinopiaServer.ApiClient);
+    root.SinopiaServer.SinopiaBaseContainer = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.SinopiaBaseResourceContext);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, SinopiaBaseResourceContext) {
   'use strict';
 
 
 
 
   /**
-   * The ResourceInfo model module.
-   * @module model/ResourceInfo
+   * The SinopiaBaseContainer model module.
+   * @module model/SinopiaBaseContainer
    * @version 2.0.0
    */
 
   /**
-   * Constructs a new <code>ResourceInfo</code>.
-   * @alias module:model/ResourceInfo
+   * Constructs a new <code>SinopiaBaseContainer</code>.
+   * @alias module:model/SinopiaBaseContainer
    * @class
    * @param id {String} 
-   * @param type {String} 
-   * @param label {String} 
-   * @param resource {String} 
+   * @param context {module:model/SinopiaBaseResourceContext} 
+   * @param type {Array.<String>} 
+   * @param rdfslabel {String} 
    */
-  var exports = function(id, type, label, resource) {
+  var exports = function(id, context, type, rdfslabel) {
     var _this = this;
 
     _this['@id'] = id;
+    _this['@context'] = context;
     _this['@type'] = type;
-    _this['label'] = label;
-    _this['resource'] = resource;
+    _this['rdfs:label'] = rdfslabel;
+
   };
 
   /**
-   * Constructs a <code>ResourceInfo</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SinopiaBaseContainer</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/ResourceInfo} obj Optional instance to populate.
-   * @return {module:model/ResourceInfo} The populated <code>ResourceInfo</code> instance.
+   * @param {module:model/SinopiaBaseContainer} obj Optional instance to populate.
+   * @return {module:model/SinopiaBaseContainer} The populated <code>SinopiaBaseContainer</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -71,14 +72,17 @@
       if (data.hasOwnProperty('@id')) {
         obj['@id'] = ApiClient.convertToType(data['@id'], 'String');
       }
+      if (data.hasOwnProperty('@context')) {
+        obj['@context'] = SinopiaBaseResourceContext.constructFromObject(data['@context']);
+      }
       if (data.hasOwnProperty('@type')) {
-        obj['@type'] = ApiClient.convertToType(data['@type'], 'String');
+        obj['@type'] = ApiClient.convertToType(data['@type'], ['String']);
+      }
+      if (data.hasOwnProperty('rdfs:label')) {
+        obj['rdfs:label'] = ApiClient.convertToType(data['rdfs:label'], 'String');
       }
       if (data.hasOwnProperty('label')) {
         obj['label'] = ApiClient.convertToType(data['label'], 'String');
-      }
-      if (data.hasOwnProperty('resource')) {
-        obj['resource'] = ApiClient.convertToType(data['resource'], 'String');
       }
     }
     return obj;
@@ -89,17 +93,21 @@
    */
   exports.prototype['@id'] = undefined;
   /**
-   * @member {String} @type
+   * @member {module:model/SinopiaBaseResourceContext} @context
+   */
+  exports.prototype['@context'] = undefined;
+  /**
+   * @member {Array.<String>} @type
    */
   exports.prototype['@type'] = undefined;
+  /**
+   * @member {String} rdfs:label
+   */
+  exports.prototype['rdfs:label'] = undefined;
   /**
    * @member {String} label
    */
   exports.prototype['label'] = undefined;
-  /**
-   * @member {String} resource
-   */
-  exports.prototype['resource'] = undefined;
 
 
 

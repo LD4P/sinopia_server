@@ -25,7 +25,7 @@
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.Variable = factory(root.SinopiaServer.ApiClient);
+    root.SinopiaServer.SinopiaBaseResourceContext = factory(root.SinopiaServer.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';
@@ -34,54 +34,54 @@
 
 
   /**
-   * The Variable model module.
-   * @module model/Variable
+   * The SinopiaBaseResourceContext model module.
+   * @module model/SinopiaBaseResourceContext
    * @version 2.0.0
    */
 
   /**
-   * Constructs a new <code>Variable</code>.
-   * @alias module:model/Variable
+   * Constructs a new <code>SinopiaBaseResourceContext</code>.
+   * @alias module:model/SinopiaBaseResourceContext
    * @class
-   * @param id {String} 
-   * @param type {String} 
+   * @param rdfs {String} 
+   * @param ldp {String} 
    */
-  var exports = function(id, type) {
+  var exports = function(rdfs, ldp) {
     var _this = this;
 
-    _this['@id'] = id;
-    _this['@type'] = type;
+    _this['rdfs'] = rdfs;
+    _this['ldp'] = ldp;
   };
 
   /**
-   * Constructs a <code>Variable</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SinopiaBaseResourceContext</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Variable} obj Optional instance to populate.
-   * @return {module:model/Variable} The populated <code>Variable</code> instance.
+   * @param {module:model/SinopiaBaseResourceContext} obj Optional instance to populate.
+   * @return {module:model/SinopiaBaseResourceContext} The populated <code>SinopiaBaseResourceContext</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
 
-      if (data.hasOwnProperty('@id')) {
-        obj['@id'] = ApiClient.convertToType(data['@id'], 'String');
+      if (data.hasOwnProperty('rdfs')) {
+        obj['rdfs'] = ApiClient.convertToType(data['rdfs'], 'String');
       }
-      if (data.hasOwnProperty('@type')) {
-        obj['@type'] = ApiClient.convertToType(data['@type'], 'String');
+      if (data.hasOwnProperty('ldp')) {
+        obj['ldp'] = ApiClient.convertToType(data['ldp'], 'String');
       }
     }
     return obj;
   }
 
   /**
-   * @member {String} @id
+   * @member {String} rdfs
    */
-  exports.prototype['@id'] = undefined;
+  exports.prototype['rdfs'] = undefined;
   /**
-   * @member {String} @type
+   * @member {String} ldp
    */
-  exports.prototype['@type'] = undefined;
+  exports.prototype['ldp'] = undefined;
 
 
 
