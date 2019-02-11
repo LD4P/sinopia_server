@@ -5,6 +5,7 @@ services:
     image: rmohr/activemq
     ports:
       - 61616:61616
+      - 61613:61613
       - 8161:8161
   trellis:
     container_name: trellis_server
