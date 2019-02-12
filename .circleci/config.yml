@@ -22,10 +22,15 @@ jobs:
       - restore_cache:
           key: node_modules-{{ checksum "sinopia_client/package.json" }}
       - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.6.1
+      - run:
           name: bring up trellis-ext-db, wait for it to start, run sinopia client integration tests
           command: |
             docker-compose up -d
-            ./wait_for_healthy_trellis.sh
+            dockerize -wait http://localhost:8081/healthcheck -timeout 1m
             cd sinopia_client
             npm run test
 
