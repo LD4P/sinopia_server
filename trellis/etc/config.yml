@@ -44,7 +44,7 @@ database:
 
   # The JDBC URL
   # url: jdbc:mysql://db.example.com/db-name
-  url: jdbc:postgresql://postgres:5432/sinopia
+  url: jdbc:postgresql://database:5432/sinopia
 
   properties:
     charSet: UTF-8
@@ -102,7 +102,7 @@ notifications:
     enabled: ${TRELLIS_NOTIFICATIONS_ENABLED:-true}
     type: ${TRELLIS_NOTIFICATIONS_TYPE:-JMS}
     topicName: ${TRELLIS_NOTIFICATIONS_TOPIC_NAME:-trellis}
-    connectionString: ${TRELLIS_NOTIFICATIONS_CONNECTION_STRING:-tcp://activemq:61616}
+    connectionString: ${TRELLIS_NOTIFICATIONS_CONNECTION_STRING:-tcp://broker:61616}
 
 # JSON-LD configuration
 jsonld:

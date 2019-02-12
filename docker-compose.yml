@@ -1,12 +1,12 @@
 version: "3"
 services:
-  message_broker:
+  broker:
     image: rmohr/activemq
     ports:
       - 61616:61616
       - 61613:61613
       - 8161:8161
-  ldp_server:
+  platform:
     build:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
@@ -15,10 +15,10 @@ services:
       - 8081:8081
     links:
       - database
-      - message_broker
+      - broker
     depends_on:
       - database
-      - message_broker
+      - broker
       - migration
   database:
     image: postgres:latest
@@ -35,7 +35,6 @@ services:
       - 9200:9200
       - 9300:9300
   migration:
-    container_name: trellis_migration
     build:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
