@@ -1,14 +1,12 @@
 version: "3"
 services:
-  activemq:
-    container_name: jms_broker
+  message_broker:
     image: rmohr/activemq
     ports:
       - 61616:61616
       - 61613:61613
       - 8161:8161
-  trellis:
-    container_name: trellis_server
+  ldp_server:
     build:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
@@ -16,16 +14,13 @@ services:
       - 8080:8080
       - 8081:8081
     links:
-      - postgres
-      - activemq
+      - database
+      - message_broker
     depends_on:
-      - postgres
+      - database
+      - message_broker
       - migration
-    healthcheck:
-      test:  ["CMD", "curl", "-f", "http://localhost:8081/healthcheck"]
-      retries: 5
-  postgres:
-    container_name: postgres_server
+  database:
     image: postgres:latest
     environment:
       POSTGRES_USER: sinopia
@@ -35,7 +30,6 @@ services:
     ports:
       - 5432:5432
   search:
-    container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
     ports:
       - 9200:9200
@@ -47,6 +41,6 @@ services:
       dockerfile: Dockerfile.trellis-ext-db
     command: ["/opt/trellis/bin/trellis-db", "db", "migrate", "/opt/trellis/etc/config.yml"]
     links:
-      - postgres
+      - database
     depends_on:
-      - postgres
+      - database
