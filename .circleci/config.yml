@@ -30,7 +30,7 @@ jobs:
           name: bring up trellis-ext-db, wait for it to start, run sinopia client integration tests
           command: |
             docker-compose up -d
-            dockerize -wait tcp://localhost:8081 -timeout 1m
+            dockerize -wait http://localhost:8081/healthcheck -timeout 1m
             cd sinopia_client
             npm run test
 
