@@ -1,0 +1,17 @@
+{
+  "name": "sinopia_indexer",
+  "version": "0.1.0",
+  "description": "Sinopia Indexer listens for STOMP messages, parses URIs out of messages, retrieves resources from an LDP server, and indexes them into ElasticSearch ",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/LD4P/sinopia_server#sinopia_indexer",
+  "repository": "github:LD4P/sinopia_server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "elasticsearch": "^15.4.1",
+    "stomp-client": "^0.9.0",
+    "superagent": "^4.1.0"
+  }
+}

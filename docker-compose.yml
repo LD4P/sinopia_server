@@ -13,13 +13,20 @@ services:
     ports:
       - 8080:8080
       - 8081:8081
-    links:
-      - database
-      - broker
     depends_on:
       - database
       - broker
       - migration
+  indexer:
+    build:
+      context: sinopia_indexer
+    environment:
+      SEARCH_HOST: search
+      BROKER_HOST: broker
+    command: dockerize -wait tcp://broker:61613 -wait tcp://search:9200 -timeout 120s npm start
+    depends_on:
+      - broker
+      - search
   database:
     image: postgres:latest
     environment:
@@ -39,7 +46,5 @@ services:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
     command: ["/opt/trellis/bin/trellis-db", "db", "migrate", "/opt/trellis/etc/config.yml"]
-    links:
-      - database
     depends_on:
       - database
