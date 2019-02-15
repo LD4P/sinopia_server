@@ -1,0 +1,6 @@
+overrides:
+  -
+    rules:
+      no-global-assign: off
+    files:
+      - index.js
