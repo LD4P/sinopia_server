@@ -8,7 +8,7 @@ export class UriHandler {
 
   handle() {
     console.log(`uri needs indexing: ${this.uri}`)
-    new Request(this.uri).body('application/ld+json')
+    new Request(this.uri).body()
       .then(json => {
         console.log(`indexing trellis resource: ${JSON.stringify(json)}`)
         return new Searcher().index(json)

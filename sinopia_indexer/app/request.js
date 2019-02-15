@@ -1,12 +1,14 @@
 const superagent = require('superagent')
 
+const defaultMimeType = process.env.DEFAULT_MIME_TYPE || 'application/ld+json'
+
 export class Request {
   constructor(uri) {
     this.uri = uri
   }
 
   body(mimeType) {
-    mimeType = mimeType || 'application/json'
+    mimeType = mimeType || defaultMimeType
 
     return superagent.get(this.uri)
       .accept(mimeType)

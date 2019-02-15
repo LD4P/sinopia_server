@@ -1,5 +1,8 @@
 const elasticsearch = require('elasticsearch')
 
+const indexName = process.env.INDEX_NAME || 'sinopia_index'
+const indexType = process.env.INDEX_TYPE || 'sinopia_resource'
+
 export class Searcher {
   constructor() {
     let host = process.env.SEARCH_HOST || 'localhost'
@@ -13,8 +16,8 @@ export class Searcher {
 
   index(json) {
     return this.client.index({
-      index: 'sinopia_index',
-      type: 'sinopia_resource',
+      index: indexName,
+      type: indexType,
       body: json
     }).then(indexResponse => {
       if (indexResponse.result != 'created') {
