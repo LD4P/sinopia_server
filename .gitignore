@@ -16,4 +16,4 @@
 .swagger-codegen-ignore
 
 # NPM deps
-sinopia_client/node_modules/
+node_modules
