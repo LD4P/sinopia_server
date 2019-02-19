@@ -13,9 +13,6 @@ services:
     ports:
       - 8080:8080
       - 8081:8081
-    links:
-      - database
-      - broker
     depends_on:
       - database
       - broker
@@ -39,7 +36,5 @@ services:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
     command: ["/opt/trellis/bin/trellis-db", "db", "migrate", "/opt/trellis/etc/config.yml"]
-    links:
-      - database
     depends_on:
       - database
