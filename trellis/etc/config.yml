@@ -70,13 +70,13 @@ namespaces: ${TRELLIS_NAMESPACES:-/opt/trellis/data/namespaces.json}
 
 # This may refer to a static base URL for resources. If left empty, the
 # base URL will reflect the Host header in the request.
-baseUrl:
+baseUrl: ${TRELLIS_BASE_URL:-}
 
 # This configuration will enable a WebSub "hub" header.
-hubUrl:
+hubUrl: ${TRELLIS_HUB_URL:-}
 
 auth:
-    adminUsers: [cmharlow]
+    adminUsers: ${TRELLIS_ADMIN_USERS:-[cmharlow]}
     webac:
         enabled: ${TRELLIS_AUTH_WEBAC_ENABLED:-true}
         cacheSize: ${TRELLIS_AUTH_WEBAC_CACHE_SIZE:-1000}
