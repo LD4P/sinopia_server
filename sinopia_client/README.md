@@ -150,8 +150,8 @@ Class | Method | HTTP request | Description
  - [SinopiaServer.Resource](docs/Resource.md)
  - [SinopiaServer.ResourceContext](docs/ResourceContext.md)
  - [SinopiaServer.ResourceInfo](docs/ResourceInfo.md)
- - [SinopiaServer.SinopiaBaseContainer](docs/SinopiaBaseContainer.md)
- - [SinopiaServer.SinopiaBaseResourceContext](docs/SinopiaBaseResourceContext.md)
+ - [SinopiaServer.SinopiaBasicContainer](docs/SinopiaBasicContainer.md)
+ - [SinopiaServer.SinopiaBasicContainerContext](docs/SinopiaBasicContainerContext.md)
  - [SinopiaServer.Variable](docs/Variable.md)
 
 

@@ -359,7 +359,7 @@ null (empty response body)
 
 <a name="getBase"></a>
 # **getBase**
-> SinopiaBaseContainer getBase()
+> SinopiaBasicContainer getBase()
 
 Get metadata for the base container.
 
@@ -390,7 +390,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SinopiaBaseContainer**](SinopiaBaseContainer.md)
+[**SinopiaBasicContainer**](SinopiaBasicContainer.md)
 
 ### Authorization
 
@@ -1073,7 +1073,7 @@ RemoteUser.apiKey = 'YOUR API KEY';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var base = new SinopiaServer.SinopiaBaseContainer(); // SinopiaBaseContainer | New base container metadata to assert on the container.
+var base = new SinopiaServer.SinopiaBasicContainer(); // SinopiaBasicContainer | New base container metadata to assert on the container.
 
 var opts = { 
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
@@ -1090,7 +1090,7 @@ apiInstance.updateBase(base, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base** | [**SinopiaBaseContainer**](SinopiaBaseContainer.md)| New base container metadata to assert on the container. | 
+ **base** | [**SinopiaBasicContainer**](SinopiaBasicContainer.md)| New base container metadata to assert on the container. | 
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type

@@ -260,8 +260,8 @@
     describe('updateBase', function() {
       it('should call updateBase successfully', function() {
         var rand_num = Math.floor(Math.random() * 100)
-        var rsrcCtx = new SinopiaServer.SinopiaBaseResourceContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
-        var baseRsrc = new SinopiaServer.SinopiaBaseContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
+        var rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        var baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
 
         return instance.updateBase(baseRsrc).then(function(_responseData) {
           return instance.getBase()

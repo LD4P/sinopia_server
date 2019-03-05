@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/LDPContainer', 'model/Resource', 'model/SinopiaBaseContainer'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/LDPContainer', 'model/Resource', 'model/SinopiaBasicContainer'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/LDPContainer'), require('../model/Resource'), require('../model/SinopiaBaseContainer'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/LDPContainer'), require('../model/Resource'), require('../model/SinopiaBasicContainer'));
   } else {
     // Browser globals (root is window)
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.LDPApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ErrorResponse, root.SinopiaServer.LDPContainer, root.SinopiaServer.Resource, root.SinopiaServer.SinopiaBaseContainer);
+    root.SinopiaServer.LDPApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ErrorResponse, root.SinopiaServer.LDPContainer, root.SinopiaServer.Resource, root.SinopiaServer.SinopiaBasicContainer);
   }
-}(this, function(ApiClient, ErrorResponse, LDPContainer, Resource, SinopiaBaseContainer) {
+}(this, function(ApiClient, ErrorResponse, LDPContainer, Resource, SinopiaBasicContainer) {
   'use strict';
 
   /**
@@ -414,7 +414,7 @@
     /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBaseContainer} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBasicContainer} and HTTP response
      */
     this.getBaseWithHttpInfo = function() {
       var postBody = null;
@@ -434,7 +434,7 @@
       var authNames = ['RemoteUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
-      var returnType = SinopiaBaseContainer;
+      var returnType = SinopiaBasicContainer;
 
       return this.apiClient.callApi(
         '/repository', 'GET',
@@ -446,7 +446,7 @@
     /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBaseContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBasicContainer}
      */
     this.getBase = function() {
       return this.getBaseWithHttpInfo()
@@ -1185,7 +1185,7 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/SinopiaBaseContainer} base New base container metadata to assert on the container.
+     * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -1227,7 +1227,7 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/SinopiaBaseContainer} base New base container metadata to assert on the container.
+     * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}

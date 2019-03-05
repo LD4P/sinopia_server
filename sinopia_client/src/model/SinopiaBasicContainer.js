@@ -16,35 +16,35 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/SinopiaBaseResourceContext'], factory);
+    define(['ApiClient', 'model/SinopiaBasicContainerContext'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./SinopiaBaseResourceContext'));
+    module.exports = factory(require('../ApiClient'), require('./SinopiaBasicContainerContext'));
   } else {
     // Browser globals (root is window)
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.SinopiaBaseContainer = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.SinopiaBaseResourceContext);
+    root.SinopiaServer.SinopiaBasicContainer = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.SinopiaBasicContainerContext);
   }
-}(this, function(ApiClient, SinopiaBaseResourceContext) {
+}(this, function(ApiClient, SinopiaBasicContainerContext) {
   'use strict';
 
 
 
 
   /**
-   * The SinopiaBaseContainer model module.
-   * @module model/SinopiaBaseContainer
+   * The SinopiaBasicContainer model module.
+   * @module model/SinopiaBasicContainer
    * @version 2.0.0
    */
 
   /**
-   * Constructs a new <code>SinopiaBaseContainer</code>.
-   * @alias module:model/SinopiaBaseContainer
+   * Constructs a new <code>SinopiaBasicContainer</code>.
+   * @alias module:model/SinopiaBasicContainer
    * @class
    * @param id {String} 
-   * @param context {module:model/SinopiaBaseResourceContext} 
+   * @param context {module:model/SinopiaBasicContainerContext} 
    * @param type {Array.<String>} 
    * @param rdfslabel {String} 
    */
@@ -59,11 +59,11 @@
   };
 
   /**
-   * Constructs a <code>SinopiaBaseContainer</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SinopiaBasicContainer</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SinopiaBaseContainer} obj Optional instance to populate.
-   * @return {module:model/SinopiaBaseContainer} The populated <code>SinopiaBaseContainer</code> instance.
+   * @param {module:model/SinopiaBasicContainer} obj Optional instance to populate.
+   * @return {module:model/SinopiaBasicContainer} The populated <code>SinopiaBasicContainer</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -73,7 +73,7 @@
         obj['@id'] = ApiClient.convertToType(data['@id'], 'String');
       }
       if (data.hasOwnProperty('@context')) {
-        obj['@context'] = SinopiaBaseResourceContext.constructFromObject(data['@context']);
+        obj['@context'] = SinopiaBasicContainerContext.constructFromObject(data['@context']);
       }
       if (data.hasOwnProperty('@type')) {
         obj['@type'] = ApiClient.convertToType(data['@type'], ['String']);
@@ -93,7 +93,7 @@
    */
   exports.prototype['@id'] = undefined;
   /**
-   * @member {module:model/SinopiaBaseResourceContext} @context
+   * @member {module:model/SinopiaBasicContainerContext} @context
    */
   exports.prototype['@context'] = undefined;
   /**

@@ -1,4 +1,4 @@
-# SinopiaServer.SinopiaBaseResourceContext
+# SinopiaServer.SinopiaBasicContainerContext
 
 ## Properties
 Name | Type | Description | Notes
