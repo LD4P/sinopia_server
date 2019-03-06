@@ -463,7 +463,7 @@
      * Get metadata (RDF) for a given Group.
      * Get the RDF (default serialization is JSON-LD) for a given Group.
      * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBasicContainer} and HTTP response
      */
     this.getGroupWithHttpInfo = function(groupID) {
       var postBody = null;
@@ -489,7 +489,7 @@
       var authNames = ['RemoteUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
-      var returnType = LDPContainer;
+      var returnType = SinopiaBasicContainer;
 
       return this.apiClient.callApi(
         '/repository/{groupID}', 'GET',
@@ -502,7 +502,7 @@
      * Get metadata (RDF) for a given Group.
      * Get the RDF (default serialization is JSON-LD) for a given Group.
      * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBasicContainer}
      */
     this.getGroup = function(groupID) {
       return this.getGroupWithHttpInfo(groupID)

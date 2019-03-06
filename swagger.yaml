@@ -230,7 +230,7 @@ paths:
               type: string
               format: URI
           schema:
-            $ref: '#/definitions/LDPContainer'
+            $ref: '#/definitions/SinopiaBasicContainer'
         '404':
           description: Unable to find the specified Group container.
           schema:

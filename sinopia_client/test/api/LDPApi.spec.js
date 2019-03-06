@@ -56,15 +56,27 @@
 
   describe('LDPApi', function() {
     describe('createGroup', function() {
+      beforeEach(function() {
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+
+        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+      });
+
       it('should call createGroup successfully', function() {
-        // created manually for now, but will need to do this as setup here (and teardown later?) to make stuff created under /repository not 404
-        // instance.updateBase(new SinopiaServer.Resource( , , new SinopiaServer.ResourceContext));
-        // var resources = [new SinopiaServer.Resource()];
-        // var group = new SinopiaServer.LDPContainer('', 'PCC Group', null, resources);
-        // return instance.createGroup('pcc', group, { contentType: 'application/ld+json' })
-        //   .then(function(_data) {
-        //     expect().to.be();
-        //   });
+        let rand_num = Math.floor(Math.random() * 100)
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'PCC Group' + rand_num)
+
+        return instance.createGroup('pcc', groupRsrc).then(function(_responseData) {
+          return instance.getGroup('pcc')
+            .then(function(responseData) {
+              expect(responseData['@id']).to.equal('http://localhost:8080/repository/pcc')
+              expect(responseData['@context']).to.deep.equal(groupRsrc['@context'])
+              expect(responseData['label']).to.equal(groupRsrc['rdfs:label'])
+            })
+        })
+        //TODO: attempting creation again should result in a response of HTTP 409 conflict
       });
     });
     describe('createResource', function() {
@@ -259,9 +271,9 @@
     });
     describe('updateBase', function() {
       it('should call updateBase successfully', function() {
-        var rand_num = Math.floor(Math.random() * 100)
-        var rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
-        var baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
+        let rand_num = Math.floor(Math.random() * 100)
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
 
         return instance.updateBase(baseRsrc).then(function(_responseData) {
           return instance.getBase()
@@ -272,9 +284,6 @@
               expect(responseData['label']).to.equal(baseRsrc['rdfs:label'])
             })
         })
-
-
-
       });
     });
     describe('updateGroup', function() {

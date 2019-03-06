@@ -405,7 +405,7 @@ This endpoint does not need any parameter.
 
 <a name="getGroup"></a>
 # **getGroup**
-> LDPContainer getGroup(groupID)
+> SinopiaBasicContainer getGroup(groupID)
 
 Get metadata (RDF) for a given Group.
 
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LDPContainer**](LDPContainer.md)
+[**SinopiaBasicContainer**](SinopiaBasicContainer.md)
 
 ### Authorization
 
