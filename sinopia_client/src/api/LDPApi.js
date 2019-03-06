@@ -54,6 +54,7 @@
      * @param {String} slug The suggested URI path for the group.
      * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -80,6 +81,7 @@
       };
       var headerParams = {
         'Slug': slug,
+        'Link': opts['link'] ? opts['link'] : '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"', //MODIFIED AUTOGEN: codegen JS disregarded default param value
         'Content-Type': opts['contentType']
       };
       var formParams = {
@@ -103,6 +105,7 @@
      * @param {String} slug The suggested URI path for the group.
      * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
@@ -1187,6 +1190,7 @@
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
      * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -1207,6 +1211,7 @@
       var collectionQueryParams = {
       };
       var headerParams = {
+        'Link': opts['link'] ? opts['link'] : '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"', //MODIFIED AUTOGEN: codegen JS disregarded default param value
         'Content-Type': opts['contentType']
       };
       var formParams = {
@@ -1229,6 +1234,7 @@
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
      * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */

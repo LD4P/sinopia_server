@@ -66,6 +66,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LDPContainer'
+        - name: Link
+          in: header
+          description: specifies container type.
+          required: false
+          type: string
+          default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type of Group metadata, with preference for JSON-LD.
@@ -112,6 +118,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SinopiaBasicContainer'
+        - name: Link
+          in: header
+          description: specifies container type.  you probably shouldn't override this for this operation.
+          required: false
+          type: string
+          default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type of Group metadata, with preference for JSON-LD.

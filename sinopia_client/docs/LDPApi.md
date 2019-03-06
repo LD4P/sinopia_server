@@ -58,6 +58,7 @@ var slug = "slug_example"; // String | The suggested URI path for the group.
 var group = new SinopiaServer.LDPContainer(); // LDPContainer | Group metadata to insert into base container and describe the group.
 
 var opts = { 
+  'link': "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\"", // String | specifies container type.
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
 };
 apiInstance.createGroup(slug, group, opts).then(function() {
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String**| The suggested URI path for the group. | 
  **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to insert into base container and describe the group. | 
+ **link** | **String**| specifies container type. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -1076,6 +1078,7 @@ var apiInstance = new SinopiaServer.LDPApi();
 var base = new SinopiaServer.SinopiaBasicContainer(); // SinopiaBasicContainer | New base container metadata to assert on the container.
 
 var opts = { 
+  'link': "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\"", // String | specifies container type.  you probably shouldn't override this for this operation.
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
 };
 apiInstance.updateBase(base, opts).then(function() {
@@ -1091,6 +1094,7 @@ apiInstance.updateBase(base, opts).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **base** | [**SinopiaBasicContainer**](SinopiaBasicContainer.md)| New base container metadata to assert on the container. | 
+ **link** | **String**| specifies container type.  you probably shouldn&#39;t override this for this operation. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
