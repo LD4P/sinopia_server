@@ -15,11 +15,11 @@ server:
         maxFileSize: 100K
 
 logging:
-  level: WARN
+  level: ${TRELLIS_LOGGING_LEVEL:-WARN}
   appenders:
     - type: console
       target: stdout
-      threshold: INFO
+      threshold: ${TRELLIS_CONSOLE_LOGGING_THRESHOLD:-INFO}
     - type: file
       currentLogFilename: /opt/trellis/log/trellis.log
       archive: true
