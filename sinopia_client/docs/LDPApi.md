@@ -118,6 +118,7 @@ var resource = new SinopiaServer.Resource(); // Resource | Resource to insert in
 
 var opts = { 
   'slug': "slug_example", // String | The suggested URI path for the resource.
+  'link': "link_example", // String | specifies container type.
   'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
 };
 apiInstance.createResource(groupID, resource, opts).then(function() {
@@ -135,6 +136,7 @@ Name | Type | Description  | Notes
  **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
  **slug** | **String**| The suggested URI path for the resource. | [optional] 
+ **link** | **String**| specifies container type. | [optional] 
  **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -147,7 +149,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/ld+json
+ - **Content-Type**: Not defined
  - **Accept**: application/ld+json
 
 <a name="createUser"></a>

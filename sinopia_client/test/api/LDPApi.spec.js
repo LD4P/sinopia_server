@@ -54,13 +54,15 @@
   const chai = require('chai')
   expect = chai.expect // no 'var', expect is already a param
 
+  const fs = require('fs');
+  const path = require('path');
+
   describe('LDPApi', function() {
     describe('createGroup', function() {
       // need base container to exist, since group is created under that
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
-
         return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
       });
 
@@ -80,16 +82,41 @@
         //TODO: attempting creation again should result in a response of HTTP 409 conflict
       });
     });
+
     describe('createResource', function() {
-      it('should call createResource successfully', function(done) {
-        //uncomment below and update the code to test createResource
-        //instance.createResource(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+      // need base container to exist, since profile group is created under that
+      beforeEach(function() {
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+      });
+
+      describe('with non-RDF resources', function() {
+        // need profile group container to exist, since that's what the actual profile will live under
+        beforeEach(function() {
+          let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
+          return instance.createGroup('profiles', groupRsrc).catch(function(err) { console.error(`Error setting up profiles group: ${err}`) })
+        });
+
+        it('should create a profile resource successfully', function() {
+          let rand_num = Math.floor(Math.random() * 100)
+          let profileJson = fs.readFileSync(path.join(__dirname, '../../../fixtures/profile_defs/profile1.json'), { encoding: 'utf8' })
+          let opts = {
+            'slug': `profile${rand_num}`,
+            'contentType': 'application/json',
+            'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: maybe these type strings should be centralized somewhere?
+          }
+
+          return instance.createResource('profiles', profileJson, opts)
+            .then(function(responseData) {
+              console.log(`responseData: ${responseData}`)
+            })
+            .catch(function(err) { console.error(`Error adding profile1: ${err}`) })
+        });
       });
     });
+
     describe('createUser', function() {
       it('should call createUser successfully', function(done) {
         //uncomment below and update the code to test createUser

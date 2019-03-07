@@ -245,6 +245,7 @@ paths:
         - LDP
       security:
         - RemoteUser: []
+      consumes: [] # client must specify content type, can be json or ld+json, see params
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -263,6 +264,12 @@ paths:
           required: false
           type: string
           format: URI
+        - name: Link
+          in: header
+          description: specifies container type.
+          required: false
+          type: string
+          example: 'Link: <http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type for the resource, with preference for JSON-LD.

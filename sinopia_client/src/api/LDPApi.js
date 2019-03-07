@@ -124,6 +124,7 @@
      * @param {module:model/Resource} resource Resource to insert into container
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.link specifies container type.
      * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -151,13 +152,14 @@
       };
       var headerParams = {
         'Slug': opts['slug'],
+        'Link': opts['link'],
         'Content-Type': opts['contentType']
       };
       var formParams = {
       };
 
       var authNames = ['RemoteUser'];
-      var contentTypes = ['application/ld+json'];
+      var contentTypes = [];
       var accepts = ['application/ld+json'];
       var returnType = null;
 
@@ -175,6 +177,7 @@
      * @param {module:model/Resource} resource Resource to insert into container
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.link specifies container type.
      * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
