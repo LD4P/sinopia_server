@@ -68,7 +68,7 @@ paths:
             $ref: '#/definitions/LDPContainer'
         - name: Link
           in: header
-          description: specifies container type.
+          description: specifies container type.  you probably shouldn't override this parameter for this operation.
           required: false
           type: string
           default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
@@ -120,7 +120,7 @@ paths:
             $ref: '#/definitions/SinopiaBasicContainer'
         - name: Link
           in: header
-          description: specifies container type.  you probably shouldn't override this for this operation.
+          description: specifies container type.  you probably shouldn't override this parameter for this operation.
           required: false
           type: string
           default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'

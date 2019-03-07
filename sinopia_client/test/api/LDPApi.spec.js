@@ -56,6 +56,7 @@
 
   describe('LDPApi', function() {
     describe('createGroup', function() {
+      // need base container to exist, since group is created under that
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
