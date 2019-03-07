@@ -108,11 +108,13 @@
             'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: maybe these type strings should be centralized somewhere?
           }
 
-          return instance.createResource('profiles', profileJson, opts)
-            .then(function(responseData) {
-              console.log(`responseData: ${responseData}`)
+          // createResourceWithHttpInfo because the thing we care about checking is in the response headers
+          return instance.createResourceWithHttpInfo('profiles', profileJson, opts)
+            .then(function(responseAndData) {
+              expect(responseAndData.response.statusCode).to.equal(201)
+              expect(responseAndData.response.headers.location).to.equal(`http://localhost:8080/repository/profiles/profile${rand_num}`)
             })
-            .catch(function(err) { console.error(`Error adding profile1: ${err}`) })
+            .catch(function(err) { console.error(`Error adding ${opts['slug']}: ${err}`) })
         });
       });
     });
