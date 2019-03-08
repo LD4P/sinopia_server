@@ -39,7 +39,7 @@ paths:
               type: string
               format: URI
           schema:
-            $ref: '#/definitions/SinopiaBaseContainer'
+            $ref: '#/definitions/SinopiaBasicContainer'
         '404':
           description: Unable to find the base container.
           schema:
@@ -66,6 +66,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LDPContainer'
+        - name: Link
+          in: header
+          description: specifies container type.  you probably shouldn't override this parameter for this operation.
+          required: false
+          type: string
+          default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type of Group metadata, with preference for JSON-LD.
@@ -111,7 +117,13 @@ paths:
           description: New base container metadata to assert on the container.
           required: true
           schema:
-            $ref: '#/definitions/SinopiaBaseContainer'
+            $ref: '#/definitions/SinopiaBasicContainer'
+        - name: Link
+          in: header
+          description: specifies container type.  you probably shouldn't override this parameter for this operation.
+          required: false
+          type: string
+          default: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type of Group metadata, with preference for JSON-LD.
@@ -218,7 +230,7 @@ paths:
               type: string
               format: URI
           schema:
-            $ref: '#/definitions/LDPContainer'
+            $ref: '#/definitions/SinopiaBasicContainer'
         '404':
           description: Unable to find the specified Group container.
           schema:
@@ -233,6 +245,7 @@ paths:
         - LDP
       security:
         - RemoteUser: []
+      consumes: [] # client must specify content type, can be json or ld+json, see params
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -251,6 +264,12 @@ paths:
           required: false
           type: string
           format: URI
+        - name: Link
+          in: header
+          description: specifies container type.
+          required: false
+          type: string
+          example: 'Link: <http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type for the resource, with preference for JSON-LD.
@@ -1124,7 +1143,7 @@ definitions:
   # note: wanted to have a Sinopia: section for Sinopia-not-LDP models, but swagger-codegen just made a SinopiaModels
   # file and mashed together everything under it, instead of making a file for each model.  so, seems like we need to
   # do our namespacing via naming convention for one level, instead of hierarchy.
-  SinopiaBaseContainer:
+  SinopiaBasicContainer:
     required:
       - "@context"
       - "@id"
@@ -1135,7 +1154,7 @@ definitions:
         type: string
         format: uri
       "@context":
-        $ref: "#/definitions/SinopiaBaseResourceContext"
+        $ref: "#/definitions/SinopiaBasicContainerContext"
       "@type":
         type: array
         items:
@@ -1145,7 +1164,7 @@ definitions:
         type: string
       "label":
         type: string
-  SinopiaBaseResourceContext:
+  SinopiaBasicContainerContext:
     required:
       - rdfs
       - ldp

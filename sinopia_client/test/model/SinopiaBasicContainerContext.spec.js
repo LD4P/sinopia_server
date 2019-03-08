@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new SinopiaServer.SinopiaBaseContainer();
+    instance = new SinopiaServer.SinopiaBasicContainerContext();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,40 +49,22 @@
       object[property] = value;
   }
 
-  describe('SinopiaBaseContainer', function() {
-    it('should create an instance of SinopiaBaseContainer', function() {
-      // uncomment below and update the code to test SinopiaBaseContainer
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
-      //expect(instance).to.be.a(SinopiaServer.SinopiaBaseContainer);
+  describe('SinopiaBasicContainerContext', function() {
+    it('should create an instance of SinopiaBasicContainerContext', function() {
+      // uncomment below and update the code to test SinopiaBasicContainerContext
+      //var instane = new SinopiaServer.SinopiaBasicContainerContext();
+      //expect(instance).to.be.a(SinopiaServer.SinopiaBasicContainerContext);
     });
 
-    it('should have the property id (base name: "@id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
+    it('should have the property rdfs (base name: "rdfs")', function() {
+      // uncomment below and update the code to test the property rdfs
+      //var instane = new SinopiaServer.SinopiaBasicContainerContext();
       //expect(instance).to.be();
     });
 
-    it('should have the property context (base name: "@context")', function() {
-      // uncomment below and update the code to test the property context
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property type (base name: "@type")', function() {
-      // uncomment below and update the code to test the property type
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property rdfslabel (base name: "rdfs:label")', function() {
-      // uncomment below and update the code to test the property rdfslabel
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property label (base name: "label")', function() {
-      // uncomment below and update the code to test the property label
-      //var instane = new SinopiaServer.SinopiaBaseContainer();
+    it('should have the property ldp (base name: "ldp")', function() {
+      // uncomment below and update the code to test the property ldp
+      //var instane = new SinopiaServer.SinopiaBasicContainerContext();
       //expect(instance).to.be();
     });
 

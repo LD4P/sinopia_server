@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Error', 'model/ErrorResponse', 'model/ErrorSource', 'model/HealthCheckResponse', 'model/LDPContainer', 'model/Resource', 'model/ResourceContext', 'model/ResourceInfo', 'model/SinopiaBaseContainer', 'model/SinopiaBaseResourceContext', 'model/Variable', 'api/DefaultApi', 'api/LDPApi'], factory);
+    define(['ApiClient', 'model/Error', 'model/ErrorResponse', 'model/ErrorSource', 'model/HealthCheckResponse', 'model/LDPContainer', 'model/Resource', 'model/ResourceContext', 'model/ResourceInfo', 'model/SinopiaBasicContainer', 'model/SinopiaBasicContainerContext', 'model/Variable', 'api/DefaultApi', 'api/LDPApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Error'), require('./model/ErrorResponse'), require('./model/ErrorSource'), require('./model/HealthCheckResponse'), require('./model/LDPContainer'), require('./model/Resource'), require('./model/ResourceContext'), require('./model/ResourceInfo'), require('./model/SinopiaBaseContainer'), require('./model/SinopiaBaseResourceContext'), require('./model/Variable'), require('./api/DefaultApi'), require('./api/LDPApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/Error'), require('./model/ErrorResponse'), require('./model/ErrorSource'), require('./model/HealthCheckResponse'), require('./model/LDPContainer'), require('./model/Resource'), require('./model/ResourceContext'), require('./model/ResourceInfo'), require('./model/SinopiaBasicContainer'), require('./model/SinopiaBasicContainerContext'), require('./model/Variable'), require('./api/DefaultApi'), require('./api/LDPApi'));
   }
-}(function(ApiClient, Error, ErrorResponse, ErrorSource, HealthCheckResponse, LDPContainer, Resource, ResourceContext, ResourceInfo, SinopiaBaseContainer, SinopiaBaseResourceContext, Variable, DefaultApi, LDPApi) {
+}(function(ApiClient, Error, ErrorResponse, ErrorSource, HealthCheckResponse, LDPContainer, Resource, ResourceContext, ResourceInfo, SinopiaBasicContainer, SinopiaBasicContainerContext, Variable, DefaultApi, LDPApi) {
   'use strict';
 
   /**
@@ -102,15 +102,15 @@
      */
     ResourceInfo: ResourceInfo,
     /**
-     * The SinopiaBaseContainer model constructor.
-     * @property {module:model/SinopiaBaseContainer}
+     * The SinopiaBasicContainer model constructor.
+     * @property {module:model/SinopiaBasicContainer}
      */
-    SinopiaBaseContainer: SinopiaBaseContainer,
+    SinopiaBasicContainer: SinopiaBasicContainer,
     /**
-     * The SinopiaBaseResourceContext model constructor.
-     * @property {module:model/SinopiaBaseResourceContext}
+     * The SinopiaBasicContainerContext model constructor.
+     * @property {module:model/SinopiaBasicContainerContext}
      */
-    SinopiaBaseResourceContext: SinopiaBaseResourceContext,
+    SinopiaBasicContainerContext: SinopiaBasicContainerContext,
     /**
      * The Variable model constructor.
      * @property {module:model/Variable}

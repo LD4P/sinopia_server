@@ -25,7 +25,7 @@
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.SinopiaBaseResourceContext = factory(root.SinopiaServer.ApiClient);
+    root.SinopiaServer.SinopiaBasicContainerContext = factory(root.SinopiaServer.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';
@@ -34,14 +34,14 @@
 
 
   /**
-   * The SinopiaBaseResourceContext model module.
-   * @module model/SinopiaBaseResourceContext
+   * The SinopiaBasicContainerContext model module.
+   * @module model/SinopiaBasicContainerContext
    * @version 2.0.0
    */
 
   /**
-   * Constructs a new <code>SinopiaBaseResourceContext</code>.
-   * @alias module:model/SinopiaBaseResourceContext
+   * Constructs a new <code>SinopiaBasicContainerContext</code>.
+   * @alias module:model/SinopiaBasicContainerContext
    * @class
    * @param rdfs {String} 
    * @param ldp {String} 
@@ -54,11 +54,11 @@
   };
 
   /**
-   * Constructs a <code>SinopiaBaseResourceContext</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SinopiaBasicContainerContext</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/SinopiaBaseResourceContext} obj Optional instance to populate.
-   * @return {module:model/SinopiaBaseResourceContext} The populated <code>SinopiaBaseResourceContext</code> instance.
+   * @param {module:model/SinopiaBasicContainerContext} obj Optional instance to populate.
+   * @return {module:model/SinopiaBasicContainerContext} The populated <code>SinopiaBasicContainerContext</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {

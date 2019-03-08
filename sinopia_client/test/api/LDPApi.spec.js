@@ -54,29 +54,71 @@
   const chai = require('chai')
   expect = chai.expect // no 'var', expect is already a param
 
+  const fs = require('fs');
+  const path = require('path');
+
   describe('LDPApi', function() {
     describe('createGroup', function() {
+      // need base container to exist, since group is created under that
+      beforeEach(function() {
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+      });
+
       it('should call createGroup successfully', function() {
-        // created manually for now, but will need to do this as setup here (and teardown later?) to make stuff created under /repository not 404
-        // instance.updateBase(new SinopiaServer.Resource( , , new SinopiaServer.ResourceContext));
-        // var resources = [new SinopiaServer.Resource()];
-        // var group = new SinopiaServer.LDPContainer('', 'PCC Group', null, resources);
-        // return instance.createGroup('pcc', group, { contentType: 'application/ld+json' })
-        //   .then(function(_data) {
-        //     expect().to.be();
-        //   });
+        let rand_num = Math.floor(Math.random() * 100)
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'PCC Group' + rand_num)
+
+        return instance.createGroup('pcc', groupRsrc).then(function(_responseData) {
+          return instance.getGroup('pcc')
+            .then(function(responseData) {
+              expect(responseData['@id']).to.equal('http://localhost:8080/repository/pcc')
+              expect(responseData['@context']).to.deep.equal(groupRsrc['@context'])
+              expect(responseData['label']).to.equal(groupRsrc['rdfs:label'])
+            })
+        })
+        //TODO: attempting creation again should result in a response of HTTP 409 conflict  https://github.com/LD4P/sinopia_server/issues/67
       });
     });
+
     describe('createResource', function() {
-      it('should call createResource successfully', function(done) {
-        //uncomment below and update the code to test createResource
-        //instance.createResource(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+      // need base container to exist, since profile group is created under that
+      beforeEach(function() {
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+      });
+
+      describe('with non-RDF resources', function() {
+        // need profile group container to exist, since that's what the actual profile will live under
+        beforeEach(function() {
+          let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
+          return instance.createGroup('profiles', groupRsrc).catch(function(err) { console.error(`Error setting up profiles group: ${err}`) })
+        });
+
+        it('should create a profile resource successfully', function() {
+          let rand_num = Math.floor(Math.random() * 100)
+          let profileJson = fs.readFileSync(path.join(__dirname, '../../../fixtures/profile_defs/profile1.json'), { encoding: 'utf8' })
+          let opts = {
+            'slug': `profile${rand_num}`,
+            'contentType': 'application/json',
+            'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: centralize type strings?  https://github.com/LD4P/sinopia_server/issues/68
+          }
+
+          // createResourceWithHttpInfo because the thing we care about checking is in the response headers
+          return instance.createResourceWithHttpInfo('profiles', profileJson, opts)
+            .then(function(responseAndData) {
+              expect(responseAndData.response.statusCode).to.equal(201)
+              expect(responseAndData.response.headers.location).to.equal(`http://localhost:8080/repository/profiles/profile${rand_num}`)
+            })
+            .catch(function(err) { console.error(`Error adding ${opts['slug']}: ${err}`) })
+        });
       });
     });
+
     describe('createUser', function() {
       it('should call createUser successfully', function(done) {
         //uncomment below and update the code to test createUser
@@ -259,9 +301,9 @@
     });
     describe('updateBase', function() {
       it('should call updateBase successfully', function() {
-        var rand_num = Math.floor(Math.random() * 100)
-        var rsrcCtx = new SinopiaServer.SinopiaBaseResourceContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
-        var baseRsrc = new SinopiaServer.SinopiaBaseContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
+        let rand_num = Math.floor(Math.random() * 100)
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server' + rand_num)
 
         return instance.updateBase(baseRsrc).then(function(_responseData) {
           return instance.getBase()
@@ -272,9 +314,6 @@
               expect(responseData['label']).to.equal(baseRsrc['rdfs:label'])
             })
         })
-
-
-
       });
     });
     describe('updateGroup', function() {

@@ -1,10 +1,10 @@
-# SinopiaServer.SinopiaBaseContainer
+# SinopiaServer.SinopiaBasicContainer
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
-**context** | [**SinopiaBaseResourceContext**](SinopiaBaseResourceContext.md) |  | 
+**context** | [**SinopiaBasicContainerContext**](SinopiaBasicContainerContext.md) |  | 
 **type** | **[String]** |  | 
 **rdfslabel** | **String** |  | 
 **label** | **String** |  | [optional] 

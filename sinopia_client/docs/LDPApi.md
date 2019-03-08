@@ -58,6 +58,7 @@ var slug = "slug_example"; // String | The suggested URI path for the group.
 var group = new SinopiaServer.LDPContainer(); // LDPContainer | Group metadata to insert into base container and describe the group.
 
 var opts = { 
+  'link': "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\"", // String | specifies container type.  you probably shouldn't override this parameter for this operation.
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
 };
 apiInstance.createGroup(slug, group, opts).then(function() {
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String**| The suggested URI path for the group. | 
  **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to insert into base container and describe the group. | 
+ **link** | **String**| specifies container type.  you probably shouldn&#39;t override this parameter for this operation. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -116,6 +118,7 @@ var resource = new SinopiaServer.Resource(); // Resource | Resource to insert in
 
 var opts = { 
   'slug': "slug_example", // String | The suggested URI path for the resource.
+  'link': "link_example", // String | specifies container type.
   'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
 };
 apiInstance.createResource(groupID, resource, opts).then(function() {
@@ -133,6 +136,7 @@ Name | Type | Description  | Notes
  **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
  **slug** | **String**| The suggested URI path for the resource. | [optional] 
+ **link** | **String**| specifies container type. | [optional] 
  **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -145,7 +149,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/ld+json
+ - **Content-Type**: Not defined
  - **Accept**: application/ld+json
 
 <a name="createUser"></a>
@@ -359,7 +363,7 @@ null (empty response body)
 
 <a name="getBase"></a>
 # **getBase**
-> SinopiaBaseContainer getBase()
+> SinopiaBasicContainer getBase()
 
 Get metadata for the base container.
 
@@ -390,7 +394,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SinopiaBaseContainer**](SinopiaBaseContainer.md)
+[**SinopiaBasicContainer**](SinopiaBasicContainer.md)
 
 ### Authorization
 
@@ -403,7 +407,7 @@ This endpoint does not need any parameter.
 
 <a name="getGroup"></a>
 # **getGroup**
-> LDPContainer getGroup(groupID)
+> SinopiaBasicContainer getGroup(groupID)
 
 Get metadata (RDF) for a given Group.
 
@@ -440,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LDPContainer**](LDPContainer.md)
+[**SinopiaBasicContainer**](SinopiaBasicContainer.md)
 
 ### Authorization
 
@@ -1073,9 +1077,10 @@ RemoteUser.apiKey = 'YOUR API KEY';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
-var base = new SinopiaServer.SinopiaBaseContainer(); // SinopiaBaseContainer | New base container metadata to assert on the container.
+var base = new SinopiaServer.SinopiaBasicContainer(); // SinopiaBasicContainer | New base container metadata to assert on the container.
 
 var opts = { 
+  'link': "<http://www.w3.org/ns/ldp#BasicContainer>; rel=\"type\"", // String | specifies container type.  you probably shouldn't override this parameter for this operation.
   'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
 };
 apiInstance.updateBase(base, opts).then(function() {
@@ -1090,7 +1095,8 @@ apiInstance.updateBase(base, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base** | [**SinopiaBaseContainer**](SinopiaBaseContainer.md)| New base container metadata to assert on the container. | 
+ **base** | [**SinopiaBasicContainer**](SinopiaBasicContainer.md)| New base container metadata to assert on the container. | 
+ **link** | **String**| specifies container type.  you probably shouldn&#39;t override this parameter for this operation. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type

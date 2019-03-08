@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/LDPContainer', 'model/Resource', 'model/SinopiaBaseContainer'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/LDPContainer', 'model/Resource', 'model/SinopiaBasicContainer'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/LDPContainer'), require('../model/Resource'), require('../model/SinopiaBaseContainer'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/LDPContainer'), require('../model/Resource'), require('../model/SinopiaBasicContainer'));
   } else {
     // Browser globals (root is window)
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.LDPApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ErrorResponse, root.SinopiaServer.LDPContainer, root.SinopiaServer.Resource, root.SinopiaServer.SinopiaBaseContainer);
+    root.SinopiaServer.LDPApi = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ErrorResponse, root.SinopiaServer.LDPContainer, root.SinopiaServer.Resource, root.SinopiaServer.SinopiaBasicContainer);
   }
-}(this, function(ApiClient, ErrorResponse, LDPContainer, Resource, SinopiaBaseContainer) {
+}(this, function(ApiClient, ErrorResponse, LDPContainer, Resource, SinopiaBasicContainer) {
   'use strict';
 
   /**
@@ -54,6 +54,7 @@
      * @param {String} slug The suggested URI path for the group.
      * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this parameter for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -80,6 +81,7 @@
       };
       var headerParams = {
         'Slug': slug,
+        'Link': opts['link'] ? opts['link'] : '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"', //MODIFIED AUTOGEN: codegen JS disregarded default param value
         'Content-Type': opts['contentType']
       };
       var formParams = {
@@ -103,6 +105,7 @@
      * @param {String} slug The suggested URI path for the group.
      * @param {module:model/LDPContainer} group Group metadata to insert into base container and describe the group.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this parameter for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
@@ -121,6 +124,7 @@
      * @param {module:model/Resource} resource Resource to insert into container
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.link specifies container type.
      * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -148,13 +152,14 @@
       };
       var headerParams = {
         'Slug': opts['slug'],
+        'Link': opts['link'],
         'Content-Type': opts['contentType']
       };
       var formParams = {
       };
 
       var authNames = ['RemoteUser'];
-      var contentTypes = ['application/ld+json'];
+      var contentTypes = [];
       var accepts = ['application/ld+json'];
       var returnType = null;
 
@@ -172,6 +177,7 @@
      * @param {module:model/Resource} resource Resource to insert into container
      * @param {Object} opts Optional parameters
      * @param {String} opts.slug The suggested URI path for the resource.
+     * @param {String} opts.link specifies container type.
      * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
@@ -414,7 +420,7 @@
     /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBaseContainer} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBasicContainer} and HTTP response
      */
     this.getBaseWithHttpInfo = function() {
       var postBody = null;
@@ -434,7 +440,7 @@
       var authNames = ['RemoteUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
-      var returnType = SinopiaBaseContainer;
+      var returnType = SinopiaBasicContainer;
 
       return this.apiClient.callApi(
         '/repository', 'GET',
@@ -446,7 +452,7 @@
     /**
      * Get metadata for the base container.
      * Get the RDF metadata (default serialization is JSON-LD) for the base container.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBaseContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBasicContainer}
      */
     this.getBase = function() {
       return this.getBaseWithHttpInfo()
@@ -460,7 +466,7 @@
      * Get metadata (RDF) for a given Group.
      * Get the RDF (default serialization is JSON-LD) for a given Group.
      * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/LDPContainer} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaBasicContainer} and HTTP response
      */
     this.getGroupWithHttpInfo = function(groupID) {
       var postBody = null;
@@ -486,7 +492,7 @@
       var authNames = ['RemoteUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
-      var returnType = LDPContainer;
+      var returnType = SinopiaBasicContainer;
 
       return this.apiClient.callApi(
         '/repository/{groupID}', 'GET',
@@ -499,7 +505,7 @@
      * Get metadata (RDF) for a given Group.
      * Get the RDF (default serialization is JSON-LD) for a given Group.
      * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/LDPContainer}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SinopiaBasicContainer}
      */
     this.getGroup = function(groupID) {
       return this.getGroupWithHttpInfo(groupID)
@@ -1185,8 +1191,9 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/SinopiaBaseContainer} base New base container metadata to assert on the container.
+     * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this parameter for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -1207,6 +1214,7 @@
       var collectionQueryParams = {
       };
       var headerParams = {
+        'Link': opts['link'] ? opts['link'] : '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"', //MODIFIED AUTOGEN: codegen JS disregarded default param value
         'Content-Type': opts['contentType']
       };
       var formParams = {
@@ -1227,8 +1235,9 @@
     /**
      * Update metadata on base container.
      * Update metadata of base container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
-     * @param {module:model/SinopiaBaseContainer} base New base container metadata to assert on the container.
+     * @param {module:model/SinopiaBasicContainer} base New base container metadata to assert on the container.
      * @param {Object} opts Optional parameters
+     * @param {String} opts.link specifies container type.  you probably shouldn&#39;t override this parameter for this operation. (default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;)
      * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
