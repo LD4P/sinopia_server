@@ -79,7 +79,7 @@
               expect(responseData['label']).to.equal(groupRsrc['rdfs:label'])
             })
         })
-        //TODO: attempting creation again should result in a response of HTTP 409 conflict
+        //TODO: attempting creation again should result in a response of HTTP 409 conflict  https://github.com/LD4P/sinopia_server/issues/67
       });
     });
 
@@ -105,7 +105,7 @@
           let opts = {
             'slug': `profile${rand_num}`,
             'contentType': 'application/json',
-            'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: maybe these type strings should be centralized somewhere?
+            'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: centralize type strings?  https://github.com/LD4P/sinopia_server/issues/68
           }
 
           // createResourceWithHttpInfo because the thing we care about checking is in the response headers
