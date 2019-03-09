@@ -356,6 +356,8 @@
         done();
       });
     });
+    //TODO:  auth tests.  will have to set JWT on client instance, e.g.
+    // instance.apiClient.authentications['CognitoUser'].accessToken = '<my secret base64 encoded JWT>'
   });
 
 }));
