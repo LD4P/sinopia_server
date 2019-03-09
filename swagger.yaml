@@ -269,7 +269,9 @@ paths:
           description: specifies container type.
           required: false
           type: string
-          example: 'Link: <http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
+          example:
+            - '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
+            - '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type for the resource, with preference for JSON-LD.
