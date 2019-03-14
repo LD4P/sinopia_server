@@ -45,11 +45,9 @@ Create a new Group (defined via JSON-LD in payload) within the base container.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -84,7 +82,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -104,11 +102,9 @@ Create a new resource (defined via JSON-LD in payload) within a supplied Group.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -145,7 +141,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -165,11 +161,9 @@ Create a new user (defined via JSON-LD in payload) within Sinopia.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -201,7 +195,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -221,11 +215,9 @@ Deletes an existing Group container. This Group URI cannot be reused.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -251,7 +243,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -271,11 +263,9 @@ Deletes an existing Resource. This Resource URI cannot be reused.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -304,7 +294,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -324,11 +314,9 @@ Deletes an existing User. This User URI cannot be reused.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -354,7 +342,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -374,11 +362,9 @@ Get the RDF metadata (default serialization is JSON-LD) for the base container.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 apiInstance.getBase().then(function(data) {
@@ -398,7 +384,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -418,11 +404,9 @@ Get the RDF (default serialization is JSON-LD) for a given Group.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -448,7 +432,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -468,11 +452,9 @@ Get the RDF (default serialization is JSON-LD) for a given resource.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -501,7 +483,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -521,11 +503,9 @@ Get the RDF (default serialization is JSON-LD) for a given Sinopia user.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -551,7 +531,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -571,11 +551,9 @@ Get the RDF (default serialization is JSON-LD) for the Sinopia users&#39; contai
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 apiInstance.getUsers().then(function(data) {
@@ -595,7 +573,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -615,11 +593,9 @@ Gets the header values that would normally be found in the header of GET request
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 apiInstance.headBase().then(function() {
@@ -639,7 +615,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -828,11 +804,9 @@ Gets the available options for HTTP methods to utilize on the base container.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 apiInstance.optionsBase().then(function() {
@@ -852,7 +826,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -872,11 +846,9 @@ Gets the available options for HTTP methods to utilize on the given group.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -902,7 +874,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -922,11 +894,9 @@ Gets the available options for HTTP methods to utilize on the given resource.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -955,7 +925,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -975,11 +945,9 @@ Gets the available options for HTTP methods to utilize on the given user.
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1005,7 +973,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1025,11 +993,9 @@ Gets the available options for HTTP methods to utilize on the Sinopia users&#39;
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 apiInstance.optionsUsers().then(function() {
@@ -1049,7 +1015,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1069,11 +1035,9 @@ Update metadata of base container with new metadata defined via JSON-LD in paylo
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1105,7 +1069,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1125,11 +1089,9 @@ Update metadata of a given group container with new metadata defined via JSON-LD
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1162,7 +1124,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1182,11 +1144,9 @@ Update metadata of a given resource with new metadata defined via JSON-LD in pay
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1222,7 +1182,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1242,11 +1202,9 @@ Update metadata of a given Sinopua user with new metadata defined via JSON-LD in
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1279,7 +1237,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 
@@ -1299,11 +1257,9 @@ Update metadata of the Sinopia users&#39; container with new metadata defined vi
 var SinopiaServer = require('sinopia_server');
 var defaultClient = SinopiaServer.ApiClient.instance;
 
-// Configure API key authorization: RemoteUser
-var RemoteUser = defaultClient.authentications['RemoteUser'];
-RemoteUser.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//RemoteUser.apiKeyPrefix = 'Token';
+// Configure OAuth2 access token for authorization: CognitoUser
+var CognitoUser = defaultClient.authentications['CognitoUser'];
+CognitoUser.accessToken = 'YOUR ACCESS TOKEN';
 
 var apiInstance = new SinopiaServer.LDPApi();
 
@@ -1333,7 +1289,7 @@ null (empty response body)
 
 ### Authorization
 
-[RemoteUser](../README.md#RemoteUser)
+[CognitoUser](../README.md#CognitoUser)
 
 ### HTTP request headers
 

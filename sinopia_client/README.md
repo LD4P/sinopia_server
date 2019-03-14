@@ -158,9 +158,10 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 
-### RemoteUser
+### CognitoUser
 
-- **Type**: API key
-- **API key parameter name**: On-Behalf-Of
-- **Location**: HTTP header
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: 
+- **Scopes**: N/A
 

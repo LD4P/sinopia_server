@@ -12,10 +12,9 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 securityDefinitions:
-  RemoteUser:
-    type: apiKey
-    in: header
-    name: On-Behalf-Of
+  CognitoUser:
+    type: oauth2
+    flow: accessCode
 paths:
   /repository:
     get:
@@ -25,7 +24,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       responses:
         '200':
           description: Successful base container response.
@@ -53,7 +52,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: Slug
           description: The suggested URI path for the group.
@@ -110,7 +109,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: Base
           in: body
@@ -160,7 +159,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       responses:
         "200":
           description: Successful response.
@@ -184,7 +183,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       responses:
         "200":
           description: Successful response.
@@ -210,7 +209,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -244,7 +243,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       consumes: [] # client must specify content type, can be json or ld+json, see params
       parameters:
         - name: groupID
@@ -269,7 +268,9 @@ paths:
           description: specifies container type.
           required: false
           type: string
-          example: 'Link: <http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
+          example:
+            - '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
+            - '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'
         - name: Content-Type
           in: header
           description: Content-Type for the resource, with preference for JSON-LD.
@@ -308,7 +309,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia. LDP Container to create the new resource within.
@@ -359,7 +360,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -399,7 +400,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -459,7 +460,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -498,7 +499,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -554,7 +555,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -599,7 +600,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -669,7 +670,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       responses:
         '200':
           description: Successful group container response.
@@ -697,7 +698,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: User
           in: body
@@ -749,7 +750,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: Users
           in: body
@@ -790,7 +791,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       responses:
         "200":
           description: Successful response.
@@ -838,7 +839,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: userID
           description: The ID for the User defined and managed within Sinopia.
@@ -872,7 +873,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: userID
           description: The ID for the User defined and managed within Sinopia.
@@ -923,7 +924,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: userID
           description: The ID for the User defined and managed within Sinopia.
@@ -963,7 +964,7 @@ paths:
       tags:
         - LDP
       security:
-        - RemoteUser: []
+        - CognitoUser: []
       parameters:
         - name: userID
           description: The ID for the User defined and managed within Sinopia.

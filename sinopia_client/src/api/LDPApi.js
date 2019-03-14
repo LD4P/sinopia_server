@@ -87,7 +87,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -158,7 +158,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = [];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -221,7 +221,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -277,7 +277,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -337,7 +337,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -391,7 +391,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -437,7 +437,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = SinopiaBasicContainer;
@@ -489,7 +489,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = SinopiaBasicContainer;
@@ -549,7 +549,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = Resource;
@@ -603,7 +603,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = Resource;
@@ -649,7 +649,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = LDPContainer;
@@ -694,7 +694,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -951,7 +951,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1003,7 +1003,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1063,7 +1063,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1117,7 +1117,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1163,7 +1163,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1220,7 +1220,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1286,7 +1286,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1359,7 +1359,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1426,7 +1426,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
@@ -1485,7 +1485,7 @@
       var formParams = {
       };
 
-      var authNames = ['RemoteUser'];
+      var authNames = ['CognitoUser'];
       var contentTypes = ['application/ld+json'];
       var accepts = ['application/ld+json'];
       var returnType = null;
