@@ -16,9 +16,12 @@
     "superagent": "^4.1.0"
   },
   "devDependencies": {
+    "amazon-cognito-identity-js": "^3.0.9",
+    "aws-sdk": "^2.423.0",
     "chai": "^4.2.0",
     "expect.js": "~0.3.1",
     "mocha": "^5.2.0",
+    "node-fetch": "^2.3.0",
     "sinon": "1.17.3"
   }
 }

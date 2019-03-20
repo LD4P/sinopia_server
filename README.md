@@ -63,7 +63,14 @@ Trellis should be available at: http://localhost:8080 And there is a built-in Tr
 
 ## Sinopia Server Testing
 
-WIP.
+To run the full test suite, you'll need to supply some credentials for a real Amazon Cognito user that has access to Sinopia, because part of the integration testing is obtaining a real JWT to test Auth'n interactions with Trellis.  You'll also need to supply the user pool id info.  This info is specified via environment variables.
+
+In local development, you can do this by providing the env vars inline when invoking the tests, e.g.:
+```sh
+AUTH_TEST_USER='user@domain.edu' AUTH_TEST_PASS='1337secrets' AUTH_TEST_USER_POOL_ID='us-north-5_ABc1De234' AUTH_TEST_CLIENT_ID='blargh' npm run test
+```
+
+For the Circle CI tests, the env vars are already defined in the project contect.
 
 ### Sinopia Server Integration Tests
 
