@@ -1,0 +1,26 @@
+{
+  "id": "resourceTemplate:bf2:Identifiers:Barcode",
+  "resourceURI": "http://id.loc.gov/ontologies/bibframe/Barcode",
+  "resourceLabel": "Barcode",
+  "propertyTemplates": [
+    {
+      "mandatory": "true",
+      "repeatable": "false",
+      "type": "literal",
+      "resourceTemplates": [],
+      "valueConstraint": {
+        "valueTemplateRefs": [],
+        "useValuesFrom": [],
+        "valueDataType": {},
+        "defaults": [
+          {
+            "defaultURI": "http://id.loc.gov/vocabulary/itemPart",
+            "defaultLiteral": "12345"
+          }
+        ]
+      },
+      "propertyURI": "http://www.w3.org/1999/02/22-rdf-syntax-ns#value",
+      "propertyLabel": "Barcode"
+    }
+  ]
+}
