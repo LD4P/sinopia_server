@@ -405,6 +405,7 @@
     // to be populated with a useable token.  (if a beforeEach or test block returns a Promise, Mocha will wait
     // for that Promise to be settled before proceeding)
     beforeEach(function() {
+      // adapted from use case #4 here: https://github.com/aws-amplify/amplify-js/tree/01e660df246f0faf0bcb5b5ebf604597db3ef4aa/packages/amazon-cognito-identity-js#usage
       let cognitoUser = getCognitoUser(username, user_pool_id, client_id)
       return new Promise(function(resolve, reject) {
         cognitoUser.authenticateUser(getAuthenticationDetails(username, password), {
