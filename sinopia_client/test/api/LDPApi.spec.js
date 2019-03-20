@@ -86,7 +86,7 @@
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
-        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+        return instance.updateBase(baseRsrc)
       });
 
       it('should call createGroup successfully', function() {
@@ -111,7 +111,7 @@
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
-        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+        return instance.updateBase(baseRsrc)
       });
 
       describe('with non-RDF resources', function() {
@@ -119,7 +119,7 @@
         beforeEach(function() {
           let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
           let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
-          return instance.createGroup('profiles', groupRsrc).catch(function(err) { console.error(`Error setting up profiles group: ${err}`) })
+          return instance.createGroup('profiles', groupRsrc)
         });
 
         it('should create a profile resource successfully', function() {
@@ -137,7 +137,6 @@
               expect(responseAndData.response.statusCode).to.equal(201)
               expect(responseAndData.response.headers.location).to.equal(`http://localhost:8080/repository/profiles/profile${rand_num}`)
             })
-            .catch(function(err) { console.error(`Error adding ${opts['slug']}: ${err}`) })
         });
       });
     });
