@@ -97,6 +97,66 @@ WIP.
 
 ### Use of Swagger with Testing Framework
 
+## Testing with Sinopia editor
+
+After bringing up the server with or without docker, run the `loadRTs.sh` script in the root directory and this will create the following containers and groups in trellis:
+
+- a base repository:
+```
+{
+  "@id": "http://localhost:8080/",
+  "label": "Sinopia LDP Server",
+  "@context": {
+    "label": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+    }
+}
+```
+- a 'repository' repository:
+```
+{
+  "@id": "http://localhost:8080/repository",
+  "label": "repository",
+  "contains": "http://localhost:8080/repository/ld4p",
+  "@context": {
+    "contains": {
+      "@id": "http://www.w3.org/ns/ldp#contains",
+      "@type": "@id"
+    }
+}
+```
+- an 'ld4p' group repository that contains the json resource templates in the fixtures/profile_defs/bibframe folder:
+```
+{
+  "@id": "http://localhost:8080/repository/ld4p",
+  "label": "LD4P Group",
+  "contains": [
+    "http://localhost:8080/repository/ld4p/Note",
+    "http://localhost:8080/repository/ld4p/ItemEnumeration",
+    "http://localhost:8080/repository/ld4p/DDC",
+    "http://localhost:8080/repository/ld4p/WorkTitle",
+    "http://localhost:8080/repository/ld4p/Barcode",
+    "http://localhost:8080/repository/ld4p/TitleNote",
+    "http://localhost:8080/repository/ld4p/ParallelTitle",
+    "http://localhost:8080/repository/ld4p/ItemAcqSource",
+    "http://localhost:8080/repository/ld4p/MonographWork",
+    "http://localhost:8080/repository/ld4p/Title",
+    "http://localhost:8080/repository/ld4p/MonographInstance",
+    "http://localhost:8080/repository/ld4p/TranscribedTitle",
+    "http://localhost:8080/repository/ld4p/Shelfmark",
+    "http://localhost:8080/repository/ld4p/LCCN",
+    "http://localhost:8080/repository/ld4p/WorkVariantTitle",
+    "http://localhost:8080/repository/ld4p/Item",
+    "http://localhost:8080/repository/ld4p/ItemChronology",
+    "http://localhost:8080/repository/ld4p/ItemRetention",
+    "http://localhost:8080/repository/ld4p/VarTitle"
+  ]
+}
+```
+- and the json content for all of those contained ld4p templates.
+
+You can then start up the Sinopia Editor in development mode and retrieve a list of these resource templates in the Editor.
+
 ### Swagger Documentation
 
 See the Specification-driven API documentation here: https://ld4p.github.io/sinopia_server/
