@@ -37,7 +37,7 @@
    */
 
   /**
-   * Constructs a new LDPApi. 
+   * Constructs a new LDPApi.
    * @alias module:api/LDPApi
    * @class
    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
@@ -575,6 +575,51 @@
         });
     }
 
+    /**
+     * Get metadata for a given resource template.
+     * Get serialization of JSON for a given NON-RDF resource.
+     * @param {String} groupID The group who is defining it&#39;s own resources or graph within Sinopia.
+     * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Resource} and HTTP response
+     */
+    this.getNonRdfResourceWithHttpInfo = function(groupID, resourceID) {
+      var postBody = null;
+
+      // verify the required parameter 'groupID' is set
+      if (groupID === undefined || groupID === null) {
+        throw new Error("Missing the required parameter 'groupID' when calling getResource");
+      }
+
+      // verify the required parameter 'resourceID' is set
+      if (resourceID === undefined || resourceID === null) {
+        throw new Error("Missing the required parameter 'resourceID' when calling getResource");
+      }
+
+
+      var pathParams = {
+        'groupID': groupID,
+        'resourceID': resourceID
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['RemoteUser'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = Resource;
+
+      return this.apiClient.callApi(
+        '/repository/{groupID}/{resourceID}', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
 
     /**
      * Get metadata (RDF) for a given user.
