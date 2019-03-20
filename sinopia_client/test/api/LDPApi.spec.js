@@ -139,6 +139,10 @@
             })
         });
       });
+
+      describe('with an RDF resource', function() {
+        // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
+      })
     });
 
     describe('createUser', function() {
@@ -200,14 +204,56 @@
       });
     });
     describe('getResource', function() {
-      it('should call getResource successfully', function(done) {
-        //uncomment below and update the code to test getResource
-        //instance.getResource(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
+      // ensure base container exists, since we need to put our group under that
+      beforeEach(function() {
+        let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+        let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+        return instance.updateBase(baseRsrc)
       });
+
+      describe('on a non-RDF resource', function() {
+        let nonRdfResourceJson = fs.readFileSync(path.join(__dirname, '../../../fixtures/profile_defs/profile1.json'), { encoding: 'utf8' })
+        let groupId = 'nonRdfStuff'
+        let slug = 'nonRdfResource'
+
+        // need a group container to exist to hold our resource
+        beforeEach(function() {
+          let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
+          return instance.createGroup(groupId, groupRsrc)
+        });
+        // need a non-rdf resource to retrieve
+        beforeEach(function() {
+          let opts = {
+            'slug': slug,
+            'contentType': 'application/json',
+            'link': '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'   //TODO: centralize type strings?  https://github.com/LD4P/sinopia_server/issues/68
+          }
+          return instance.createResource(groupId, nonRdfResourceJson, opts)
+        })
+
+        it('should return the expected content', function() {
+          return instance.getResourceWithHttpInfo(groupId, slug, { accept: 'application/json' })
+            .then(function(responseAndData) {
+              expect(responseAndData.response.statusCode).to.equal(200)
+              // body will already be parsed as JSON (due to the Accept header?).  text will be the raw HTTP response body.
+              expect(responseAndData.response.body).to.deep.equal(JSON.parse(nonRdfResourceJson))
+              expect(JSON.parse(responseAndData.response.text)).to.deep.equal(JSON.parse(nonRdfResourceJson))
+            })
+        })
+
+        describe('on an RDF resource', function() {
+          // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
+        })
+      })
+      describe('on an RDF resource', function() {
+        // need a group container to exist to hold our resource
+        beforeEach(function() {
+          let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
+          return instance.createGroup('rdfStuff', groupRsrc)
+        });
+      })
     });
     describe('getUser', function() {
       it('should call getUser successfully', function(done) {
