@@ -56,25 +56,25 @@
       done();
     });
 
-    it('should have the property containerID (base name: "containerID")', function() {
+    it.skip('should have the property containerID (base name: "containerID")', function() {
       // uncomment below and update the code to test the property containerID
       //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
-    it('should have the property name (base name: "name")', function() {
+    it.skip('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
       //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
-    it('should have the property URI (base name: "URI")', function() {
+    it.skip('should have the property URI (base name: "URI")', function() {
       // uncomment below and update the code to test the property URI
       //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();
     });
 
-    it('should have the property resources (base name: "resources")', function() {
+    it.skip('should have the property resources (base name: "resources")', function() {
       // uncomment below and update the code to test the property resources
       //var instance = new SinopiaServer.LDPContainer();
       //expect(instance).to.be();

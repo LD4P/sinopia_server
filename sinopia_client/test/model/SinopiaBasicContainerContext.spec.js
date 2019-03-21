@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('SinopiaBasicContainerContext', function() {
+  describe.skip('SinopiaBasicContainerContext', function() {
     it('should create an instance of SinopiaBasicContainerContext', function() {
       // uncomment below and update the code to test SinopiaBasicContainerContext
       //var instane = new SinopiaServer.SinopiaBasicContainerContext();

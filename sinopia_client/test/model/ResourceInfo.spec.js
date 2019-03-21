@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ResourceInfo', function() {
+  describe.skip('ResourceInfo', function() {
     it('should create an instance of ResourceInfo', function() {
       // uncomment below and update the code to test ResourceInfo
       //var instane = new SinopiaServer.ResourceInfo();

@@ -140,12 +140,12 @@
         });
       });
 
-      describe('with an RDF resource', function() {
+      describe.skip('with an RDF resource', function() {
         // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
       })
     });
 
-    describe('createUser', function() {
+    describe.skip('createUser', function() {
       it('should call createUser successfully', function(done) {
         //uncomment below and update the code to test createUser
         //instance.createUser(function(error) {
@@ -155,7 +155,7 @@
         done();
       });
     });
-    describe('deleteGroup', function() {
+    describe.skip('deleteGroup', function() {
       it('should call deleteGroup successfully', function(done) {
         //uncomment below and update the code to test deleteGroup
         //instance.deleteGroup(function(error) {
@@ -165,7 +165,7 @@
         done();
       });
     });
-    describe('deleteResource', function() {
+    describe.skip('deleteResource', function() {
       it('should call deleteResource successfully', function(done) {
         //uncomment below and update the code to test deleteResource
         //instance.deleteResource(function(error) {
@@ -175,7 +175,7 @@
         done();
       });
     });
-    describe('deleteUser', function() {
+    describe.skip('deleteUser', function() {
       it('should call deleteUser successfully', function(done) {
         //uncomment below and update the code to test deleteUser
         //instance.deleteUser(function(error) {
@@ -185,7 +185,7 @@
         done();
       });
     });
-    describe('getBase', function() {
+    describe.skip('getBase', function() {
       // it('should call getBase successfully', function() {
       //   return instance.getBase()
       //     .then(function(_data) {
@@ -193,7 +193,7 @@
       //     });
       // });
     });
-    describe('getGroup', function() {
+    describe.skip('getGroup', function() {
       it('should call getGroup successfully', function(done) {
         //uncomment below and update the code to test getGroup
         //instance.getGroup(function(error) {
@@ -242,7 +242,7 @@
             })
         })
 
-        describe('on an RDF resource', function() {
+        describe.skip('on an RDF resource', function() {
           // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
         })
       })
@@ -255,7 +255,7 @@
         });
       })
     });
-    describe('getUser', function() {
+    describe.skip('getUser', function() {
       it('should call getUser successfully', function(done) {
         //uncomment below and update the code to test getUser
         //instance.getUser(function(error) {
@@ -265,7 +265,7 @@
         done();
       });
     });
-    describe('getUsers', function() {
+    describe.skip('getUsers', function() {
       it('should call getUsers successfully', function(done) {
         //uncomment below and update the code to test getUsers
         //instance.getUsers(function(error) {
@@ -275,7 +275,7 @@
         done();
       });
     });
-    describe('headBase', function() {
+    describe.skip('headBase', function() {
       // it('should call headBase successfully', function() {
       //   return instance.headBase()
       //     .then(function(_data) {
@@ -283,7 +283,7 @@
       //     });
       // });
     });
-    describe('headGroup', function() {
+    describe.skip('headGroup', function() {
       // it('should call headGroup successfully', function() {
       //   return instance.headGroup('pcc')
       //     .then(function(_data) {
@@ -291,7 +291,7 @@
       //     });
       // });
     });
-    describe('headResource', function() {
+    describe.skip('headResource', function() {
       it('should call headResource successfully', function(done) {
         //uncomment below and update the code to test headResource
         //instance.headResource(function(error) {
@@ -301,7 +301,7 @@
         done();
       });
     });
-    describe('headUser', function() {
+    describe.skip('headUser', function() {
       it('should call headUser successfully', function(done) {
         //uncomment below and update the code to test headUser
         //instance.headUser(function(error) {
@@ -311,7 +311,7 @@
         done();
       });
     });
-    describe('headUsers', function() {
+    describe.skip('headUsers', function() {
       it('should call headUsers successfully', function(done) {
         //uncomment below and update the code to test headUsers
         //instance.headUsers(function(error) {
@@ -321,7 +321,7 @@
         done();
       });
     });
-    describe('optionsBase', function() {
+    describe.skip('optionsBase', function() {
       // it('should call optionsBase successfully', function() {
       //   return instance.optionsBase()
       //     .then(function(_data) {
@@ -329,7 +329,7 @@
       //     });
       // });
     });
-    describe('optionsGroup', function() {
+    describe.skip('optionsGroup', function() {
       // it('should call optionsGroup successfully', function() {
       //   return instance.optionsGroup('pcc')
       //     .then(function(_data) {
@@ -337,7 +337,7 @@
       //     });
       // });
     });
-    describe('optionsResource', function() {
+    describe.skip('optionsResource', function() {
       it('should call optionsResource successfully', function(done) {
         //uncomment below and update the code to test optionsResource
         //instance.optionsResource(function(error) {
@@ -347,7 +347,7 @@
         done();
       });
     });
-    describe('optionsUser', function() {
+    describe.skip('optionsUser', function() {
       it('should call optionsUser successfully', function(done) {
         //uncomment below and update the code to test optionsUser
         //instance.optionsUser(function(error) {
@@ -357,7 +357,7 @@
         done();
       });
     });
-    describe('optionsUsers', function() {
+    describe.skip('optionsUsers', function() {
       it('should call optionsUsers successfully', function(done) {
         //uncomment below and update the code to test optionsUsers
         //instance.optionsUsers(function(error) {
@@ -384,7 +384,7 @@
         })
       });
     });
-    describe('updateGroup', function() {
+    describe.skip('updateGroup', function() {
       it('should call updateGroup successfully', function(done) {
         //uncomment below and update the code to test updateGroup
         //instance.updateGroup(function(error) {
@@ -394,7 +394,7 @@
         done();
       });
     });
-    describe('updateResource', function() {
+    describe.skip('updateResource', function() {
       it('should call updateResource successfully', function(done) {
         //uncomment below and update the code to test updateResource
         //instance.updateResource(function(error) {
@@ -404,7 +404,7 @@
         done();
       });
     });
-    describe('updateUser', function() {
+    describe.skip('updateUser', function() {
       it('should call updateUser successfully', function(done) {
         //uncomment below and update the code to test updateUser
         //instance.updateUser(function(error) {
@@ -414,7 +414,7 @@
         done();
       });
     });
-    describe('updateUsers', function() {
+    describe.skip('updateUsers', function() {
       it('should call updateUsers successfully', function(done) {
         //uncomment below and update the code to test updateUsers
         //instance.updateUsers(function(error) {

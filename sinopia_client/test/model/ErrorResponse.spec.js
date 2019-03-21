@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ErrorResponse', function() {
+  describe.skip('ErrorResponse', function() {
     it('should create an instance of ErrorResponse', function() {
       // uncomment below and update the code to test ErrorResponse
       //var instane = new SinopiaServer.ErrorResponse();
