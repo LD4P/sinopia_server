@@ -381,6 +381,10 @@
   });
 
   describe('Authentication', function() {
+    // tests hit amazon and then trellis.  occasionally they run past the
+    // default 2 s timeout, so up it to 10 s (time specified in ms).
+    this.timeout(10000);
+
     // NOTE: if this test is failing for you locally, it may be because you're not supplying the login info required below.  none
     // of this is particularly sensitive (the test user should be a dummy user on a dev system, and user pool id and client id are public
     // info that a user can figure out by looking at our editor client source code).  regardless, good practice to not commit login

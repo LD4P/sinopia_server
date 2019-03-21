@@ -11,9 +11,8 @@ services:
       context: .
       dockerfile: Dockerfile.trellis-ext-db
     environment:
-      TRELLIS_AUTH_JWT_ENABLED: 'true'
-      COGNITO_USER_POOL_ID: 'us-west-2_HUmNIdmhy'
-      AWS_COGNITO_REGION: 'us-west-2'
+      COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID:-us-west-2_CGd9Wq136}
+      AWS_COGNITO_REGION: ${AWS_COGNITO_REGION:-us-west-2}
     ports:
       - 8080:8080
       - 8081:8081
