@@ -57,13 +57,36 @@
   const fs = require('fs');
   const path = require('path');
 
+  global.fetch = require('node-fetch'); // requires installing the node-fetch module
+  const AmazonCognitoIdentity = require('amazon-cognito-identity-js'); // requires the fetch module
+
+  function getAuthenticationDetails(username, password) {
+    let authenticationData = {
+        Username : username,
+        Password : password,
+    };
+    return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+  }
+  function getCognitoUser(username, user_pool_id, client_id) {
+    let poolData = {
+      UserPoolId : user_pool_id, // Your user pool id here
+      ClientId : client_id // Your client id here
+    };
+    let userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    let userData = {
+      Username : username, // QUESTION: or do we sub in the actual user name?
+      Pool : userPool
+    };
+    return new AmazonCognitoIdentity.CognitoUser(userData);
+  }
+
   describe('LDPApi', function() {
     describe('createGroup', function() {
       // need base container to exist, since group is created under that
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
-        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+        return instance.updateBase(baseRsrc)
       });
 
       it('should call createGroup successfully', function() {
@@ -88,7 +111,7 @@
       beforeEach(function() {
         let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
         let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
-        return instance.updateBase(baseRsrc).catch(function(err) { console.error(`Error setting up base container: ${err}`) })
+        return instance.updateBase(baseRsrc)
       });
 
       describe('with non-RDF resources', function() {
@@ -96,7 +119,7 @@
         beforeEach(function() {
           let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
           let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
-          return instance.createGroup('profiles', groupRsrc).catch(function(err) { console.error(`Error setting up profiles group: ${err}`) })
+          return instance.createGroup('profiles', groupRsrc)
         });
 
         it('should create a profile resource successfully', function() {
@@ -114,7 +137,6 @@
               expect(responseAndData.response.statusCode).to.equal(201)
               expect(responseAndData.response.headers.location).to.equal(`http://localhost:8080/repository/profiles/profile${rand_num}`)
             })
-            .catch(function(err) { console.error(`Error adding ${opts['slug']}: ${err}`) })
         });
       });
     });
@@ -356,8 +378,81 @@
         done();
       });
     });
-    //TODO:  auth tests.  will have to set JWT on client instance, e.g.
-    // instance.apiClient.authentications['CognitoUser'].accessToken = '<my secret base64 encoded JWT>'
   });
 
+  describe('Authentication', function() {
+    // tests hit amazon and then trellis.  occasionally they run past the
+    // default 2 s timeout, so up it to 10 s (time specified in ms).
+    this.timeout(10000);
+
+    // NOTE: if this test is failing for you locally, it may be because you're not supplying the login info required below.  none
+    // of this is particularly sensitive (the test user should be a dummy user on a dev system, and user pool id and client id are public
+    // info that a user can figure out by looking at our editor client source code).  regardless, good practice to not commit login
+    // info publicly, and this makes it easier to change said info without a PR if e.g. the user pool gets rebuilt by terraform.
+    // example:
+    // AUTH_TEST_USER='user@domain.edu' AUTH_TEST_PASS='1337secrets' AUTH_TEST_USER_POOL_ID='us-north-5_ABc1De234' AUTH_TEST_CLIENT_ID='blargh' npm run test
+    let username = process.env.AUTH_TEST_USER
+    let password = process.env.AUTH_TEST_PASS
+    let user_pool_id = process.env.AUTH_TEST_USER_POOL_ID
+    let client_id = process.env.AUTH_TEST_CLIENT_ID
+    let curJwt = null
+
+    // need base container to exist, since that's what we're going to try retrieving to test authentication
+    beforeEach(function() {
+      let rsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+      let baseRsrc = new SinopiaServer.SinopiaBasicContainer('', rsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Sinopia LDP Server')
+      return instance.updateBase(baseRsrc)
+    });
+
+    // get a fresh JWT.  by returning a Promise that resolves/rejects in the success/failure callbacks, we
+    // make Mocha wait on the AWS SDK call to complete before the tests are run, since they need the JWT var
+    // to be populated with a useable token.  (if a beforeEach or test block returns a Promise, Mocha will wait
+    // for that Promise to be settled before proceeding)
+    beforeEach(function() {
+      // adapted from use case #4 here: https://github.com/aws-amplify/amplify-js/tree/01e660df246f0faf0bcb5b5ebf604597db3ef4aa/packages/amazon-cognito-identity-js#usage
+      let cognitoUser = getCognitoUser(username, user_pool_id, client_id)
+      return new Promise(function(resolve, reject) {
+        cognitoUser.authenticateUser(getAuthenticationDetails(username, password), {
+          onSuccess: function (result) {
+            curJwt = result.getAccessToken().getJwtToken();
+            resolve({jwt: curJwt})
+          },
+          onFailure: function(err) {
+            reject({err: err})
+          },
+        });
+      })
+    });
+
+    describe('the user has a valid unexpired JWT', function() {
+      it('setting the JWT should let the user read a resource (e.g. the base resource)', function() {
+        instance.apiClient.authentications['CognitoUser'].accessToken = curJwt
+        return instance.getBaseWithHttpInfo()
+          .then(function(responseAndData) {
+            expect(responseAndData.response.statusCode).to.equal(200)
+          })
+      })
+    });
+
+    describe('the user has a JWT with a bad signature', function() {
+      beforeEach(function() {
+        // the last segment of the encoded JWT is base64url encoded, and thus by definition can't contain the '+' char,
+        // so this should give us a bad signature that is still of the expected length.
+        // see https://en.wikipedia.org/wiki/Base64#URL_applications and https://en.wikipedia.org/wiki/JSON_Web_Token#Structure
+        curJwt = `${curJwt.slice(0, -1)}+`
+      })
+      it('the user should get an HTTP 401 response', function() {
+        instance.apiClient.authentications['CognitoUser'].accessToken = curJwt
+        return instance.getBaseWithHttpInfo()
+          .then(function(responseAndData) {
+            expect(responseAndData.response.statusCode).to.equal(401)
+          }).catch(function(err) {
+            expect(err.response.statusCode).to.equal(401)
+          })
+      })
+    });
+
+    // TODO: figure out a good way to test an expired JWT that doesn't require waiting an hour, since threshold is set on AWS end.
+    // maybe just commit a valid but expired JWT and use that, instead of obtaining a fresh one and letting it go stale?
+  })
 }));

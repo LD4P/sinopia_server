@@ -9,6 +9,7 @@
 # For example:
 # someuser : secret : http://example.org/someuser/
 
-cmharlow : S3cr3t! : http://sinopia.io/users/cmharlow
-
-suntzu : S6ntz6? : http://sinopia.io/users/suntzu
+# FOR TESTING ONLY!  don't use this in production.
+#cmharlow : S3cr3t! : http://sinopia.io/users/cmharlow
+#
+#suntzu : S6ntz6? : http://sinopia.io/users/suntzu

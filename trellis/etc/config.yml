@@ -76,16 +76,16 @@ baseUrl: ${TRELLIS_BASE_URL:-}
 hubUrl: ${TRELLIS_HUB_URL:-}
 
 auth:
-    adminUsers: ${TRELLIS_ADMIN_USERS:-[cmharlow]}
+    adminUsers: ${TRELLIS_ADMIN_USERS:-[]}
     webac:
         enabled: ${TRELLIS_AUTH_WEBAC_ENABLED:-true}
         cacheSize: ${TRELLIS_AUTH_WEBAC_CACHE_SIZE:-1000}
         cacheExpireSeconds: ${TRELLIS_AUTH_WEBAC_CACHE_EXPIRE_SECONDS:-60}
     jwt:
-        enabled: ${TRELLIS_AUTH_JWT_ENABLED:-false}
+        enabled: ${TRELLIS_AUTH_JWT_ENABLED:-true}
         jwks: https://cognito-idp.${AWS_COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}/.well-known/jwks.json
     basic:
-        enabled: ${TRELLIS_AUTH_BASIC_ENABLED:-true}
+        enabled: ${TRELLIS_AUTH_BASIC_ENABLED:-false}
         usersFile: ${TRELLIS_AUTH_BASIC_USERS_FILE:-/opt/trellis/etc/users.auth}
 
 cors:
