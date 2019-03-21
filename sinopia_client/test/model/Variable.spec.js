@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('Variable', function() {
+  describe.skip('Variable', function() {
     it('should create an instance of Variable', function() {
       // uncomment below and update the code to test Variable
       //var instane = new SinopiaServer.Variable();
