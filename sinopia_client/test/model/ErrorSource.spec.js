@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ErrorSource', function() {
+  describe.skip('ErrorSource', function() {
     it('should create an instance of ErrorSource', function() {
       // uncomment below and update the code to test ErrorSource
       //var instane = new SinopiaServer.ErrorSource();

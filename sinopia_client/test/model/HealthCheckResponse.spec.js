@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('HealthCheckResponse', function() {
+  describe.skip('HealthCheckResponse', function() {
     it('should create an instance of HealthCheckResponse', function() {
       // uncomment below and update the code to test HealthCheckResponse
       //var instane = new SinopiaServer.HealthCheckResponse();

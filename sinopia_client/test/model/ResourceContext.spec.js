@@ -49,7 +49,7 @@
       object[property] = value;
   }
 
-  describe('ResourceContext', function() {
+  describe.skip('ResourceContext', function() {
     it('should create an instance of ResourceContext', function() {
       // uncomment below and update the code to test ResourceContext
       //var instane = new SinopiaServer.ResourceContext();

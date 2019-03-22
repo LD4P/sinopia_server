@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 <a name="getResource"></a>
 # **getResource**
-> Resource getResource(groupID, resourceID)
+> Resource getResource(groupID, resourceID, opts)
 
 Get metadata (RDF) for a given resource.
 
@@ -462,7 +462,10 @@ var groupID = "groupID_example"; // String | The group who is defining it's own 
 
 var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
 
-apiInstance.getResource(groupID, resourceID).then(function(data) {
+var opts = { 
+  'accept': "accept_example" // String | The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json.
+};
+apiInstance.getResource(groupID, resourceID, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -476,6 +479,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
+ **accept** | **String**| The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json. | [optional] 
 
 ### Return type
 
@@ -488,7 +492,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/ld+json
- - **Accept**: application/ld+json
+ - **Accept**: Not defined
 
 <a name="getUser"></a>
 # **getUser**
