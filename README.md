@@ -18,13 +18,13 @@ This is all a work in progress, and the following indicates the documentation we
 
 Using the `docker-compose.yml` file and `trellis/etc/` directory at the top level of this repository, you can spin up a container of postgres and trellis, run the trellis database migration job, and have access to the Sinopia Server (here, just straight trellis) at http://localhost:8080. The following command sets this up:
 
-```
-$ docker-compose up
+```sh
+$ docker-compose up # add the '-d' flag to daemonize and run in background
 ```
 
 Give this command a few seconds to run; it will remain running in the shell you started it in. When you want to close it down, `cntl + c` will stop the server, then run:
 
-```
+```sh
 $ docker-compose down
 ```
 
@@ -61,7 +61,7 @@ See the official Trellis manual installation instructions here: https://github.c
 
 Trellis should be available at: http://localhost:8080 And there is a built-in Trellis health check here: http://localhost:8081/healthcheck.
 
-## Sinopia Server Testing
+## Sinopia Server Integration Testing
 
 To run the full test suite, you'll need to supply some credentials for a real Amazon Cognito user that has access to Sinopia, because part of the integration testing is obtaining a real JWT to test Auth'n interactions with Trellis.  You'll also need to supply the user pool id info.  This info is specified via environment variables.
 
@@ -72,52 +72,75 @@ AUTH_TEST_USER='user@domain.edu' AUTH_TEST_PASS='1337secrets' AUTH_TEST_USER_POO
 
 For the Circle CI tests, the env vars are already defined in the project contect.
 
-### Sinopia Server Integration Tests
-
-### Trellis Integration Tests
-
-### Sinopia Server Unit Tests
-
-### Trellis Unit Tests
-
-### Circle-CI Integration Testing Setup
-
 
 ## AWS Deployment Set Up
 
 WIP.
 
-## Working with the Open API Specification (aka Swagger) Specification
 
-WIP.
+## Working with the Open API (aka Swagger) Specification
 
 ### Use of Swagger with Trellis - LDP
 
-### Validating Swagger
+Our Swagger spec illustrates the subset of LDP actions supported by "Sinopia Server" (which at this point, is still just our specific configuration and usage of trellis-ext-db as a linked data store).
 
 ### Use of Swagger with Testing Framework
+
+We're implementing integration tests (using the swagger-codegen stubs as a starting point, and adding other things as needed).  These tests use the sinopia_client JS code against a dockerized trellis-ext-db instance to illustrate our usage of trellis-ext-db as the Sinopia backend.
 
 ### Swagger Documentation
 
 See the Specification-driven API documentation here: https://ld4p.github.io/sinopia_server/
 
-### Generating Sinopia Server Client with Swagger
+### Installing swagger-codegen
 
-#### Generating a Javascript Client API with swagger-codegen cli
+[swagger-codegen-2.4.0](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.4.0) is the latest version of swagger-codegen that supports the Javascript language and parses this project's Swagger spec without error.  You can obtain the JAR file you need from:
+* https://mvnrepository.com/artifact/io.swagger/swagger-codegen/2.4.0 (Maven Repository info page)
+* http://central.maven.org/maven2/io/swagger/swagger-codegen/2.4.0/swagger-codegen-2.4.0.jar (direct download link)
 
-[swagger-codegen-2.3.1](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.3.1) is the latest version of swagger-codegen that supports the javascript language.
+The following commands assume the swagger-codegen JAR file is in the same directory as the swagger.yaml
+file (and where applicable, the output directory for the generated client code, i.e. you downloaded the
+JAR file to this project's root directory).  Tested with Java 1.8.0_102, YMMV with earlier versions.
 
-1. Obtain the openapi.yaml file that you will be using. (https://editor.swagger.io/ has a utility to convert a JSON spec to a YAML spec.)
-- On the first line of the YAML spec change: `openapi: 3.0.1` to: `swagger: 3.0.1`
-- Download and the unzip the [v2.3.1](https://github.com/swagger-api/swagger-codegen/archive/v2.3.1.zip) zip file, then:
-- run the following (mvn package will take a little while to run)
+### Validating the Swagger spec
 
+If you'd like to validate the swagger.yaml file, you can do so by running:
+
+```sh
+java -jar swagger-codegen-cli-2.4.0.jar validate -i swagger.yaml
 ```
-$> cd swagger-codegen-2.3.1
-$swagger-codegen-2.3.1/> ./run-in-docker.sh mvn package
-$swagger-codegen-2.3.1/> mkdir client_api
-$swagger-codegen-2.3.1/> ./run-in-docker.sh generate -i openapi.yaml -l javascript --additional-properties usePromises=true -o client_api/
-$swagger-codegen-2.3.1/> cp -r client_api /path/to/project/location/
+
+### Generating/Publishing the Sinopia Server Client
+
+#### (Re-)Generating the Sinopia Server Javascript Client with swagger-codegen CLI
+
+```sh
+$ java -jar swagger-codegen-2.4.0.jar generate -i swagger.yaml -l javascript --additional-properties usePromises=true -o sinopia_client/
 ```
 
-(See: https://github.com/swagger-api/swagger-codegen#docker)
+You'll want to make sure the couple of hand edits to the generated client code aren't blown away when you commit the updates (yes, gross, sorry).
+
+If you want to regenerate test stubs, you'll have to delete the `sinopia_client/test` directory first -- swagger-codegen won't overwrite it.  You'll then have to `git add -p` the new stubs, and ditch the erasure of the old tests that you want to keep, before committing (yes, also gross, sorry).
+
+For a slightly different approach to using swagger-codegen with an Open API v3.0 spec, not necessarily with this project, see the prior version of this README section here:  https://github.com/LD4P/sinopia_server/tree/3880d034a9611cdf657e21c63a43ea0abf6c0201#generating-sinopia-server-client-with-swagger
+
+#### Publishing the updated client code
+
+You'll likely want to bump the version on the spec (before regenerating!) and re-push the updated client code to NPM, e.g. for consumption by the
+sinopia_editor project.  You can do this by `cd`ing into the client directory and publishing:
+
+```sh
+$ cd sinopia_client
+$ npm publish
+```
+
+This requires publishing rights on https://www.npmjs.com/package/sinopia_server
+
+## Rebuilding our (Sinopia-specific) trellis-ext-db image and pushing to Docker Hub
+
+```shell
+$ docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db .
+$ docker push ld4p/trellis-ext-db  # assumes user is logged into docker hub account via 'docker login' command
+```
+
+This requires push access to the ld4p Docker Hub organization.
