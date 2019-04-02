@@ -93,6 +93,15 @@ cors:
     allowOrigin:
         - "*"
     maxAge: ${TRELLIS_CORS_MAX_AGE:-180}
+    allowHeaders:
+        - "Content-Type"
+        - "Authorization"
+        - "Link"
+        - "Accept"
+        - "Accept-DateTime"
+        - "Prefer"
+        - "Slug"
+        - "Origin"
 
 cache:
     maxAge: ${TRELLIS_CACHE_MAX_AGE:-86400}
