@@ -22,8 +22,10 @@ rtDir='fixtures/profile_defs/bibframe'
 
 for F in `ls $rtDir/*.json`; do
   rt=`(echo $F | cut -f 1 -d '.')`
-  curl -i -X POST --data-binary @$F -H "Slug: $(basename $rt)" -H 'Link: <http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"' -H "Content-Type: application/json" http://localhost:8080/repository/ld4p -u 'suntzu:S6ntz6?'
-  curl -i http://localhost:8080/repository/ld4p/$(basename $rt)
+  id=`(cat $F | jq '.["id"]' | sed s/\"//g)`
+  echo $id
+  curl -i -X POST --data-binary @$F -H "Slug: $id" -H 'Link: <http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"' -H "Content-Type: application/json" http://localhost:8080/repository/ld4p -u 'suntzu:S6ntz6?'
+  curl -i http://localhost:8080/repository/ld4p/$id
 done
 
 curl -i -H "Accept:application/ld+json" http://localhost:8080/repository/ld4p
