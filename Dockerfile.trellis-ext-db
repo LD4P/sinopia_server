@@ -1,4 +1,4 @@
-FROM trellisldp/trellis-ext-db:latest
+FROM trellisldp/trellis-ext-db:0.2.1
 
 # Our configured repackaging of the upstream container
 LABEL maintainer="SUL Infrastructure Team <dlss-infrastructure-team@lists.stanford.edu>"
