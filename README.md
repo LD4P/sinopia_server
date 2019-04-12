@@ -22,6 +22,13 @@ Using the `docker-compose.yml` file and `trellis/etc/` directory at the top leve
 $ docker-compose up # add the '-d' flag to daemonize and run in background
 ```
 
+Or, to spin up Trellis and its dependencies with the Sinopia container structure (root, repository, and group containers) and ACLs (declared on root container) pre-created, you can do using the `platformdata` docker-compose service:
+
+```shell
+# Add -d flag to run containers in background
+$ docker-compose up platformdata
+```
+
 Give this command a few seconds to run; it will remain running in the shell you started it in. When you want to close it down, `cntl + c` will stop the server, then run:
 
 ```sh
