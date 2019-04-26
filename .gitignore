@@ -4,3 +4,6 @@
 
 # NPM deps
 node_modules
+
+# Contains secrets!
+.env
