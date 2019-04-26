@@ -509,6 +509,7 @@ paths:
         - LDP
       security:
         - CognitoUser: []
+      consumes: [] # client must specify content type, can be json or ld+json, see params
       parameters:
         - name: groupID
           description: The group who is defining it's own resources or graph within Sinopia.
@@ -528,7 +529,7 @@ paths:
             $ref: '#/definitions/Resource'
         - name: Content-Type
           in: header
-          description: Content-Type of Group metadata, with preference for JSON-LD.
+          description: Content-Type for the resource, with preference for JSON-LD.
           required: false
           type: string
       responses:
