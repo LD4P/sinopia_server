@@ -37,7 +37,7 @@
    */
 
   /**
-   * Constructs a new LDPApi. 
+   * Constructs a new LDPApi.
    * @alias module:api/LDPApi
    * @class
    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
@@ -1328,7 +1328,7 @@
      * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
      * @param {module:model/Resource} resource Resource metadata to replace existing description of the given group.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     this.updateResourceWithHttpInfo = function(groupID, resourceID, resource, opts) {
@@ -1366,7 +1366,7 @@
       };
 
       var authNames = ['CognitoUser'];
-      var contentTypes = ['application/ld+json'];
+      var contentTypes = [];
       var accepts = ['application/ld+json'];
       var returnType = null;
 
@@ -1384,7 +1384,7 @@
      * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
      * @param {module:model/Resource} resource Resource metadata to replace existing description of the given group.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.contentType Content-Type of Group metadata, with preference for JSON-LD.
+     * @param {String} opts.contentType Content-Type for the resource, with preference for JSON-LD.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     this.updateResource = function(groupID, resourceID, resource, opts) {

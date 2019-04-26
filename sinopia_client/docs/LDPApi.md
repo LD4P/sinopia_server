@@ -1161,7 +1161,7 @@ var resourceID = "resourceID_example"; // String | The UUID for the resource def
 var resource = new SinopiaServer.Resource(); // Resource | Resource metadata to replace existing description of the given group.
 
 var opts = { 
-  'contentType': "contentType_example" // String | Content-Type of Group metadata, with preference for JSON-LD.
+  'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
 };
 apiInstance.updateResource(groupID, resourceID, resource, opts).then(function() {
   console.log('API called successfully.');
@@ -1178,7 +1178,7 @@ Name | Type | Description  | Notes
  **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
  **resource** | [**Resource**](Resource.md)| Resource metadata to replace existing description of the given group. | 
- **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
+ **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
 
 ### Return type
 
@@ -1190,7 +1190,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/ld+json
+ - **Content-Type**: Not defined
  - **Accept**: application/ld+json
 
 <a name="updateUser"></a>

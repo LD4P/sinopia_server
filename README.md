@@ -102,8 +102,8 @@ See the Specification-driven API documentation here: https://ld4p.github.io/sino
 ### Installing swagger-codegen
 
 [swagger-codegen-2.4.0](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.4.0) is the latest version of swagger-codegen that supports the Javascript language and parses this project's Swagger spec without error.  You can obtain the JAR file you need from:
-* https://mvnrepository.com/artifact/io.swagger/swagger-codegen/2.4.0 (Maven Repository info page)
-* http://central.maven.org/maven2/io/swagger/swagger-codegen/2.4.0/swagger-codegen-2.4.0.jar (direct download link)
+* https://mvnrepository.com/artifact/io.swagger/swagger-codegen-cli/2.4.0 (Maven Repository info page)
+* http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.0/swagger-codegen-cli-2.4.0.jar (direct download link)
 
 The following commands assume the swagger-codegen JAR file is in the same directory as the swagger.yaml
 file (and where applicable, the output directory for the generated client code, i.e. you downloaded the
@@ -122,7 +122,7 @@ java -jar swagger-codegen-cli-2.4.0.jar validate -i swagger.yaml
 #### (Re-)Generating the Sinopia Server Javascript Client with swagger-codegen CLI
 
 ```sh
-$ java -jar swagger-codegen-2.4.0.jar generate -i swagger.yaml -l javascript --additional-properties usePromises=true -o sinopia_client/
+$ java -jar swagger-codegen-cli-2.4.0.jar generate -i swagger.yaml -l javascript --additional-properties usePromises=true -o sinopia_client/
 ```
 
 You'll want to make sure the couple of hand edits to the generated client code aren't blown away when you commit the updates (yes, gross, sorry).
