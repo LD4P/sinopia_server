@@ -37,14 +37,14 @@ database:
   driverClass: org.postgresql.Driver
 
   # The database username
-  user: sinopia
+  user: ${TRELLIS_DB_USERNAME:-sinopia}
 
   # The database password
-  password: S1n0p1a
+  password: ${TRELLIS_DB_PASSWORD:-S1n0p1a}
 
   # The JDBC URL
   # url: jdbc:mysql://db.example.com/db-name
-  url: jdbc:postgresql://database:5432/sinopia
+  url: ${TRELLIS_DB_URL:-jdbc:postgresql://database:5432/sinopia}
 
   properties:
     charSet: UTF-8
