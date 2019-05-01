@@ -83,7 +83,7 @@ auth:
         cacheExpireSeconds: ${TRELLIS_AUTH_WEBAC_CACHE_EXPIRE_SECONDS:-60}
     jwt:
         enabled: ${TRELLIS_AUTH_JWT_ENABLED:-true}
-        jwks: https://cognito-idp.${AWS_COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}/.well-known/jwks.json
+        jwks: https://cognito-idp.${AWS_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}/.well-known/jwks.json
     basic:
         enabled: ${TRELLIS_AUTH_BASIC_ENABLED:-false}
         usersFile: ${TRELLIS_AUTH_BASIC_USERS_FILE:-/opt/trellis/etc/users.auth}

@@ -29,6 +29,8 @@ Or, to spin up Trellis and its dependencies with the Sinopia container structure
 $ docker-compose up platformdata
 ```
 
+**NOTE**: In order for the above to work, you will need to set `COGNITO_ADMIN_PASSWORD`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY` in a file named `.env` in the sinopia_server root.
+
 Give this command a few seconds to run; it will remain running in the shell you started it in. When you want to close it down, `cntl + c` will stop the server, then run:
 
 ```sh
