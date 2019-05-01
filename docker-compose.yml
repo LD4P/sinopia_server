@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile.trellis-ext-db
     environment:
       COGNITO_USER_POOL_ID: ${COGNITO_USER_POOL_ID:-us-west-2_CGd9Wq136}
-      AWS_REGION: ${AWS_COGNITO_REGION:-us-west-2}
+      AWS_REGION: ${AWS_REGION:-us-west-2}
     ports:
       - 8080:8080
       - 8081:8081
