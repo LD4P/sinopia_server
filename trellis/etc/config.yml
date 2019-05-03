@@ -112,6 +112,8 @@ notifications:
     type: ${TRELLIS_NOTIFICATIONS_TYPE:-JMS}
     topicName: ${TRELLIS_NOTIFICATIONS_TOPIC_NAME:-trellis}
     connectionString: ${TRELLIS_NOTIFICATIONS_CONNECTION_STRING:-tcp://broker:61616}
+    username: ${TRELLIS_NOTIFICATIONS_USERNAME}
+    password: ${TRELLIS_NOTIFICATIONS_PASSWORD}
 
 # JSON-LD configuration
 jsonld:
