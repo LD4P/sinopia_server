@@ -5,4 +5,4 @@ LABEL maintainer="SUL Infrastructure Team <dlss-infrastructure-team@lists.stanfo
 
 COPY trellis/etc/ /opt/trellis/etc/
 
-RUN ls -lah /opt/trellis/etc/
+RUN ls -lha /opt/trellis/etc/
