@@ -33,6 +33,21 @@ jobs:
             dockerize -wait http://localhost:8081/healthcheck -timeout 1m
             cd sinopia_client
             npm run test
+  register_image:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build & push docker image
+          # NOTE: the env variables holding docker credentials are stored in the CircleCI dashboard
+          command: |
+            git diff --name-only HEAD^ | grep -E '(Dockerfile|trellis)' || exit 0
+            docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db:latest .
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push ld4p/trellis-ext-db:latest
 
 workflows:
   version: 2
@@ -42,3 +57,10 @@ workflows:
       - test:
           requires:
             - dependencies
+      - register_image:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
