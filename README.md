@@ -147,9 +147,12 @@ This requires publishing rights on https://www.npmjs.com/package/sinopia_server
 
 ## Rebuilding our (Sinopia-specific) trellis-ext-db image and pushing to Docker Hub
 
+The CircleCI build is configured to perform these steps automatically on any successful build on the `master` branch that touches files that should trigger a rebuild/repush. If you **do** need to manually build and push an image, you can do this via:
+
+
 ```shell
 $ docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db .
 $ docker push ld4p/trellis-ext-db  # assumes user is logged into docker hub account via 'docker login' command
 ```
 
-This requires push access to the ld4p Docker Hub organization.
+**NOTE**: The `docker push` action requires push access to the [ld4p Docker Hub organization](https://hub.docker.com/u/ld4p).
