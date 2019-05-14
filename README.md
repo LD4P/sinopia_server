@@ -4,7 +4,7 @@
 
 This is the repository for the Sinopia Server, namely, the Server that persists and support CRUD operations against Sinopia resources (see [here](https://ld4p.github.io/sinopia/models) for resource models). The Sinopia Server consists of:
 
-- LDP Server via the [Trellis-Ext-Db Codebase (release 0.1.1)](https://github.com/trellis-ldp/trellis-ext-db).
+- LDP Server via the [Trellis-Ext-Db Codebase (release 0.2.2)](https://github.com/trellis-ldp/trellis-ext-db).
 - [Swagger specification](swagger.yaml) that constrains interactions and expectations on top of the LDP Server ReST API Endpoint.
 - Server integration testsuite driveny by the Swagger specification.
 - Authn and Authz handling (being explored at present).
