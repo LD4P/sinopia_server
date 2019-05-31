@@ -140,8 +140,30 @@
         });
       });
 
-      describe.skip('with an RDF resource', function() {
-        // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
+      describe('with an RDF resource', function() {
+        // need a group container to exist to hold our resource
+        beforeEach(function() {
+          let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Neato Resources Group')
+          return instance.createGroup('NeatoResourcesGroup', groupRsrc)
+        })
+
+        it('should create an RDF resource successfully', function() {
+          let rand_num = Math.floor(Math.random() * 100)
+          let resourceJson = fs.readFileSync(path.join(__dirname, '../../../fixtures/resource_defs/resource1.jsonld'), { encoding: 'utf8' })
+          let opts = {
+            'slug': `resource_${rand_num}`,
+            'contentType': 'application/ld+json',
+            'link': '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'   //TODO: centralize type strings?  https://github.com/LD4P/sinopia_server/issues/68
+          }
+
+          // createResourceWithHttpInfo because the thing we care about checking is in the response headers
+          return instance.createResourceWithHttpInfo('NeatoResourcesGroup', resourceJson, opts)
+            .then(function(responseAndData) {
+              expect(responseAndData.response.statusCode).to.equal(201)
+              expect(responseAndData.response.headers.location).to.equal(`http://localhost:8080/repository/NeatoResourcesGroup/resource_${rand_num}`)
+            })
+        })
       })
     });
 
@@ -241,18 +263,36 @@
               expect(JSON.parse(responseAndData.response.text)).to.deep.equal(JSON.parse(nonRdfResourceJson))
             })
         })
-
-        describe.skip('on an RDF resource', function() {
-          // TODO: a test: https://github.com/LD4P/sinopia_server/issues/34
-        })
       })
+
       describe('on an RDF resource', function() {
+        let rdfResourceJson = fs.readFileSync(path.join(__dirname, '../../../fixtures/resource_defs/resource1.jsonld'), { encoding: 'utf8' })
+        let groupId = 'rdfStuff'
+        let slug = 'rdfResource'
+
         // need a group container to exist to hold our resource
         beforeEach(function() {
           let grpRsrcCtx = new SinopiaServer.SinopiaBasicContainerContext('http://www.w3.org/2000/01/rdf-schema#', 'http://www.w3.org/ns/ldp#')
-          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Profiles Group')
+          let groupRsrc = new SinopiaServer.SinopiaBasicContainer('', grpRsrcCtx, ['ldp:Container', 'ldp:BasicContainer'], 'Retrievable Resources Group')
           return instance.createGroup('rdfStuff', groupRsrc)
         });
+        // need an rdf resource to retrieve
+        beforeEach(function() {
+          let opts = {
+            'slug': slug,
+            'contentType': 'application/ld+json',
+            'link': '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'   //TODO: centralize type strings?  https://github.com/LD4P/sinopia_server/issues/68
+          }
+          return instance.createResource(groupId, rdfResourceJson, opts)
+        })
+
+        it('should return the expected content', function() {
+          return instance.getResource(groupId, slug, { accept: 'application/ld+json' })
+            .then(function(responseData) {
+              expect(responseData['@id']).to.equal('http://localhost:8080/repository/rdfStuff/rdfResource')
+              expect(responseData['title']).to.equal('Sinopia Resource 1')
+            })
+        })
       })
     });
     describe.skip('getUser', function() {

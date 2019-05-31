@@ -25,7 +25,7 @@
     if (!root.SinopiaServer) {
       root.SinopiaServer = {};
     }
-    root.SinopiaServer.Resource = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ResourceContext);
+    root.SinopiaServer.SinopiaResource = factory(root.SinopiaServer.ApiClient, root.SinopiaServer.ResourceContext);
   }
 }(this, function(ApiClient, ResourceContext) {
   'use strict';
@@ -34,33 +34,35 @@
 
 
   /**
-   * The Resource model module.
-   * @module model/Resource
+   * The SinopiaResource model module.
+   * @module model/SinopiaResource
    * @version 3.0.0-beta5
    */
 
   /**
-   * Constructs a new <code>Resource</code>.
-   * @alias module:model/Resource
+   * Constructs a new <code>SinopiaResource</code>.
+   * @alias module:model/SinopiaResource
    * @class
-   * @param graph {Array.<Object>} 
    * @param id {String} 
    * @param context {module:model/ResourceContext} 
+   * @param title {String} 
    */
-  var exports = function(graph, id, context) {
+  var exports = function(id, context, title) {
     var _this = this;
 
-    _this['@graph'] = graph;
+
+
     _this['@id'] = id;
     _this['@context'] = context;
+    _this['title'] = title;
   };
 
   /**
-   * Constructs a <code>Resource</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>SinopiaResource</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/Resource} obj Optional instance to populate.
-   * @return {module:model/Resource} The populated <code>Resource</code> instance.
+   * @param {module:model/SinopiaResource} obj Optional instance to populate.
+   * @return {module:model/SinopiaResource} The populated <code>SinopiaResource</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
@@ -69,11 +71,17 @@
       if (data.hasOwnProperty('@graph')) {
         obj['@graph'] = ApiClient.convertToType(data['@graph'], [Object]);
       }
+      if (data.hasOwnProperty('@type')) {
+        obj['@type'] = ApiClient.convertToType(data['@type'], ['String']);
+      }
       if (data.hasOwnProperty('@id')) {
         obj['@id'] = ApiClient.convertToType(data['@id'], 'String');
       }
       if (data.hasOwnProperty('@context')) {
         obj['@context'] = ResourceContext.constructFromObject(data['@context']);
+      }
+      if (data.hasOwnProperty('title')) {
+        obj['title'] = ApiClient.convertToType(data['title'], 'String');
       }
     }
     return obj;
@@ -84,6 +92,10 @@
    */
   exports.prototype['@graph'] = undefined;
   /**
+   * @member {Array.<String>} @type
+   */
+  exports.prototype['@type'] = undefined;
+  /**
    * @member {String} @id
    */
   exports.prototype['@id'] = undefined;
@@ -91,6 +103,10 @@
    * @member {module:model/ResourceContext} @context
    */
   exports.prototype['@context'] = undefined;
+  /**
+   * @member {String} title
+   */
+  exports.prototype['title'] = undefined;
 
 
 
