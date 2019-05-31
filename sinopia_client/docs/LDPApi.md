@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 <a name="getResource"></a>
 # **getResource**
-> Resource getResource(groupID, resourceID, opts)
+> SinopiaResource getResource(groupID, resourceID, opts)
 
 Get metadata (RDF) for a given resource.
 
@@ -483,7 +483,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Resource**](Resource.md)
+[**SinopiaResource**](SinopiaResource.md)
 
 ### Authorization
 

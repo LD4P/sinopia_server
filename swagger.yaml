@@ -6,7 +6,7 @@ produces:
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 3.0.0-beta3
+  version: 3.0.0-beta5
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -494,7 +494,7 @@ paths:
               type: string
               format: URI
           schema:
-            $ref: '#/definitions/Resource'
+            $ref: '#/definitions/SinopiaResource'
         '404':
           description: Unable to find the specified resource.
           schema:
@@ -1186,3 +1186,26 @@ definitions:
       "ldp":
         type: string
         format: uri
+  SinopiaResource:
+    required:
+      - "@id"
+      - "@context"
+      - title
+    properties:
+      "@graph":
+        type: array
+        items:
+          type: object
+          allOf:
+            - $ref: "#/definitions/ResourceInfo"
+      "@type":
+        type: array
+        items:
+          type: string
+      "@id":
+        type: string
+        format: uri
+      "@context":
+        $ref: "#/definitions/ResourceContext"
+      "title":
+        type: string
