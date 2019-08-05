@@ -89,6 +89,6 @@ workflows:
             branches:
               only:
                 - master
-      - udpate_ecs:
+      - update_ecs:
           requires:
             - register_image
