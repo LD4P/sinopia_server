@@ -50,6 +50,29 @@ jobs:
             docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db:latest .
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push ld4p/trellis-ext-db:latest
+  update_ecs:
+      working_directory: ~/sinopia_server
+      docker: # NOT the default
+        - image: circleci/python:3.7-stretch-node-browsers
+      steps:
+        - run: sudo pip install awscli
+        - run:
+            name: Update AWS ECS
+            command: |
+              mkdir ~/.aws
+              echo -e "[circle]\naws_access_key_id=$AWS_ACCESS_KEY_ID\naws_secret_access_key=$AWS_SECRET_ACCESS_KEY\n" > ~/.aws/credentials
+              unset AWS_SESSION_TOKEN
+              aws configure set region us-west-2
+              aws configure set output json
+              temp_creds=$(aws sts assume-role --role-session-name DevelopersRole --role-arn $DEV_ROLE_ARN --profile circle | jq .Credentials)
+              export AWS_ACCESS_KEY_ID=$(echo "$temp_creds" | jq .AccessKeyId | xargs)
+              export AWS_SECRET_ACCESS_KEY=$(echo "$temp_creds" | jq .SecretAccessKey | xargs)
+              export AWS_SESSION_TOKEN=$(echo "$temp_creds" | jq .SessionToken | xargs)
+              aws configure list # Show confirmation of config
+              task_arn=$(aws ecs list-task-definitions --family-prefix trellis --region us-west-2 --sort DESC --max-items 1 | jq --raw-output --exit-status '.taskDefinitionArns[]')
+              cluster_arn=$(aws ecs list-clusters --region us-west-2 | jq --raw-output --exit-status '.clusterArns[] | select(contains(":cluster/sinopia-dev"))')
+              # echo -n "task_arn=$task_arn\ncluster_arn=$cluster_arn\n"
+              aws ecs update-service --service trellis --region us-west-2 --cluster $cluster_arn --task-definition $task_arn --force-new-deployment
 
 workflows:
   version: 2
@@ -66,3 +89,6 @@ workflows:
             branches:
               only:
                 - master
+      - udpate_ecs:
+          requires:
+            - register_image
