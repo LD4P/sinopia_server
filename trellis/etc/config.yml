@@ -7,6 +7,9 @@ server:
       port: ${TRELLIS_ADMIN_HTTP_PORT:-8081}
   requestLog:
     appenders:
+      - type: console
+        target: stdout
+        threshold: ${TRELLIS_CONSOLE_LOGGING_THRESHOLD:-INFO}
       - type: file
         currentLogFilename: /opt/trellis/log/access.log
         archive: true
