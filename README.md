@@ -147,12 +147,16 @@ This requires publishing rights on https://www.npmjs.com/package/sinopia_server
 
 ## Rebuilding our (Sinopia-specific) trellis-ext-db image and pushing to Docker Hub
 
-The CircleCI build is configured to perform these steps automatically on any successful build on the `master` branch that touches files that should trigger a rebuild/repush. If you **do** need to manually build and push an image, you can do this via:
+The CircleCI build is configured to perform these steps automatically on any successful build on the `master` branch that touches files that should trigger a rebuild/repush. This updates the `latest` tag.
+
+ To create a release tag, you can do this via (substituting 1.3.0 with the appropriate version):
 
 
 ```shell
-$ docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db .
-$ docker push ld4p/trellis-ext-db  # assumes user is logged into docker hub account via 'docker login' command
+$ docker build -f Dockerfile.trellis-ext-db -t ld4p/trellis-ext-db:1.3.0 .
+$ docker push ld4p/trellis-ext-db:1.3.0  # assumes user is logged into docker hub account via 'docker login' command
 ```
 
-**NOTE**: The `docker push` action requires push access to the [ld4p Docker Hub organization](https://hub.docker.com/u/ld4p).
+**NOTE**:
+* The `docker push` action requires push access to the [ld4p Docker Hub organization](https://hub.docker.com/u/ld4p).
+* We have been using the latest Sinopia editor version as the version above.
