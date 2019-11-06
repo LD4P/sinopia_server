@@ -61,6 +61,7 @@ database:
   checkConnectionWhileIdle: false
   evictionInterval: 10s
   minIdleTime: 1 minute
+  maxActive: 400
 
 # This may refer to a remote Triplestore, e.g. https://example.org/sparql
 resources: ${TRELLIS_RESOURCES:-/opt/trellis/data/rdf}
