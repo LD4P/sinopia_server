@@ -103,9 +103,9 @@ See the Specification-driven API documentation here: https://ld4p.github.io/sino
 
 ### Installing swagger-codegen
 
-[swagger-codegen-2.4.9](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.4.9) is the latest version of swagger-codegen that supports the Javascript language and parses this project's Swagger spec without error.  You can obtain the JAR file you need from:
-* https://mvnrepository.com/artifact/io.swagger/swagger-codegen-cli/2.4.9 (Maven Repository info page)
-* http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.9/swagger-codegen-cli-2.4.9.jar (direct download link)
+[swagger-codegen-2.4.8](https://github.com/swagger-api/swagger-codegen/releases/tag/v2.4.8) is the latest version of swagger-codegen that supports the Javascript language and parses this project's Swagger spec without error.  You can obtain the JAR file you need from:
+* https://mvnrepository.com/artifact/io.swagger/swagger-codegen-cli/2.4.8 (Maven Repository info page)
+* http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.8/swagger-codegen-cli-2.4.8.jar (direct download link)
 
 The following commands assume the swagger-codegen JAR file is in the same directory as the swagger.yaml
 file (and where applicable, the output directory for the generated client code, i.e. you downloaded the
@@ -116,7 +116,7 @@ JAR file to this project's root directory).  Tested with Java 1.8.0_102, YMMV wi
 If you'd like to validate the swagger.yaml file, you can do so by running:
 
 ```sh
-java -jar swagger-codegen-cli-2.4.9.jar validate -i swagger.yaml
+java -jar swagger-codegen-cli-2.4.8.jar validate -i swagger.yaml
 ```
 
 ### Generating/Publishing the Sinopia Server Client
@@ -124,10 +124,24 @@ java -jar swagger-codegen-cli-2.4.9.jar validate -i swagger.yaml
 #### (Re-)Generating the Sinopia Server Javascript Client with swagger-codegen CLI
 
 ```sh
-$ java -jar swagger-codegen-cli-2.4.9.jar generate -i swagger.yaml -l javascript --additional-properties usePromises=true -o sinopia_client/
+$ java -jar swagger-codegen-cli-2.4.8.jar generate -i swagger.yaml -l javascript --additional-properties usePromises=true -o sinopia_client/
 ```
 
-If you want to regenerate test stubs, you'll have to delete the `sinopia_client/test` directory first -- swagger-codegen won't overwrite it.  You'll then have to `git add -p` the new stubs, and ditch the erasure of the old tests that you want to keep, before committing (yes, also gross, sorry).
+If you want to regenerate test stubs, you'll have to delete the `sinopia_client/test` directory first -- swagger-codegen won't overwrite it if it exists.  You'll then have to `git add -p` the new stubs (and any other desirable changes), and ditch any erasure of the old tests that you want to keep, before committing.  swagger-codegen can't merge its freshly generated stubs with the added and implemented tests, so that will have to be done manually.
+
+Other things to do when committing after regenerating the client code:
+* As with the tests, manually keep any `sinopia_client/src` modifications that are still desirable.  In general, you should avoid modifying the generated code if at all possible.
+  * As of this writing (2019-11-08), two operations have been modified to add default values for the `Link` header, per the swagger spec, because swagger-codegen did not produce code which properly set default header values per the spec.
+* Selectively incorporate any auto-generated changes to `package.json`.  You'll likely want to keep e.g. the version bump.  But `swagger-codegen` will likely lose the test dependencies we've added, and will likely revert package versions to versions that are out of date.
+
+You'll likely incorporate most of the auto-generated changes, but they should be manually vetted.
+
+For an example PR where the spec was modified and client code was regenerated, see:  https://github.com/LD4P/sinopia_server/pull/119
+
+Notes about codegen tools that don't work as of 2019-11-08:
+* Swagger Codegen 3.x (3.0.13 as of this writing) has recently added experimental support for generated javascript clients, but it crashes with a missing template error when we try to use it.
+* A fork of the Swagger Codegen 2.x line, [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/qna.md) was tried (4.x and 5.x), but it generated code that failed to allow override of the default `Content-Type` header from `application/ld+json` for the `createResource` operation, and more modification of the generated code seemed unesirable.
+* Hence, we're currently stuck on Swagger Codegen 2.4.8.
 
 For a slightly different approach to using swagger-codegen with an Open API v3.0 spec, not necessarily with this project, see the prior version of this README section here:  https://github.com/LD4P/sinopia_server/tree/3880d034a9611cdf657e21c63a43ea0abf6c0201#generating-sinopia-server-client-with-swagger
 

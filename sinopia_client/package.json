@@ -12,15 +12,15 @@
     "fs": false
   },
   "dependencies": {
-    "superagent": "^4.1.0"
+    "superagent": "^5.1.0"
   },
   "devDependencies": {
-    "amazon-cognito-identity-js": "^3.0.9",
-    "aws-sdk": "^2.423.0",
+    "amazon-cognito-identity-js": "^3.2.0",
+    "aws-sdk": "^2.568.0",
     "chai": "^4.2.0",
     "expect.js": "~0.3.1",
-    "mocha": "^5.2.0",
-    "node-fetch": "^2.3.0",
-    "sinon": "1.17.3"
+    "mocha": "^6.2.2",
+    "node-fetch": "^2.6.0",
+    "sinon": "7.5.0"
   }
 }
