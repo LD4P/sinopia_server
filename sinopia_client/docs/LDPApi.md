@@ -19,17 +19,17 @@ Method | HTTP request | Description
 [**headGroup**](LDPApi.md#headGroup) | **HEAD** /repository/{groupID} | Get headers only for a group GET request.
 [**headResource**](LDPApi.md#headResource) | **HEAD** /repository/{groupID}/{resourceID} | Get headers only for a resource GET request.
 [**headUser**](LDPApi.md#headUser) | **HEAD** /repository/users/{userID} | Get headers only for a user GET request.
-[**headUsers**](LDPApi.md#headUsers) | **HEAD** /repository/users | Get headers only for a Sinopia users' container GET request.
+[**headUsers**](LDPApi.md#headUsers) | **HEAD** /repository/users | Get headers only for a Sinopia users&#39; container GET request.
 [**optionsBase**](LDPApi.md#optionsBase) | **OPTIONS** /repository | HTTP Options for base container.
 [**optionsGroup**](LDPApi.md#optionsGroup) | **OPTIONS** /repository/{groupID} | HTTP Options for group.
 [**optionsResource**](LDPApi.md#optionsResource) | **OPTIONS** /repository/{groupID}/{resourceID} | HTTP Options for resource.
 [**optionsUser**](LDPApi.md#optionsUser) | **OPTIONS** /repository/users/{userID} | HTTP Options for user.
-[**optionsUsers**](LDPApi.md#optionsUsers) | **OPTIONS** /repository/users | HTTP Options for Sinopia users' container.
+[**optionsUsers**](LDPApi.md#optionsUsers) | **OPTIONS** /repository/users | HTTP Options for Sinopia users&#39; container.
 [**updateBase**](LDPApi.md#updateBase) | **PUT** /repository | Update metadata on base container.
 [**updateGroup**](LDPApi.md#updateGroup) | **PUT** /repository/{groupID} | Update metadata on a group.
 [**updateResource**](LDPApi.md#updateResource) | **PUT** /repository/{groupID}/{resourceID} | Update metadata on a resource.
 [**updateUser**](LDPApi.md#updateUser) | **PUT** /repository/users/{userID} | Update metadata on a user.
-[**updateUsers**](LDPApi.md#updateUsers) | **PUT** /repository/users | Update metadata on the Sinopia users' container.
+[**updateUsers**](LDPApi.md#updateUsers) | **PUT** /repository/users | Update metadata on the Sinopia users&#39; container.
 
 
 <a name="createGroup"></a>
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String**| The suggested URI path for the group. | 
  **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to insert into base container and describe the group. | 
- **link** | **String**| specifies container type.  you probably shouldn't override this parameter for this operation. | [optional] [default to <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"]
+ **link** | **String**| specifies container type.  you probably shouldn&#39;t override this parameter for this operation. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -114,7 +114,7 @@ var resource = new SinopiaServer.Resource(); // Resource | Resource to insert in
 
 var opts = { 
   'slug': "slug_example", // String | The suggested URI path for the resource.
-  'link': "link_example", // String | specifies container type.  Callers creating wanting non-RDF should use '<http://www.w3.org/ns/ldp#NonRDFSource>; rel=\"type\"', those creating RDF should use '<http://www.w3.org/ns/ldp#RDFSource>; rel=\"type\"'.
+  'link': "link_example", // String | specifies container type.  Callers creating non-RDF should use '<http://www.w3.org/ns/ldp#NonRDFSource>; rel=\"type\"', those creating RDF should use '<http://www.w3.org/ns/ldp#RDFSource>; rel=\"type\"'.
   'contentType': "contentType_example" // String | Content-Type for the resource, with preference for JSON-LD.
 };
 apiInstance.createResource(groupID, resource, opts).then(function() {
@@ -129,10 +129,10 @@ apiInstance.createResource(groupID, resource, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resource** | [**Resource**](Resource.md)| Resource to insert into container | 
  **slug** | **String**| The suggested URI path for the resource. | [optional] 
- **link** | **String**| specifies container type.  Callers creating wanting non-RDF should use '<http://www.w3.org/ns/ldp#NonRDFSource>; rel=\"type\"', those creating RDF should use '<http://www.w3.org/ns/ldp#RDFSource>; rel=\"type\"'. | [optional] 
+ **link** | **String**| specifies container type.  Callers creating non-RDF should use &#39;&lt;http://www.w3.org/ns/ldp#NonRDFSource&gt;; rel&#x3D;\&quot;type\&quot;&#39;, those creating RDF should use &#39;&lt;http://www.w3.org/ns/ldp#RDFSource&gt;; rel&#x3D;\&quot;type\&quot;&#39;. | [optional] 
  **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -185,7 +185,7 @@ apiInstance.createUser(user, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | [**Resource**](Resource.md)| User to insert into Sinopia users' container. | 
+ **user** | [**Resource**](Resource.md)| User to insert into Sinopia users&#39; container. | 
  **slug** | **String**| The suggested URI path for the user. | [optional] 
  **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
 
@@ -235,7 +235,7 @@ apiInstance.deleteGroup(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -285,7 +285,7 @@ apiInstance.deleteResource(groupID, resourceID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
 
 ### Return type
@@ -424,7 +424,7 @@ apiInstance.getGroup(groupID).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -477,7 +477,7 @@ apiInstance.getResource(groupID, resourceID, opts).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
  **accept** | **String**| The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json. | [optional] 
 
@@ -548,7 +548,7 @@ Name | Type | Description  | Notes
 
 Get metadata (RDF) for the Sinopia users container.
 
-Get the RDF (default serialization is JSON-LD) for the Sinopia users' container.
+Get the RDF (default serialization is JSON-LD) for the Sinopia users&#39; container.
 
 ### Example
 ```javascript
@@ -654,7 +654,7 @@ apiInstance.headGroup(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -699,7 +699,7 @@ apiInstance.headResource(groupID, resourceID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
 
 ### Return type
@@ -762,9 +762,9 @@ No authorization required
 # **headUsers**
 > headUsers()
 
-Get headers only for a Sinopia users' container GET request.
+Get headers only for a Sinopia users&#39; container GET request.
 
-Gets the header values that would normally be found in the header of GET request on the Sinopia users' container.
+Gets the header values that would normally be found in the header of GET request on the Sinopia users&#39; container.
 
 ### Example
 ```javascript
@@ -870,7 +870,7 @@ apiInstance.optionsGroup(groupID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
 
 ### Return type
 
@@ -920,7 +920,7 @@ apiInstance.optionsResource(groupID, resourceID).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
 
 ### Return type
@@ -988,9 +988,9 @@ null (empty response body)
 # **optionsUsers**
 > optionsUsers()
 
-HTTP Options for Sinopia users' container.
+HTTP Options for Sinopia users&#39; container.
 
-Gets the available options for HTTP methods to utilize on the Sinopia users' container
+Gets the available options for HTTP methods to utilize on the Sinopia users&#39; container
 
 ### Example
 ```javascript
@@ -1064,7 +1064,7 @@ apiInstance.updateBase(base, opts).then(function() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **base** | [**SinopiaBasicContainer**](SinopiaBasicContainer.md)| New base container metadata to assert on the container. | 
- **link** | **String**| specifies container type.  you probably shouldn't override this parameter for this operation. | [optional] [default to <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"]
+ **link** | **String**| specifies container type.  you probably shouldn&#39;t override this parameter for this operation. | [optional] [default to &lt;http://www.w3.org/ns/ldp#BasicContainer&gt;; rel&#x3D;&quot;type&quot;]
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
@@ -1118,7 +1118,7 @@ apiInstance.updateGroup(groupID, group, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. LDP Container to create the new resource within. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. LDP Container to create the new resource within. | 
  **group** | [**LDPContainer**](LDPContainer.md)| Group metadata to replace existing description of the given group. | 
  **contentType** | **String**| Content-Type of Group metadata, with preference for JSON-LD. | [optional] 
 
@@ -1175,7 +1175,7 @@ apiInstance.updateResource(groupID, resourceID, resource, opts).then(function() 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupID** | **String**| The group who is defining it's own resources or graph within Sinopia. | 
+ **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
  **resource** | [**Resource**](Resource.md)| Resource metadata to replace existing description of the given group. | 
  **contentType** | **String**| Content-Type for the resource, with preference for JSON-LD. | [optional] 
@@ -1252,9 +1252,9 @@ null (empty response body)
 # **updateUsers**
 > updateUsers(users, opts)
 
-Update metadata on the Sinopia users' container.
+Update metadata on the Sinopia users&#39; container.
 
-Update metadata of the Sinopia users' container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
+Update metadata of the Sinopia users&#39; container with new metadata defined via JSON-LD in payload. Performs overwrite, not partial update.
 
 ### Example
 ```javascript
@@ -1284,8 +1284,8 @@ apiInstance.updateUsers(users, opts).then(function() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **users** | [**LDPContainer**](LDPContainer.md)| Sinopia users' container metadata to replace existing description of the Sinopia users' container. | 
- **contentType** | **String**| Content-Type of Sinopia users' container metadata, with preference for JSON-LD. | [optional] 
+ **users** | [**LDPContainer**](LDPContainer.md)| Sinopia users&#39; container metadata to replace existing description of the Sinopia users&#39; container. | 
+ **contentType** | **String**| Content-Type of Sinopia users&#39; container metadata, with preference for JSON-LD. | [optional] 
 
 ### Return type
 

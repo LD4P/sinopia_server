@@ -6,7 +6,7 @@ produces:
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 3.0.1
+  version: 3.0.2
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -265,7 +265,7 @@ paths:
           format: URI
         - name: Link
           in: header
-          description: specifies container type.  Callers creating wanting non-RDF should use '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"', those creating RDF should use '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'.
+          description: specifies container type.  Callers creating non-RDF should use '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"', those creating RDF should use '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'.
           required: false
           type: string
         - name: Content-Type
