@@ -273,10 +273,13 @@
         })
 
         it('should return the expected content', function() {
-          return instance.getResource(groupId, slug, { accept: 'application/ld+json' })
+          const headers = { accept: 'application/ld+json',
+                            prefer: 'return=representation; include="http://www.trellisldp.org/ns/trellis#PreferAudit"' }
+          return instance.getResource(groupId, slug, headers)
             .then(function(responseData) {
               expect(responseData['@id']).to.equal('http://localhost:8080/repository/rdfStuff/rdfResource')
               expect(responseData['title']).to.equal('Sinopia Resource 1')
+              console(responseData)
             })
         })
       })

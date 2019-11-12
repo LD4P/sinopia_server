@@ -1,8 +1,33 @@
 {
   "@context": {
+    "atTime": {
+      "@id": "http://www.w3.org/ns/prov#atTime",
+      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "wasGeneratedBy": {
+      "@id": "http://www.w3.org/ns/prov#wasGeneratedBy",
+      "@type": "@id"
+    },
+    "as": "https://www.w3.org/ns/activitystreams#",
     "dcterms": "http://purl.org/dc/terms/",
-    "ldp": "http://www.w3.org/ns/ldp#" },
+    "ldp": "http://www.w3.org/ns/ldp#" ,
+    "prov": "http://www.w3.org/ns/prov#" },
   "@id": "",
   "@type": ["ldp:RDFSource"],
-  "dcterms:title": "Sinopia Resource 1"
+  "dcterms:title": "Sinopia Resource 1",
+  {
+    "@id": "http://localhost:8080/repository/rdfStuff/rdfResource",
+    "wasGeneratedBy": [
+      "_:b0"
+    ]
+  },
+  {
+    "@id": "_:b0",
+    "@type": [
+      "prov:Activity",
+      "as:Create"
+    ],
+    "atTime": "2019-08-21T18:09:18.622Z",
+    "wasAssociatedWith": "https://cognito.amazonaws.com/abcdef"
+  }
 }

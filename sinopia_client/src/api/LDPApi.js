@@ -37,7 +37,7 @@
    */
 
   /**
-   * Constructs a new LDPApi. 
+   * Constructs a new LDPApi.
    * @alias module:api/LDPApi
    * @class
    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
@@ -522,6 +522,7 @@
      * @param {String} resourceID The UUID for the resource defined and managed within Sinopia.
      * @param {Object} opts Optional parameters
      * @param {String} opts.accept The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json.
+     * @param {String} opts.prefer The Prefer header for the desired resource. Callers wanting additional PreferAudit
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SinopiaResource} and HTTP response
      */
     this.getResourceWithHttpInfo = function(groupID, resourceID, opts) {
@@ -548,8 +549,10 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'Accept': opts['accept']
+        'Accept': opts['accept'],
       };
+
+      if (opts['prefer'] !== undefined) headerParams['Prefer'] = opts['prefer']
       var formParams = {
       };
 
@@ -557,7 +560,8 @@
       var contentTypes = ['application/ld+json'];
       var accepts = [];
       var returnType = SinopiaResource;
-
+      console.log(`Before apiClient call`)
+      console.log(headerParams)
       return this.apiClient.callApi(
         '/repository/{groupID}/{resourceID}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
