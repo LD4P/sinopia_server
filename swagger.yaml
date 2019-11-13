@@ -6,7 +6,7 @@ produces:
 basePath: /
 info:
   description: Sinopia Server. Supports CRUD, following loosely LDP, on Sinopia resources. Top level requires special authorization for creating a group's graph (i.e. PCC, Stanford, etc.).
-  version: 3.0.2
+  version: 3.0.3
   title: Sinopia Server
   license:
     name: Apache 2.0
@@ -473,6 +473,11 @@ paths:
         - name: Accept
           in: header
           description: The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json.
+          required: false
+          type: string
+        - name: Prefer
+          in: header
+          description: Used to request certain behavior from Trellis, used to request provenance metadata for indexing.
           required: false
           type: string
       responses:
