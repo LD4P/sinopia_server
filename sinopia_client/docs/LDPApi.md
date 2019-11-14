@@ -463,7 +463,8 @@ var groupID = "groupID_example"; // String | The group who is defining it's own 
 var resourceID = "resourceID_example"; // String | The UUID for the resource defined and managed within Sinopia.
 
 var opts = { 
-  'accept': "accept_example" // String | The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json.
+  'accept': "accept_example", // String | The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json.
+  'prefer': "prefer_example" // String | Used to request certain behavior from Trellis, used to request provenance metadata for indexing.
 };
 apiInstance.getResource(groupID, resourceID, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -480,6 +481,7 @@ Name | Type | Description  | Notes
  **groupID** | **String**| The group who is defining it&#39;s own resources or graph within Sinopia. | 
  **resourceID** | **String**| The UUID for the resource defined and managed within Sinopia. | 
  **accept** | **String**| The MIME type of the desired resource.  Callers wanting non-RDF should ask for application/json, those wanting RDF should ask for application/ld+json. | [optional] 
+ **prefer** | **String**| Used to request certain behavior from Trellis, used to request provenance metadata for indexing. | [optional] 
 
 ### Return type
 
